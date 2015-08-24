@@ -12,24 +12,22 @@ public class ViewJson implements IViewJson {
 
 	@Override
 	public String toJson(Object obj) {
-		return null;
+		throw new UnsupportedOperationException("Not Impl.");
 	}
 
 	@Override
 	public String toFormatJson(Object obj) {
-		return null;
+		throw new UnsupportedOperationException("Not Impl.");
 	}
 
 	@Override
 	public <T> List<T> toListObject(String content, Class<T> valueType) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Not Impl.");
 	}
 
 	@Override
 	public <T> T toObject(String json, Class<T> clazz) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Not Impl.");
 	}
 
 }
