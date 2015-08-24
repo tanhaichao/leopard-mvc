@@ -89,7 +89,7 @@ public class SessionRequestWrapper extends HttpServletRequestWrapper {
 			return session;
 		}
 		if (create) {
-			this.session = new HttpSessionWrapper(this.sid, expiry);
+			this.session = new SessionWrapper(this.sid, expiry);
 			return session;
 		}
 		else {

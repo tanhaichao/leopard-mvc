@@ -12,7 +12,7 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebFilter(filterName = "leopardSessionFilter", urlPatterns = "*.do")
+@WebFilter(filterName = "leopardSessionFilter", urlPatterns = "/")
 public class SessionFilter implements Filter {
 
 	@Override

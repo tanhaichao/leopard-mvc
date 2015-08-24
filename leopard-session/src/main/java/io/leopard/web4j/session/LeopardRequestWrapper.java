@@ -12,14 +12,16 @@ import javax.servlet.http.HttpServletResponse;
  * 
  */
 public class LeopardRequestWrapper extends SessionRequestWrapper {
+	private RequestParameterListener requestParameterListener = new RequestParameterListenerImpl();
+	private RequestAttributeListener requestAttributeListener = new RequestAttributeListenerImpl();
 
 	public LeopardRequestWrapper(HttpServletRequest request, HttpServletResponse response) {
 		super(request, response);
 	}
 
-//	public String getSuperParameter(String name) {
-//		return super.getParameter(name);
-//	}
+	// public String getSuperParameter(String name) {
+	// return super.getParameter(name);
+	// }
 
 	@Override
 	public String getParameter(String name) {
@@ -35,6 +37,7 @@ public class LeopardRequestWrapper extends SessionRequestWrapper {
 	@Override
 	public String[] getParameterValues(String name) {
 		String[] values = super.getParameterValues(name);
+		requestParameterListener.parameterGet((HttpServletRequest) super.getRequest(), name, values);
 		// if (values != null) {
 		// this.checkXxxParameter(name, values);
 		// }
@@ -74,6 +77,7 @@ public class LeopardRequestWrapper extends SessionRequestWrapper {
 	@Override
 	public Object getAttribute(String name) {
 		Object value = super.getAttribute(name);
+		this.requestAttributeListener.attributeGet((HttpServletRequest) super.getRequest(), name, value);
 		// boolean needCheckXss = needCheckXss();
 		// if (!needCheckXss) {
 		// return value;

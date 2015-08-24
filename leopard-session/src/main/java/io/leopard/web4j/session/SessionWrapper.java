@@ -9,7 +9,7 @@ import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionContext;
 
 @SuppressWarnings("deprecation")
-public class HttpSessionWrapper implements HttpSession {
+public class SessionWrapper implements HttpSession {
 	// protected static final Log LOGGER = LogFactory.getLog(HttpSessionWrapper.class);
 
 	// private HttpSession session;
@@ -24,7 +24,7 @@ public class HttpSessionWrapper implements HttpSession {
 
 	// private SessionService sessionService;
 
-	public HttpSessionWrapper(String sid, int expiry) {
+	public SessionWrapper(String sid, int expiry) {
 		if (sid == null || sid.length() == 0) {
 			throw new IllegalArgumentException("sessionId怎么会为空?");
 		}
