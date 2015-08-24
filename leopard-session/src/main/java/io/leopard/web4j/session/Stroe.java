@@ -69,38 +69,32 @@ public class Stroe implements IStroe {
 
 	@Override
 	public String get(String key) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Not Impl.");
 	}
 
 	@Override
 	public String set(String key, String value, int seconds) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Not Impl.");
 	}
 
 	@Override
 	public Long del(String key) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Not Impl.");
 	}
 
 	@Override
 	public String toJson(Object obj) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Not Impl.");
 	}
 
 	@Override
 	public <T> T toObject(String json, Class<T> clazz) {
-		// TODO Auto-generated method stub
-		return null;
+		throw new UnsupportedOperationException("Not Impl.");
 	}
 
 	@Override
 	public boolean isEnable() {
-		// TODO Auto-generated method stub
-		return false;
+		throw new UnsupportedOperationException("Not Impl.");
 	}
 
 }
