@@ -114,6 +114,6 @@ public class ModelUtil {
 	 */
 	public static <T> List<T> getListForJson(ModelAndView model, Class<T> clazz, String name) {
 		String json = (String) get(model, name);
-		return (List<T>) Json.toListObject(json, clazz, false);
+		return (List<T>) Json.toListObject(json, clazz);
 	}
 }
