@@ -20,18 +20,20 @@ public class StoreMemoryImpl implements IStore {
 
 	@Override
 	public String get(String key) {
-		System.err.println("StroeMemoryImpl:" + key);
+		System.err.println("StroeMemoryImpl get:" + key);
 		return data.get(key);
 	}
 
 	@Override
 	public String set(String key, String value, int seconds) {
+		System.err.println("StroeMemoryImpl set:" + key + " " + value);
 		data.put(key, value);
 		return value;
 	}
 
 	@Override
 	public Long del(String key) {
+		System.err.println("StroeMemoryImpl del:" + key);
 		data.remove(key);
 		return 1L;
 	}

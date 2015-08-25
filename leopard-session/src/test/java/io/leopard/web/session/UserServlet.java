@@ -31,22 +31,12 @@ public class UserServlet extends HttpServlet {
 		out.println("now:" + now.toString());
 	}
 
-	private static void test() {
-		String str = UserServlet.class.getResource("/test-test.txt").toString();
-		System.out.println("uri:" + str);
-	}
-
 	@Test
-	public void test2() {
-		test();
-	}
-
-	public static void main(String[] args) throws Exception {
-		test();
+	public void test() throws Exception {
 		JettyServer.start("src/test/webapp");
 		System.out.println("ok");
 		String str = Httpnb.doGet("http://localhost/index");
 		System.out.println("str:" + str);
-		System.exit(0);
 	}
+
 }

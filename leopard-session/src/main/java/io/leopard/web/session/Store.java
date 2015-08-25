@@ -15,11 +15,11 @@ public class Store implements IStore {
 
 	public Store() {
 		Iterator<IStore> iterator = ServiceLoader.load(IStore.class).iterator();
-		System.err.println("Store iterator:" + iterator);
+		// System.err.println("Store iterator:" + iterator);
 
 		while (iterator.hasNext()) {
 			IStore stroe = iterator.next();
-			System.err.println("Store stroe:" + stroe);
+			// System.err.println("Store stroe:" + stroe);
 			if (stroe.isEnable()) {
 				this.stroe = stroe;
 				break;
@@ -29,7 +29,7 @@ public class Store implements IStore {
 
 	@Override
 	public String get(String key) {
-		System.err.println("Stroe get:" + key);
+		// System.err.println("Stroe get:" + key);
 		if (stroe != null) {
 			return stroe.get(key);
 		}
@@ -54,7 +54,7 @@ public class Store implements IStore {
 
 	@Override
 	public boolean isEnable() {
-		System.err.println("Stroe isEnable:" + stroe);
+		// System.err.println("Stroe isEnable:" + stroe);
 		if (stroe != null) {
 			return stroe.isEnable();
 		}
