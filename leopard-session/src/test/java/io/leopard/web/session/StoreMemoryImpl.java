@@ -13,9 +13,15 @@ public class StoreMemoryImpl implements IStore {
 
 	private Map<String, String> data = new ConcurrentHashMap<String, String>(10);
 
+	private static boolean enable = true;
+
+	public static void setEnable(boolean enable) {
+		StoreMemoryImpl.enable = enable;
+	}
+
 	@Override
 	public boolean isEnable() {
-		return true;
+		return enable;
 	}
 
 	@Override

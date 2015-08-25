@@ -17,6 +17,7 @@ public class StoreRedisImpl implements IStore {
 
 	@Override
 	public String get(String key) {
+		System.err.println("StoreRedisImpl get:" + key);
 		return redis.get(key);
 	}
 
