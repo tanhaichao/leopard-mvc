@@ -4,7 +4,7 @@ import java.util.List;
 
 public class ViewJson implements IViewJson {
 
-	private static final IViewJson instance = null;
+	private static final IViewJson instance = new ViewJson();
 
 	public static IViewJson getInstance() {
 		return instance;

@@ -22,6 +22,7 @@ public class TrynbResolverImpl implements TrynbResolver {
 		Iterator<TrynbResolver> iterator = ServiceLoader.load(TrynbResolver.class).iterator();
 		while (iterator.hasNext()) {
 			TrynbResolver resolver = iterator.next();
+			System.out.println("resolver:" + resolver);
 			list.add(resolver);
 		}
 	}
