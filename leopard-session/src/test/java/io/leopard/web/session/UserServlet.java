@@ -23,9 +23,7 @@ public class UserServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("service:" + request);
 		HttpSession session = request.getSession();
-
 		session.setAttribute("key", new Date());
-
 		Date now = (Date) session.getAttribute("key");
 		ServletOutputStream out = response.getOutputStream();
 		out.println("now:" + now.toString());
