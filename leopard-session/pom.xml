@@ -23,6 +23,9 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 		</dependency>
+
+
+		<!-- test -->
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-jetty</artifactId>
@@ -34,8 +37,6 @@
 			<artifactId>jackson-jaxrs</artifactId>
 			<scope>test</scope>
 		</dependency>
-
-
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
@@ -48,5 +49,6 @@
 			<version>0.0.1</version>
 			<scope>test</scope>
 		</dependency>
+		<!-- test -->
 	</dependencies>
 </project>
