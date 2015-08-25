@@ -1,0 +1,3 @@
+io.leopard.web4j.view.trynb.JsonViewTrynbResolver
+io.leopard.web4j.view.trynb.OkTextViewTrynbResolver
+io.leopard.web4j.view.trynb.WsViewTrynbResolver

@@ -14,20 +14,20 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 public class TrynbResolverImpl implements TrynbResolver {
-	private List<TrynbResolver> trynbResolverList = new ArrayList<TrynbResolver>();
+
+	private List<TrynbResolver> list = new ArrayList<TrynbResolver>();
 
 	public TrynbResolverImpl() {
-		ServiceLoader<TrynbResolver> loader = ServiceLoader.load(TrynbResolver.class);
-		Iterator<TrynbResolver> driversIterator = loader.iterator();
-		while (driversIterator.hasNext()) {
-			TrynbResolver resolver = driversIterator.next();
-			trynbResolverList.add(resolver);
+		Iterator<TrynbResolver> iterator = ServiceLoader.load(TrynbResolver.class).iterator();
+		while (iterator.hasNext()) {
+			TrynbResolver resolver = iterator.next();
+			list.add(resolver);
 		}
 	}
 
 	@Override
 	public ModelAndView resolveView(HttpServletRequest request, HttpServletResponse response, HandlerMethod handler, Exception exception, TrynbInfo trynbInfo) {
-		for (TrynbResolver trynbResolver : trynbResolverList) {
+		for (TrynbResolver trynbResolver : list) {
 			ModelAndView view = trynbResolver.resolveView(request, response, handler, exception, trynbInfo);
 			if (view != null) {
 				return view;
