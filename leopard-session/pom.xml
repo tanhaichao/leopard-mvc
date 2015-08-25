@@ -8,31 +8,6 @@
 	<artifactId>leopard-session</artifactId>
 
 
-	<plugin>
-		<groupId>org.codehaus.mojo</groupId>
-		<artifactId>build-helper-maven-plugin</artifactId>
-		<version>1.7</version>
-		<executions>
-			<execution>
-				<id>add-test-resource</id>
-				<phase>generate-test-resources</phase>
-				<goals>
-					<goal>add-test-resource</goal>
-				</goals>
-				<configuration>
-					<tasks>
-						<echo>add integration resources</echo>
-					</tasks>
-					<resources>
-						<resource>
-							<directory>src/test/resources</directory>
-						</resource>
-					</resources>
-				</configuration>
-			</execution>
-
-		</executions>
-	</plugin>
 	<dependencies>
 		<dependency>
 			<groupId>javax.servlet</groupId>
@@ -70,7 +45,7 @@
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>httpnb</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>0.0.1</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
