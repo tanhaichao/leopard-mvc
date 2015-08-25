@@ -15,8 +15,11 @@ public class Stroe implements IStroe {
 
 	public Stroe() {
 		Iterator<IStroe> iterator = ServiceLoader.load(IStroe.class).iterator();
+		System.err.println("iterator:" + iterator);
+
 		while (iterator.hasNext()) {
 			IStroe stroe = iterator.next();
+			System.err.println("stroe:" + stroe);
 			if (stroe.isEnable()) {
 				this.stroe = stroe;
 				break;
@@ -26,6 +29,7 @@ public class Stroe implements IStroe {
 
 	@Override
 	public String get(String key) {
+		System.err.println("Stroe get:" + key);
 		if (stroe != null) {
 			return stroe.get(key);
 		}
@@ -50,10 +54,11 @@ public class Stroe implements IStroe {
 
 	@Override
 	public boolean isEnable() {
+		System.err.println("Stroe isEnable:" + stroe);
 		if (stroe != null) {
 			return stroe.isEnable();
 		}
-		throw new UnsupportedOperationException("Not Impl.");
+		return false;
 	}
 
 }

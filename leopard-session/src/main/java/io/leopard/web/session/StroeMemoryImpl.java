@@ -20,6 +20,7 @@ public class StroeMemoryImpl implements IStroe {
 
 	@Override
 	public String get(String key) {
+		System.err.println("StroeMemoryImpl:" + key);
 		return data.get(key);
 	}
 
