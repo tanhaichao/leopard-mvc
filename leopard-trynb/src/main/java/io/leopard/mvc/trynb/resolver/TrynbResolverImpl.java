@@ -18,6 +18,7 @@ public class TrynbResolverImpl implements TrynbResolver {
 	private List<TrynbResolver> list = new ArrayList<TrynbResolver>();
 
 	public TrynbResolverImpl() {
+		// new Exception("ok").printStackTrace();
 		Iterator<TrynbResolver> iterator = ServiceLoader.load(TrynbResolver.class).iterator();
 		while (iterator.hasNext()) {
 			TrynbResolver resolver = iterator.next();
