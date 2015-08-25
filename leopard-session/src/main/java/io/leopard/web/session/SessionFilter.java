@@ -19,19 +19,19 @@ public class SessionFilter implements Filter {
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
-		System.out.print("doFilter:" + request);
+		// System.out.print("doFilter:" + request);
 		LeopardRequestWrapper httpRequestWraper = new LeopardRequestWrapper(request, response);
 		chain.doFilter(httpRequestWraper, response);
 	}
 
 	@Override
 	public void destroy() {
-		System.out.print("SessionFilter destroy.");
+		// System.out.print("SessionFilter destroy.");
 	}
 
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		System.out.print("SessionFilter init:" + filterConfig);
+		// System.out.print("SessionFilter init:" + filterConfig);
 	}
 
 }
