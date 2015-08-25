@@ -1,5 +1,7 @@
 package io.leopard.web4j.view;
 
+import io.leopard.json.Json;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -68,7 +70,7 @@ public class WsView extends AbstractView {
 		map.put("message", message);
 		if (data != null) {
 			map.put("clazz", data.getClass().getName());
-			map.put("data", ViewJson.getInstance().toJson(data));
+			map.put("data", Json.toJson(data));
 		}
 		return map;
 	}
@@ -81,7 +83,7 @@ public class WsView extends AbstractView {
 	@Override
 	public String getBody(HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> map = this.getResult();
-		return ViewJson.getInstance().toJson(map);
+		return Json.toJson(map);
 	}
 
 }

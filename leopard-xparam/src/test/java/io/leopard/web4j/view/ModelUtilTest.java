@@ -1,5 +1,7 @@
 package io.leopard.web4j.view;
 
+import io.leopard.json.Json;
+
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.web.servlet.ModelAndView;
@@ -29,7 +31,7 @@ public class ModelUtilTest {
 
 	@Test
 	public void toObject() {
-		String json = ViewJson.getInstance().toJson("text");
+		String json = Json.toJson("text");
 
 		ModelAndView model = new ModelAndView();
 		model.addObject("message", json);
@@ -38,7 +40,7 @@ public class ModelUtilTest {
 
 	@Test
 	public void toJson() {
-		String json = ViewJson.getInstance().toJson("text");
+		String json = Json.toJson("text");
 		ModelAndView model = new ModelAndView();
 		model.addObject("message", json);
 		Assert.assertEquals(json, ModelUtil.toJson(model));

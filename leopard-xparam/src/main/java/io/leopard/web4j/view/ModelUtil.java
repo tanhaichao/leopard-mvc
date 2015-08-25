@@ -1,5 +1,7 @@
 package io.leopard.web4j.view;
 
+import io.leopard.json.Json;
+
 import java.util.List;
 
 import org.springframework.web.servlet.ModelAndView;
@@ -43,7 +45,7 @@ public class ModelUtil {
 	public static <T> T toObject(ModelAndView model, Class<T> clazz) {
 		String json = toJson(model);
 
-		return ViewJson.getInstance().toObject(json, clazz);
+		return Json.toObject(json, clazz);
 	}
 
 	/**
@@ -112,6 +114,6 @@ public class ModelUtil {
 	 */
 	public static <T> List<T> getListForJson(ModelAndView model, Class<T> clazz, String name) {
 		String json = (String) get(model, name);
-		return (List<T>) ViewJson.getInstance().toListObject(json, clazz);
+		return (List<T>) Json.toListObject(json, clazz, false);
 	}
 }

@@ -1,5 +1,7 @@
 package io.leopard.web4j.view;
 
+import io.leopard.json.Json;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -116,10 +118,10 @@ public class AjaxView extends AbstractView {
 	public static class JsonOutput {
 		public String output(Object data, boolean format, String dateFormat, HttpServletRequest request) {
 			if (format) {
-				return ViewJson.getInstance().toFormatJson(data);
+				return Json.toFormatJson(data);
 			}
 			else {
-				return ViewJson.getInstance().toJson(data);
+				return Json.toJson(data);
 			}
 		}
 	}

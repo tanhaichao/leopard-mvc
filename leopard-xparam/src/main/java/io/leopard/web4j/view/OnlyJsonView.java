@@ -1,5 +1,7 @@
 package io.leopard.web4j.view;
 
+import io.leopard.json.Json;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -36,10 +38,10 @@ public class OnlyJsonView extends AbstractView {
 	public String getBody(HttpServletRequest request, HttpServletResponse response) {
 		// boolean format = "true".equals(request.getParameter("format"));
 		if (this.format || "true".equals(request.getParameter("format"))) {
-			return ViewJson.getInstance().toFormatJson(data);
+			return Json.toFormatJson(data);
 		}
 		else {
-			return ViewJson.getInstance().toJson(data);
+			return Json.toJson(data);
 		}
 	}
 }
