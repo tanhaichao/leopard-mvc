@@ -34,7 +34,9 @@ public class TrynbResolverImpl implements TrynbResolver {
 				return view;
 			}
 		}
-		return new ModelAndView("/error");
+		ModelAndView view = new ModelAndView("/error");
+		view.addObject("message", exception.getMessage());
+		return view;
 	}
 
 }
