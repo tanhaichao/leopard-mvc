@@ -10,9 +10,9 @@ public interface IStroe {
 
 	Long del(String key);
 
-	String toJson(Object obj);
-
-	<T> T toObject(String json, Class<T> clazz);
+	// String toJson(Object obj);
+	//
+	// <T> T toObject(String json, Class<T> clazz);
 
 	// Map<String, Object> getSession(String sid);
 	//

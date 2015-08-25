@@ -1,5 +1,7 @@
 package io.leopard.web4j.session;
 
+import io.leopard.json.Json;
+
 import java.util.Enumeration;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -52,7 +54,7 @@ public class SessionWrapper implements HttpSession {
 		if (this.map == null) {
 			String key = this.getSessionKey(sid);
 			String json = Stroe.getInstance().get(key);
-			this.map = Stroe.getInstance().toObject(json, Map.class);
+			this.map = Json.toObject(json, Map.class);
 			// this.map = sessionService.getSession(sid);
 			if (map == null) {
 				map = new LinkedHashMap<String, Object>();
@@ -75,7 +77,7 @@ public class SessionWrapper implements HttpSession {
 		this.getMap().put(key, value);
 		// sessionService.saveSession(this.sid, this.getMap(), expiry);
 
-		String json = Stroe.getInstance().toJson(this.getMap());
+		String json = Json.toJson(this.getMap());
 		Stroe.getInstance().set(getSessionKey(sid), json, expiry);
 	}
 
@@ -107,7 +109,7 @@ public class SessionWrapper implements HttpSession {
 	public void removeAttribute(String key) {
 		this.getMap().remove(key);
 
-		String json = Stroe.getInstance().toJson(this.getMap());
+		String json = Json.toJson(this.getMap());
 		Stroe.getInstance().set(getSessionKey(sid), json, expiry);
 		// sessionService.saveSession(this.sid, this.getMap(), expiry);
 

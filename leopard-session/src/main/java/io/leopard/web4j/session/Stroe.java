@@ -82,15 +82,15 @@ public class Stroe implements IStroe {
 		throw new UnsupportedOperationException("Not Impl.");
 	}
 
-	@Override
-	public String toJson(Object obj) {
-		throw new UnsupportedOperationException("Not Impl.");
-	}
-
-	@Override
-	public <T> T toObject(String json, Class<T> clazz) {
-		throw new UnsupportedOperationException("Not Impl.");
-	}
+	// @Override
+	// public String toJson(Object obj) {
+	// throw new UnsupportedOperationException("Not Impl.");
+	// }
+	//
+	// @Override
+	// public <T> T toObject(String json, Class<T> clazz) {
+	// throw new UnsupportedOperationException("Not Impl.");
+	// }
 
 	@Override
 	public boolean isEnable() {

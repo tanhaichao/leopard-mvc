@@ -1,5 +1,7 @@
 package io.leopard.web4j.session;
 
+import io.leopard.json.Json;
+
 import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -32,7 +34,7 @@ public class JsonSerializer {
 
 	public static String toJson(Object obj) {
 		String className = obj.getClass().getName();
-		String json = Stroe.getInstance().toJson(obj);
+		String json = Json.toJson(obj);
 		String str = className + SPLIT + json;
 		return str;
 	}
@@ -73,7 +75,7 @@ public class JsonSerializer {
 		String json = jsonSerialize.substring(index + SPLIT.length());
 
 		Class<?> clazz = getClass(className);
-		return Stroe.getInstance().toObject(json, clazz);
+		return Json.toObject(json, clazz);
 	}
 
 	private static Map<String, Class<?>> clazzCache = new ConcurrentHashMap<String, Class<?>>();
