@@ -18,6 +18,12 @@
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-json</artifactId>
 		</dependency>
+
+		<dependency>
+			<groupId>io.leopard</groupId>
+			<artifactId>leopard-redis</artifactId>
+			<scope>provided</scope>
+		</dependency>
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -46,5 +52,6 @@
 			<scope>test</scope>
 		</dependency>
 		<!-- test -->
+
 	</dependencies>
 </project>

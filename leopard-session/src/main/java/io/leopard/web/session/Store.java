@@ -16,7 +16,6 @@ public class Store implements IStore {
 	public Store() {
 		Iterator<IStore> iterator = ServiceLoader.load(IStore.class).iterator();
 		// System.err.println("Store iterator:" + iterator);
-
 		while (iterator.hasNext()) {
 			IStore stroe = iterator.next();
 			// System.err.println("Store stroe:" + stroe);
@@ -24,6 +23,10 @@ public class Store implements IStore {
 				this.stroe = stroe;
 				break;
 			}
+		}
+
+		if (this.stroe == null) {// 默认为redis实现
+			this.stroe = new StoreRedisImpl();
 		}
 	}
 
