@@ -1,7 +1,5 @@
 package io.leopard.mvc.trynb;
 
-import io.leopard.mvc.trynb.ErrorUtil;
-
 import java.lang.reflect.GenericSignatureFormatError;
 import java.sql.SQLException;
 
@@ -32,15 +30,15 @@ public class ErrorUtilTest {
 	// Assert.assertFalse(ErrorUtil.isUseFtl());
 	// }
 
-	@Test
-	public void replaceMessage() {
-		Assert.assertNull(ErrorUtil.replaceMessage((String) null));
-		Assert.assertEquals("错误消息有HTML代码.", ErrorUtil.replaceMessage("<font>"));
-		Assert.assertEquals("错误消息有HTML代码.", ErrorUtil.replaceMessage("font>"));
-		Assert.assertEquals("错误消息有XSS风险.", ErrorUtil.replaceMessage("src="));
-		Assert.assertEquals("message", ErrorUtil.replaceMessage("message"));
-		Assert.assertEquals("message", ErrorUtil.replaceMessage(new Exception("message")));
-	}
+	// @Test
+	// public void replaceMessage() {
+	// Assert.assertNull(ErrorUtil.replaceMessage((String) null));
+	// Assert.assertEquals("错误消息有HTML代码.", ErrorUtil.replaceMessage("<font>"));
+	// Assert.assertEquals("错误消息有HTML代码.", ErrorUtil.replaceMessage("font>"));
+	// Assert.assertEquals("错误消息有XSS风险.", ErrorUtil.replaceMessage("src="));
+	// Assert.assertEquals("message", ErrorUtil.replaceMessage("message"));
+	// Assert.assertEquals("message", ErrorUtil.replaceMessage(new Exception("message")));
+	// }
 
 	@Test
 	public void parseMessage() {

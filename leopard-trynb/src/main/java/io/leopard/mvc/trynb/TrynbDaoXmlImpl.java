@@ -86,4 +86,9 @@ public class TrynbDaoXmlImpl implements TrynbDao {
 		exceptionConfig.setLog(log);
 		return exceptionConfig;
 	}
+
+	@Override
+	public ErrorConfig find(String url) {
+		throw new UnsupportedOperationException("Not Impl.");
+	}
 }

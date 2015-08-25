@@ -18,11 +18,10 @@ public class TrynbResolverImpl implements TrynbResolver {
 	private List<TrynbResolver> list = new ArrayList<TrynbResolver>();
 
 	public TrynbResolverImpl() {
-		// new Exception("ok").printStackTrace();
 		Iterator<TrynbResolver> iterator = ServiceLoader.load(TrynbResolver.class).iterator();
 		while (iterator.hasNext()) {
 			TrynbResolver resolver = iterator.next();
-			System.out.println("resolver:" + resolver);
+			// System.out.println("resolver:" + resolver);
 			list.add(resolver);
 		}
 	}
@@ -35,7 +34,7 @@ public class TrynbResolverImpl implements TrynbResolver {
 				return view;
 			}
 		}
-		return null;
+		return new ModelAndView("/error");
 	}
 
 }

@@ -8,42 +8,22 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.springframework.util.StringUtils;
 
 public class TrynbServiceImpl implements TrynbService {
 
-	protected Log logger = LogFactory.getLog(TrynbServiceImpl.class);
-
 	private final TrynbDao trynbDao = new TrynbDaoImpl();
+	private final TrynbLogger trynbLogger = new TrynbLoggerImpl();
 
-	// private final List<ExceptionConfig> defaultConfigList = new ArrayList<ExceptionConfig>();
+	protected ExceptionConfig find(String uri, Exception exception) {
+		ErrorConfig errorConfig = trynbDao.find(uri);
+		List<ExceptionConfig> exceptionConfigList = errorConfig.getExceptionConfigList();
+		String exceptionClassName = exception.getClass().getName();
 
-	public TrynbServiceImpl() {
-		// addDefaultConfig(ConnectionLimitException.class, "warn", "ConnectionLimitException");
-		// // addDefaultConfig(RefererInvalidException.class, "warn", "RefererInvalidException");//FIXME ahai 代码被注释了
-		// // addDefaultConfig(AdminIpForbiddenRuntimeException.class, "warn", "AdminIpForbiddenRuntimeException");//FIXME ahai 代码被注释了
-		// addDefaultConfig(NotLoginException.class, "warn", "NotLoginException");
-		// // addDefaultConfig(RefererInvalidException.class, "warn", 400);//暂时不启用
-	}
-
-	// RefererInvalidException:
-
-	// protected void addDefaultConfig(Class<?> clazz, String log, String statusCode) {
-	// ExceptionConfig config = new ExceptionConfig();
-	// config.setType(clazz.getName());
-	// config.setLog(log);
-	// config.setStatusCode(statusCode);
-	// defaultConfigList.add(config);
-	// }
-
-	@Override
-	public ErrorConfig find(String url) {
-		for (ErrorConfig error : trynbDao.list()) {
-			String prefix = error.getUrl();
-			if (url.startsWith(prefix)) {
-				return error;
+		for (ExceptionConfig exceptionConfig : exceptionConfigList) {
+			boolean match = match(exceptionConfig.getType(), exceptionClassName);
+			if (match) {
+				return exceptionConfig;
 			}
 		}
 		return null;
@@ -51,7 +31,7 @@ public class TrynbServiceImpl implements TrynbService {
 
 	@Override
 	public TrynbInfo parse(HttpServletRequest request, String uri, Exception exception) {
-		ExceptionConfig exceptionConfig = this.parseExceptionConfig(uri, exception);
+		ExceptionConfig exceptionConfig = this.find(uri, exception);
 
 		String message;
 		if (exceptionConfig == null || StringUtils.isEmpty(exceptionConfig.getMessage())) {
@@ -73,28 +53,26 @@ public class TrynbServiceImpl implements TrynbService {
 		if (exceptionConfig == null) {
 			// logger.error("匹配[" + uri + "." + exception.getClass().getName() +
 			// "]不到exception配置");
-			this.error(request, uri, exception);
+			// this.error(request, uri, exception);
+			trynbLogger.error(request, uri, exception);
 			return exception.getClass().getSimpleName();
 		}
 		String logType = ExceptionConfig.getType(exceptionConfig.getLog());
 		if ("error".equals(logType)) {
-			this.error(request, uri, exception);
+			// this.error(request, uri, exception);
+			trynbLogger.error(request, uri, exception);
 		}
 		else if ("warn".equals(logType)) {
-			// if (exception instanceof NotLoginException) {
-			// String cookie = request.getHeader("Cookie");
-			// logger.warn("Cookie:" + cookie);
-			// logger.warn("uri:" + uri + " message:" + exception.getMessage(), exception);
-			// }
-			// else {
-			logger.warn("uri:" + uri + " message:" + exception.getMessage());
-			// }
+			// logger.warn("uri:" + uri + " message:" + exception.getMessage());
+			trynbLogger.warn(request, uri, exception);
 		}
 		else if ("info".equals(logType)) {
-			logger.info("uri:" + uri + " message:" + exception.getMessage());
+			// logger.info("uri:" + uri + " message:" + exception.getMessage());
+			trynbLogger.info(request, uri, exception);
 		}
 		else if ("debug".equals(logType)) {
-			logger.debug("uri:" + uri + " message:" + exception.getMessage());
+			// logger.debug("uri:" + uri + " message:" + exception.getMessage());
+			trynbLogger.debug(request, uri, exception);
 		}
 		if (StringUtils.isEmpty(exceptionConfig.getStatusCode())) {
 			return exception.getClass().getSimpleName();
@@ -102,28 +80,16 @@ public class TrynbServiceImpl implements TrynbService {
 		return exceptionConfig.getStatusCode();
 	}
 
-	protected ExceptionConfig parseExceptionConfig(String uri, Exception exception) {
-		ErrorConfig errorConfig = this.find(uri);
-		List<ExceptionConfig> exceptionConfigList = errorConfig.getExceptionConfigList();
-		String exceptionClassName = exception.getClass().getName();
-
-		for (ExceptionConfig exceptionConfig : exceptionConfigList) {
-			boolean match = ErrorUtil.match(exceptionConfig.getType(), exceptionClassName);
-			if (match) {
-				return exceptionConfig;
+	private static boolean match(String type, String exceptionClassName) {
+		if (type.indexOf(".") == -1) {
+			if (exceptionClassName.endsWith(type)) {
+				return true;
 			}
 		}
-		// for (ExceptionConfig exceptionConfig : defaultConfigList) {
-		// boolean match = ErrorUtil.match(exceptionConfig.getType(), exceptionClassName);
-		// if (match) {
-		// return exceptionConfig;
-		// }
-		// }
-		return null;
+		if (exceptionClassName.equals(type)) {
+			return true;
+		}
+		return false;
 	}
 
-	protected void error(HttpServletRequest request, String uri, Exception exception) {
-		String clientInfo = ErrorUtil.getClientInfo(request, uri, exception.getMessage());
-		logger.error(clientInfo, exception);
-	}
 }

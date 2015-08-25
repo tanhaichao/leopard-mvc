@@ -18,4 +18,15 @@ public class TrynbDaoImpl implements TrynbDao {
 		list = trynbDao.list();
 		return list;
 	}
+
+	@Override
+	public ErrorConfig find(String url) {
+		for (ErrorConfig error : trynbDao.list()) {
+			String prefix = error.getUrl();
+			if (url.startsWith(prefix)) {
+				return error;
+			}
+		}
+		return null;
+	}
 }
