@@ -14,6 +14,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.junit.Test;
+
 @WebServlet(name = "userServlet", urlPatterns = "/index")
 public class UserServlet extends HttpServlet {
 
@@ -29,7 +31,18 @@ public class UserServlet extends HttpServlet {
 		out.println("now:" + now.toString());
 	}
 
+	private static void test() {
+		String str = UserServlet.class.getResource("/test-test.txt").toString();
+		System.out.println("uri:" + str);
+	}
+
+	@Test
+	public void test2() {
+		test();
+	}
+
 	public static void main(String[] args) throws Exception {
+		test();
 		JettyServer.start("src/test/webapp");
 		System.out.println("ok");
 		String str = Httpnb.doGet("http://localhost/index");
