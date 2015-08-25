@@ -3,23 +3,23 @@ package io.leopard.web.session;
 import java.util.Iterator;
 import java.util.ServiceLoader;
 
-public class Stroe implements IStroe {
+public class Store implements IStore {
 
-	private static final IStroe instance = new Stroe();
+	private static final IStore instance = new Store();
 
-	public static IStroe getInstance() {
+	public static IStore getInstance() {
 		return instance;
 	}
 
-	private IStroe stroe;
+	private IStore stroe;
 
-	public Stroe() {
-		Iterator<IStroe> iterator = ServiceLoader.load(IStroe.class).iterator();
-		System.err.println("iterator:" + iterator);
+	public Store() {
+		Iterator<IStore> iterator = ServiceLoader.load(IStore.class).iterator();
+		System.err.println("Store iterator:" + iterator);
 
 		while (iterator.hasNext()) {
-			IStroe stroe = iterator.next();
-			System.err.println("stroe:" + stroe);
+			IStore stroe = iterator.next();
+			System.err.println("Store stroe:" + stroe);
 			if (stroe.isEnable()) {
 				this.stroe = stroe;
 				break;

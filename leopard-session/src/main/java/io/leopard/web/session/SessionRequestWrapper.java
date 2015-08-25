@@ -86,7 +86,7 @@ public class SessionRequestWrapper extends HttpServletRequestWrapper {
 	@Override
 	public HttpSession getSession(boolean create) {
 		System.out.println("getSession:" + create);
-		if (!Stroe.getInstance().isEnable()) {
+		if (!Store.getInstance().isEnable()) {
 			return super.getSession(true);
 		}
 		if (session != null) {

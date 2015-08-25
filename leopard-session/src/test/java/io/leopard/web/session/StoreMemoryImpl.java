@@ -9,7 +9,7 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author 阿海
  *
  */
-public class StroeMemoryImpl implements IStroe {
+public class StoreMemoryImpl implements IStore {
 
 	private Map<String, String> data = new ConcurrentHashMap<String, String>(10);
 

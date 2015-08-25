@@ -53,7 +53,7 @@ public class SessionWrapper implements HttpSession {
 	protected Map<String, Object> getMap() {
 		if (this.map == null) {
 			String key = this.getSessionKey(sid);
-			String json = Stroe.getInstance().get(key);
+			String json = Store.getInstance().get(key);
 			this.map = Json.toObject(json, Map.class);
 			// this.map = sessionService.getSession(sid);
 			if (map == null) {
@@ -78,7 +78,7 @@ public class SessionWrapper implements HttpSession {
 		// sessionService.saveSession(this.sid, this.getMap(), expiry);
 
 		String json = Json.toJson(this.getMap());
-		Stroe.getInstance().set(getSessionKey(sid), json, expiry);
+		Store.getInstance().set(getSessionKey(sid), json, expiry);
 	}
 
 	@Override
@@ -102,7 +102,7 @@ public class SessionWrapper implements HttpSession {
 		// sessionService.removeSession(this.sid);
 
 		String key = this.getSessionKey(sid);
-		Stroe.getInstance().del(key);
+		Store.getInstance().del(key);
 	}
 
 	@Override
@@ -110,7 +110,7 @@ public class SessionWrapper implements HttpSession {
 		this.getMap().remove(key);
 
 		String json = Json.toJson(this.getMap());
-		Stroe.getInstance().set(getSessionKey(sid), json, expiry);
+		Store.getInstance().set(getSessionKey(sid), json, expiry);
 		// sessionService.saveSession(this.sid, this.getMap(), expiry);
 
 	}

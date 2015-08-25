@@ -1,6 +1,6 @@
 package io.leopard.web.session;
 
-public interface IStroe {
+public interface IStore {
 
 	boolean isEnable();
 
