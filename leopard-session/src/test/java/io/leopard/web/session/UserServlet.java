@@ -23,7 +23,7 @@ public class UserServlet extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("service:" + request);
+		// System.out.println("service:" + request);
 		HttpSession session = request.getSession();
 		session.setAttribute("key", new Date());
 		Date now = (Date) session.getAttribute("key");
@@ -34,9 +34,9 @@ public class UserServlet extends HttpServlet {
 	@Test
 	public void test() throws Exception {
 		JettyServer.start("src/test/webapp");
-		System.out.println("ok");
-		String str = Httpnb.doGet("http://localhost/index");
-		System.out.println("str:" + str);
+		// System.out.println("ok");
+		String result = Httpnb.doGet("http://localhost/index");
+		System.out.println("result:" + result);
 	}
 
 }
