@@ -13,9 +13,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 public class JsonViewTrynbResolver implements TrynbResolver {
 
-	public JsonViewTrynbResolver() {
-		new Exception("JsonViewTrynbResolver").printStackTrace();
-	}
+	// public JsonViewTrynbResolver() {
+	// new Exception("JsonViewTrynbResolver").printStackTrace();
+	// }
 
 	@Override
 	public ModelAndView resolveView(HttpServletRequest request, HttpServletResponse response, HandlerMethod handler, Exception exception, TrynbInfo trynbInfo) {
