@@ -22,14 +22,23 @@
 		<dependencies>
 			<dependency>
 				<groupId>io.leopard</groupId>
-				<artifactId>leopard-json</artifactId>
-				<version>0.0.1-SNAPSHOT</version>
+				<artifactId>leopard-mock</artifactId>
+				<version>0.0.3-SNAPSHOT</version>
+				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-jetty</artifactId>
-				<version>0.0.2-SNAPSHOT</version>
+				<version>0.0.3-SNAPSHOT</version>
+				<scope>test</scope>
 			</dependency>
+			
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-json</artifactId>
+				<version>0.0.1-SNAPSHOT</version>
+			</dependency>
+
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-redis</artifactId>
@@ -45,11 +54,7 @@
 				<artifactId>httpnb</artifactId>
 				<version>0.0.1</version>
 			</dependency>
-			<dependency>
-				<groupId>io.leopard</groupId>
-				<artifactId>leopard-mock</artifactId>
-				<version>0.0.2-SNAPSHOT</version>
-			</dependency>
+
 		</dependencies>
 	</dependencyManagement>
 	<modules>
