@@ -1,8 +1,8 @@
 package io.leopard.web.passport.xparam;
 
 import io.leopard.web.passport.NotLoginException;
-import io.leopard.web.passport.RequestUtil;
 import io.leopard.web.passport.SessionUtil;
+import io.leopard.web.servlet.RequestUtil;
 import io.leopard.web4j.xparam.XParam;
 
 import javax.servlet.http.HttpServletRequest;

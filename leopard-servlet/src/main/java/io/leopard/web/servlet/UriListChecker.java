@@ -1,4 +1,4 @@
-package io.leopard.web.passport;
+package io.leopard.web.servlet;
 
 //import io.leopard.burrow.util.ListUtil;
 
@@ -9,6 +9,7 @@ import java.util.Set;
 
 public class UriListChecker {
 
+	
 	private Set<String> uris = new HashSet<String>();
 	private List<String> folders = new ArrayList<String>();
 

@@ -57,5 +57,6 @@
 		<module>leopard-trynb</module>
 		<module>leopard-session</module>
 		<module>leopard-passport</module>
+		<module>leopard-servlet</module>
 	</modules>
 </project>
