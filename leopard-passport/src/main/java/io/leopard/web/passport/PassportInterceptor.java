@@ -32,7 +32,7 @@ public class PassportInterceptor implements HandlerInterceptor {
 		parameterNameSet.add("sessUsername");
 	}
 
-	private PassportValidate passportValidateLei;
+	private PassportValidate passportValidateLei = new PassportValidateImpl();
 
 	protected UriListChecker uriListChecker = new UriListChecker();// 需要做登录验证的URL列表
 
@@ -96,7 +96,6 @@ public class PassportInterceptor implements HandlerInterceptor {
 		String ip = RequestUtil.getProxyIp(request);
 		String message = "您[" + ip + "]未登录,uri:" + request.getRequestURI();
 		logger.info(message);
-
 		passportValidateLei.showLoginBox(request, response);
 	}
 
