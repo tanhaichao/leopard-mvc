@@ -4,12 +4,9 @@
 	http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
-	<context:component-scan base-package="io.leopard.trynb.web.controller" />
-
-	<context:component-scan base-package="io.leopard.mvc.trynb.controller" />
+	<context:component-scan base-package="io.leopard.mvc.trynb.web.controller" />
 
 	<bean class="io.leopard.mvc.trynb.TrynbConfiguration" />
-
 
 	<bean id="freemarkerConfigurer" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
 		<property name="templateLoaderPath" value="/WEB-INF/freemarker/" />
