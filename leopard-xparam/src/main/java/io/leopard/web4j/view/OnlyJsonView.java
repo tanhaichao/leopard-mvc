@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class OnlyJsonView extends AbstractView {
 
+	
 	private final Object data;
 	private final boolean format;
 
