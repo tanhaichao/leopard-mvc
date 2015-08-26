@@ -15,7 +15,7 @@ public class SessUidXParam implements XParam {
 
 	@Override
 	public Object getValue(HttpServletRequest request, MethodParameter parameter) {
-		Long sessUid = (Long) request.getSession().getAttribute("uid");
+		Long sessUid = (Long) request.getSession().getAttribute("passport");
 		if (sessUid == null) {
 			String ip = XParamUtil.getProxyIp(request);
 			throw new NotLoginException("您[" + ip + "]未登录.");

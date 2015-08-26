@@ -15,7 +15,7 @@ public class SessUsernameXParam implements XParam {
 
 	@Override
 	public Object getValue(HttpServletRequest request, MethodParameter parameter) {
-		String sessUsername = (String) request.getSession().getAttribute("username");
+		String sessUsername = (String) request.getSession().getAttribute("passport");
 		if (sessUsername == null) {
 			String ip = XParamUtil.getProxyIp(request);
 			throw new NotLoginException("您[" + ip + "]未登录.");
