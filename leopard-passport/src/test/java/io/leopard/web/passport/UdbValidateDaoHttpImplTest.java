@@ -1,11 +1,7 @@
 package io.leopard.web.passport;
 
-import io.leopard.test.mock.LeopardMockRunner;
-
 import org.junit.Test;
-import org.junit.runner.RunWith;
 
-@RunWith(LeopardMockRunner.class)
 public class UdbValidateDaoHttpImplTest {
 
 	// @Test
