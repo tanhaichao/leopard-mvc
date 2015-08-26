@@ -5,11 +5,7 @@ import io.leopard.json.Json;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 public class SessionUtil {
-	protected static final Log logger = LogFactory.getLog(SessionUtil.class);
 
 	public static final String SESSIONID_COOKIE_NAME = "SESSIONID";
 

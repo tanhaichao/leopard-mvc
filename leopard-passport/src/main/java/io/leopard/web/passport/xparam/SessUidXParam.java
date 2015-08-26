@@ -25,7 +25,6 @@ public class SessUidXParam implements XParam {
 			String ip = RequestUtil.getProxyIp(request);
 			throw new NotLoginException("您[" + ip + "]未登录.");
 		}
-
 		return sessUid;
 		// throw new UnsupportedOperationException("Not Impl.");
 	}

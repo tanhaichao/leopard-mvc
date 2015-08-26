@@ -6,8 +6,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.web.servlet.View;
-
 /**
  * 通行证登陆验证抽象实现.
  * 
@@ -18,7 +16,7 @@ public abstract class AbstractPassportValidate implements PassportValidate {
 
 	@Override
 	public void showLoginBox(HttpServletRequest request, HttpServletResponse response) {
-		View view = this.getView();
+		FtlView view = this.getView();
 		String url = RequestUtil.getRequestURL(request);
 		String queryString = request.getQueryString();
 		if (queryString != null && queryString.length() > 0) {
@@ -35,7 +33,7 @@ public abstract class AbstractPassportValidate implements PassportValidate {
 		}
 	}
 
-	protected View getView() {
+	protected FtlView getView() {
 		return new FtlView("/passport/ftl", "login");
 	}
 }

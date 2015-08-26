@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.core.MethodParameter;
-import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -22,7 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
  * @author 阿海
  * 
  */
-@Component
+
 public class PassportInterceptor implements HandlerInterceptor {
 	protected Log logger = LogFactory.getLog(this.getClass());
 
@@ -32,7 +31,7 @@ public class PassportInterceptor implements HandlerInterceptor {
 		parameterNameSet.add("sessUid");
 		parameterNameSet.add("sessUsername");
 	}
-	
+
 	private PassportValidate passportValidateLei;
 
 	protected UriListChecker uriListChecker = new UriListChecker();// 需要做登录验证的URL列表
