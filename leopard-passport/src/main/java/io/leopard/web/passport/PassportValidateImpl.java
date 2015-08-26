@@ -19,6 +19,16 @@ public class PassportValidateImpl implements PassportValidate {
 
 	private PassportValidate passportValidate = new PassportValidateLoaderImpl();
 
+	private final static PassportValidate instance = new PassportValidateImpl();
+
+	public static PassportValidate getInstance() {
+		return instance;
+	}
+
+	private PassportValidateImpl() {
+
+	}
+
 	@Override
 	public Object validate(HttpServletRequest request, HttpServletResponse response) {
 		Object passport = request.getSession().getAttribute(SESSION_KEY);
@@ -57,6 +67,11 @@ public class PassportValidateImpl implements PassportValidate {
 		catch (Exception e) {
 			throw new RuntimeException(e.getMessage(), e);
 		}
+	}
+
+	@Override
+	public boolean login(HttpServletRequest request, HttpServletResponse response) {
+		return passportValidate.login(request, response);
 	}
 
 }

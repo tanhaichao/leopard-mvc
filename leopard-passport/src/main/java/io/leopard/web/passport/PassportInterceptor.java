@@ -19,7 +19,7 @@ public class PassportInterceptor implements HandlerInterceptor {
 	protected Log logger = LogFactory.getLog(this.getClass());
 
 	private PassportChecker passportChecker = new PassportCheckerImpl();
-	private PassportValidate passportValidateLei = new PassportValidateImpl();
+	private PassportValidate passportValidateLei = PassportValidateImpl.getInstance();
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

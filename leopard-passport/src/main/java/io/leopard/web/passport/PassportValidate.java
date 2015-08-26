@@ -26,4 +26,6 @@ public interface PassportValidate {
 	 */
 	boolean showLoginBox(HttpServletRequest request, HttpServletResponse response);
 
+	boolean login(HttpServletRequest request, HttpServletResponse response);
+
 }

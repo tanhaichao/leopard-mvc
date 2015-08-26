@@ -57,4 +57,9 @@ public class PassportValidateLoaderImpl implements PassportValidate {
 		return getPassportValidate().showLoginBox(request, response);
 	}
 
+	@Override
+	public boolean login(HttpServletRequest request, HttpServletResponse response) {
+		return getPassportValidate().login(request, response);
+	}
+
 }
