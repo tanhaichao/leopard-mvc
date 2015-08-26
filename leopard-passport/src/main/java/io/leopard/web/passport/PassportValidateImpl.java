@@ -3,9 +3,7 @@ package io.leopard.web.passport;
 import io.leopard.web.servlet.RequestUtil;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
-import java.util.ServiceLoader;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,21 +17,7 @@ public class PassportValidateImpl implements PassportValidate {
 
 	protected Log logger = LogFactory.getLog(this.getClass());
 
-	private PassportValidate passportValidate = null;
-
-	public PassportValidateImpl() {
-		Iterator<PassportValidate> iterator = ServiceLoader.load(PassportValidate.class).iterator();
-		if (iterator.hasNext()) {
-			this.passportValidate = iterator.next();
-		}
-	}
-
-	private PassportValidate getPassportValidate() {
-		if (passportValidate == null) {
-			throw new NullPointerException("PassportValidate接口未实现.");
-		}
-		return passportValidate;
-	}
+	private PassportValidate passportValidate = new PassportValidateLoaderImpl();
 
 	@Override
 	public Object validate(HttpServletRequest request, HttpServletResponse response) {
@@ -41,7 +25,7 @@ public class PassportValidateImpl implements PassportValidate {
 		if (passport != null) {
 			return passport;
 		}
-		passport = getPassportValidate().validate(request, response);
+		passport = passportValidate.validate(request, response);
 		if (passport != null) {
 			request.getSession().setAttribute(SESSION_KEY, passport);
 		}
@@ -53,7 +37,7 @@ public class PassportValidateImpl implements PassportValidate {
 		String ip = RequestUtil.getProxyIp(request);
 		String message = "您[" + ip + "]未登录,uri:" + request.getRequestURI();
 		logger.info(message);
-		if (getPassportValidate().showLoginBox(request, response)) {
+		if (passportValidate.showLoginBox(request, response)) {
 			return true;
 		}
 
