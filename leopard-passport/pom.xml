@@ -16,12 +16,6 @@
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
-			<artifactId>leopard-xparam</artifactId>
-			<version>0.0.2-SNAPSHOT</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.leopard</groupId>
 			<artifactId>leopard-servlet</artifactId>
 			<version>0.0.2-SNAPSHOT</version>
 		</dependency>

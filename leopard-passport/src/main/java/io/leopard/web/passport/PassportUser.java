@@ -3,7 +3,7 @@ package io.leopard.web.passport;
 public class PassportUser {
 
 	private String username;
-	private long uid;
+	private Long uid;
 
 	public String getUsername() {
 		return username;
@@ -13,11 +13,11 @@ public class PassportUser {
 		this.username = username;
 	}
 
-	public long getUid() {
+	public Long getUid() {
 		return uid;
 	}
 
-	public void setUid(long uid) {
+	public void setUid(Long uid) {
 		this.uid = uid;
 	}
 

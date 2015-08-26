@@ -16,7 +16,7 @@ public interface PassportValidate {
 	 * 
 	 * @return 通行证或uid
 	 */
-	PassportUser validate(HttpServletRequest request, HttpServletResponse response);
+	Object validate(HttpServletRequest request, HttpServletResponse response);
 
 	/**
 	 * 显示登陆框.
@@ -24,6 +24,6 @@ public interface PassportValidate {
 	 * @param request
 	 * @param response
 	 */
-	void showLoginBox(HttpServletRequest request, HttpServletResponse response);
+	boolean showLoginBox(HttpServletRequest request, HttpServletResponse response);
 
 }
