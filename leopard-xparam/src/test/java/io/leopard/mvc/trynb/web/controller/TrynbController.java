@@ -12,7 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/")
-public class IndexController {
+public class TrynbController {
 
 	@RequestMapping("/index.do")
 	public ModelAndView index() {
