@@ -21,9 +21,6 @@ public class PassportValidateLoaderImpl implements PassportValidate {
 		this.passportValidate = this.getPassportValidateByApplicationContext();
 		if (passportValidate == null) {
 			this.passportValidate = this.getPassportValidateByServiceLoader();
-			if (passportValidate == null) {
-				throw new NullPointerException("PassportValidate接口未实现.");
-			}
 		}
 		return passportValidate;
 	}
@@ -49,17 +46,29 @@ public class PassportValidateLoaderImpl implements PassportValidate {
 
 	@Override
 	public Object validate(HttpServletRequest request, HttpServletResponse response) {
-		return getPassportValidate().validate(request, response);
+		PassportValidate passportValidate = this.getPassportValidate();
+		if (passportValidate == null) {
+			throw new NullPointerException("PassportValidate接口未实现.");
+		}
+		return passportValidate.validate(request, response);
 	}
 
 	@Override
 	public boolean showLoginBox(HttpServletRequest request, HttpServletResponse response) {
-		return getPassportValidate().showLoginBox(request, response);
+		PassportValidate passportValidate = this.getPassportValidate();
+		if (passportValidate == null) {
+			throw new NullPointerException("PassportValidate接口未实现.");
+		}
+		return passportValidate.showLoginBox(request, response);
 	}
 
 	@Override
 	public boolean login(HttpServletRequest request, HttpServletResponse response) {
-		return getPassportValidate().login(request, response);
+		PassportValidate passportValidate = this.getPassportValidate();
+		if (passportValidate == null) {
+			return false;
+		}
+		return passportValidate.login(request, response);
 	}
 
 }
