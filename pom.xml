@@ -56,5 +56,6 @@
 		<module>leopard-xparam</module>
 		<module>leopard-trynb</module>
 		<module>leopard-session</module>
+		<module>leopard-passport</module>
 	</modules>
 </project>
