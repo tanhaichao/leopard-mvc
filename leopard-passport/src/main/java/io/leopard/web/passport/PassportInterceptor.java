@@ -5,8 +5,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.config.BeanPostProcessor;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
 /**
  * 检查是否已登录.
@@ -14,8 +18,8 @@ import org.springframework.web.servlet.ModelAndView;
  * @author 阿海
  * 
  */
-
-public class PassportInterceptor implements HandlerInterceptor {
+@Component
+public class PassportInterceptor implements HandlerInterceptor, BeanPostProcessor {
 	protected Log logger = LogFactory.getLog(this.getClass());
 
 	private PassportChecker passportChecker = new PassportCheckerImpl();
@@ -46,4 +50,21 @@ public class PassportInterceptor implements HandlerInterceptor {
 
 	}
 
+	@Override
+	public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+		if (bean instanceof RequestMappingHandlerMapping) {
+			System.out.println("PassportBeanPostProcessor bean:" + bean);
+			this.registerInterceptor((RequestMappingHandlerMapping) bean);
+		}
+		return bean;
+	}
+
+	private void registerInterceptor(RequestMappingHandlerMapping handlerMapping) {
+		handlerMapping.setInterceptors(new Object[] { this });
+	}
+
+	@Override
+	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
+		return bean;
+	}
 }
