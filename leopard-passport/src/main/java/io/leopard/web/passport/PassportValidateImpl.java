@@ -2,6 +2,7 @@ package io.leopard.web.passport;
 
 import io.leopard.web.servlet.RequestUtil;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -70,7 +71,7 @@ public class PassportValidateImpl implements PassportValidate {
 	}
 
 	@Override
-	public boolean login(HttpServletRequest request, HttpServletResponse response) {
+	public boolean login(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		return passportValidate.login(request, response);
 	}
 

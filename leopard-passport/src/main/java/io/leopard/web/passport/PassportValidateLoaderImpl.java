@@ -1,5 +1,6 @@
 package io.leopard.web.passport;
 
+import java.io.IOException;
 import java.util.Iterator;
 import java.util.ServiceLoader;
 
@@ -63,7 +64,7 @@ public class PassportValidateLoaderImpl implements PassportValidate {
 	}
 
 	@Override
-	public boolean login(HttpServletRequest request, HttpServletResponse response) {
+	public boolean login(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		PassportValidate passportValidate = this.getPassportValidate();
 		if (passportValidate == null) {
 			return false;

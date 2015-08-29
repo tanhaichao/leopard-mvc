@@ -1,5 +1,7 @@
 package io.leopard.web.passport;
 
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -34,7 +36,8 @@ public interface PassportValidate {
 	 * @param request
 	 * @param response
 	 * @return 未实现返回null，已实现跳转返回true，未跳转返回false
+	 * @throws IOException
 	 */
-	boolean login(HttpServletRequest request, HttpServletResponse response);
+	boolean login(HttpServletRequest request, HttpServletResponse response) throws IOException;
 
 }
