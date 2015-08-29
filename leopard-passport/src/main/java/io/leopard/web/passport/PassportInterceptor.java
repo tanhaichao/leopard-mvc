@@ -28,7 +28,7 @@ public class PassportInterceptor implements HandlerInterceptor, BeanPostProcesso
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		boolean isNeedCheckLogin = passportChecker.isNeedCheckLogin(request, handler);
-		// System.out.println("PassportInterceptor preHandle:" + isNeedCheckLogin + " " + handler);
+		System.out.println("PassportInterceptor preHandle:" + isNeedCheckLogin + " " + handler);
 		if (!isNeedCheckLogin) {
 			return true;
 		}
@@ -55,6 +55,7 @@ public class PassportInterceptor implements HandlerInterceptor, BeanPostProcesso
 
 	@Override
 	public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
+		System.out.println("postProcessBeforeInitialization:" + bean);
 		if (bean instanceof RequestMappingHandlerMapping) {
 			System.out.println("PassportBeanPostProcessor bean:" + bean);
 			this.registerInterceptor((RequestMappingHandlerMapping) bean);
@@ -70,4 +71,25 @@ public class PassportInterceptor implements HandlerInterceptor, BeanPostProcesso
 	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
 		return bean;
 	}
+
+	// @Override
+	// public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+	// System.out.println("PassportInterceptor setApplicationContext:" + applicationContext);
+	//
+	// }
+	//
+	// @Override
+	// public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+	// // PassportBeanPostProcessor bean:org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping@9b2dc56
+	// // PassportBeanPostProcessor bean:org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping@6d6cd1e0
+	// System.out.println("PassportInterceptor setBeanFactory:" + beanFactory);
+	// try {
+	// @SuppressWarnings("deprecation")
+	// DefaultAnnotationHandlerMapping handlerMapping = beanFactory.getBean(DefaultAnnotationHandlerMapping.class);
+	// handlerMapping.setInterceptors(new Object[] { this });
+	// }
+	// catch (NoSuchBeanDefinitionException e) {
+	//
+	// }
+	// }
 }

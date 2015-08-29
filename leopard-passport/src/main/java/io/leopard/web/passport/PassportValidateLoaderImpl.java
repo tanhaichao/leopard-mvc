@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.servlet.FrameworkServlet;
+import org.springframework.web.servlet.support.RequestContextUtils;
 
 public class PassportValidateLoaderImpl implements PassportValidate {
 
@@ -21,6 +22,7 @@ public class PassportValidateLoaderImpl implements PassportValidate {
 			return passportValidate;
 		}
 		this.passportValidate = this.getPassportValidateByApplicationContext(request);
+		System.out.println("getPassportValidateByApplicationContext:" + passportValidate);
 		if (passportValidate == null) {
 			this.passportValidate = this.getPassportValidateByServiceLoader();
 		}
@@ -45,7 +47,6 @@ public class PassportValidateLoaderImpl implements PassportValidate {
 		ApplicationContext context = (ApplicationContext) request.getServletContext().getAttribute(attributeName);
 		// ApplicationContext context = ContextLoader.getCurrentWebApplicationContext();
 		if (context == null) {
-			System.out.println("");
 			return null;
 		}
 		try {

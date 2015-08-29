@@ -6,25 +6,9 @@
 
 	<context:component-scan base-package="io.leopard.web.passport.controller" />
 	
+	<context:component-scan base-package="io.leopard.web.passport" />
 	<context:component-scan base-package="io.leopard.web.xparam" />
 
-	<bean id="freemarkerConfigurer" class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
-		<property name="templateLoaderPath" value="/WEB-INF/freemarker/" />
-		<property name="freemarkerSettings">
-			<props>
-				<prop key="template_update_delay">0</prop>
-				<prop key="defaultEncoding">UTF-8</prop>
-			</props>
-		</property>
-	</bean>
-
-	<bean id="viewResolver" class="org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver">
-		<property name="order" value="1" />
-		<property name="cache" value="false" />
-		<property name="suffix" value=".ftl" />
-		<property name="exposeSpringMacroHelpers" value="true" />
-		<property name="contentType" value="text/html;charset=UTF-8"></property>
-	</bean>
 
 
 </beans>
