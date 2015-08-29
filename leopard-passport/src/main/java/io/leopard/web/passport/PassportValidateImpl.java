@@ -70,7 +70,7 @@ public class PassportValidateImpl implements PassportValidate {
 	}
 
 	@Override
-	public Boolean login(HttpServletRequest request, HttpServletResponse response) {
+	public boolean login(HttpServletRequest request, HttpServletResponse response) {
 		return passportValidate.login(request, response);
 	}
 

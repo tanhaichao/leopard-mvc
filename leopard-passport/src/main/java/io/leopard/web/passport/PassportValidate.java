@@ -35,6 +35,6 @@ public interface PassportValidate {
 	 * @param response
 	 * @return 未实现返回null，已实现跳转返回true，未跳转返回false
 	 */
-	Boolean login(HttpServletRequest request, HttpServletResponse response);
+	boolean login(HttpServletRequest request, HttpServletResponse response);
 
 }

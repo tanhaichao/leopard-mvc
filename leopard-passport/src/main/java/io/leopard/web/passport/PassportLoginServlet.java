@@ -21,18 +21,11 @@ public class PassportLoginServlet extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Boolean flag = PassportValidateImpl.getInstance().login(request, response);
-		if (flag == null) {
+		boolean flag = PassportValidateImpl.getInstance().login(request, response);
+		if (!flag) {
 			this.notImpl(response);
 			return;
 		}
-
-		if (flag) {
-			return;
-		}
-
-		String url = request.getParameter("url");
-		response.sendRedirect(url);
 	}
 
 	private void notImpl(HttpServletResponse response) throws IOException {

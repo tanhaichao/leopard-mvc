@@ -63,7 +63,7 @@ public class PassportValidateLoaderImpl implements PassportValidate {
 	}
 
 	@Override
-	public Boolean login(HttpServletRequest request, HttpServletResponse response) {
+	public boolean login(HttpServletRequest request, HttpServletResponse response) {
 		PassportValidate passportValidate = this.getPassportValidate();
 		if (passportValidate == null) {
 			return false;
