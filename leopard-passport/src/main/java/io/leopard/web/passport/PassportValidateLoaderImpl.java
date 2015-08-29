@@ -48,7 +48,7 @@ public class PassportValidateLoaderImpl implements PassportValidate {
 	public Object validate(HttpServletRequest request, HttpServletResponse response) {
 		PassportValidate passportValidate = this.getPassportValidate();
 		if (passportValidate == null) {
-			throw new NullPointerException("PassportValidate接口未实现.");
+			throw new UnsupportedOperationException("PassportValidate接口未实现.");
 		}
 		return passportValidate.validate(request, response);
 	}
