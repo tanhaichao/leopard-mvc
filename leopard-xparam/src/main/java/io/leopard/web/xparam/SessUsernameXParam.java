@@ -3,6 +3,7 @@ package io.leopard.web.xparam;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.core.MethodParameter;
+import org.springframework.stereotype.Service;
 
 /**
  * 获取存在session中的用户名.
@@ -10,7 +11,7 @@ import org.springframework.core.MethodParameter;
  * @author 阿海
  * 
  */
-
+@Service
 public class SessUsernameXParam implements XParam {
 
 	@Override

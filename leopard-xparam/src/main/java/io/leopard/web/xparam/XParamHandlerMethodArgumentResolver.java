@@ -12,6 +12,7 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.core.MethodParameter;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ValueConstants;
 import org.springframework.web.context.request.NativeWebRequest;
@@ -23,6 +24,7 @@ import org.springframework.web.method.annotation.AbstractNamedValueMethodArgumen
  * @author 阿海
  *
  */
+@Component
 public class XParamHandlerMethodArgumentResolver extends AbstractNamedValueMethodArgumentResolver implements BeanFactoryAware {
 	// TODO ahai 这里有必要使用线程安全的Map吗？
 	private static final Map<String, XParam> data = new HashMap<String, XParam>();
@@ -37,7 +39,7 @@ public class XParamHandlerMethodArgumentResolver extends AbstractNamedValueMetho
 		Map<String, XParam> map = factory.getBeansOfType(XParam.class);
 		for (Entry<String, XParam> entry : map.entrySet()) {
 			XParam xparam = entry.getValue();
-			// System.err.println("xparam.getKey() " + entry.getKey() + ":" + xparam.getKey());
+			// System.out.println("xparam.getKey() " + entry.getKey() + ":" + xparam.getKey());
 			data.put(xparam.getKey(), xparam);
 		}
 	}
@@ -46,6 +48,7 @@ public class XParamHandlerMethodArgumentResolver extends AbstractNamedValueMetho
 	public boolean supportsParameter(MethodParameter parameter) {
 		String name = parameter.getParameterName();
 		boolean isSpecialName = data.containsKey(name);
+		// System.out.println("name:" + name + " isSpecialName:" + isSpecialName);
 		return isSpecialName;
 	}
 
