@@ -28,10 +28,11 @@ public class PassportInterceptor implements HandlerInterceptor, BeanPostProcesso
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		boolean isNeedCheckLogin = passportChecker.isNeedCheckLogin(request, handler);
+		System.out.println("PassportInterceptor preHandle:" + isNeedCheckLogin + " " + handler);
 		if (!isNeedCheckLogin) {
 			return true;
 		}
-		System.out.println("PassportInterceptor preHandle:" + isNeedCheckLogin + " " + handler);
+
 		Object account = passportValidateLei.validate(request, response);
 		if (account == null) {
 			passportValidateLei.showLoginBox(request, response);
