@@ -13,7 +13,7 @@ public class PassportCheckerImpl implements PassportChecker {
 
 	@Override
 	public boolean isNeedCheckLogin(HttpServletRequest request, Object handler) {
-		System.out.println("PassportCheckerImpl:" + handler.getClass());
+		// System.out.println("PassportCheckerImpl:" + handler.getClass());
 		if (passportCheckerHandlerMethodImpl.isNeedCheckLogin(request, handler)) {
 			return true;
 		}
