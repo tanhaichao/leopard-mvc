@@ -28,25 +28,23 @@ public class XParamBeanPostProcessor implements BeanPostProcessor, BeanFactoryAw
 		return bean;
 	}
 
+	/**
+	 * 注册HandlerMethodArgumentResolver.
+	 * 
+	 * @param adapter
+	 */
 	private void registerHandlerMethodArgumentResolver(RequestMappingHandlerAdapter adapter) {
 		List<HandlerMethodArgumentResolver> customArgumentResolvers = adapter.getCustomArgumentResolvers();
-		System.out.println("XParamBeanPostProcessor postProcessBeforeInitialization customArgumentResolvers:" + adapter.getCustomArgumentResolvers());
 		if (customArgumentResolvers == null) {
 			customArgumentResolvers = new ArrayList<HandlerMethodArgumentResolver>();
 			adapter.setCustomArgumentResolvers(customArgumentResolvers);
 		}
 		XParamHandlerMethodArgumentResolver argumentResolver = beanFactory.getBean(XParamHandlerMethodArgumentResolver.class);
-		System.out.println("XParamBeanPostProcessor postProcessBeforeInitialization argumentResolver:" + argumentResolver);
-
 		customArgumentResolvers.add(argumentResolver);
 	}
 
 	@Override
 	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
-		// if (bean instanceof RequestMappingHandlerAdapter) {
-		// List<HandlerMethodArgumentResolver> customArgumentResolvers = ((RequestMappingHandlerAdapter) bean).getCustomArgumentResolvers();
-		// System.out.println("XParamBeanPostProcessor postProcessAfterInitialization customArgumentResolvers:" + customArgumentResolvers);
-		// }
 		return bean;
 	}
 
