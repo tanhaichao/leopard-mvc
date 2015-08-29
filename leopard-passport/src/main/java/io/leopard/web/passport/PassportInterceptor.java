@@ -55,7 +55,7 @@ public class PassportInterceptor implements HandlerInterceptor, BeanPostProcesso
 
 	@Override
 	public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-		System.out.println("postProcessBeforeInitialization:" + bean);
+//		System.out.println("postProcessBeforeInitialization:" + bean);
 		if (bean instanceof RequestMappingHandlerMapping) {
 			System.out.println("PassportBeanPostProcessor bean:" + bean);
 			this.registerInterceptor((RequestMappingHandlerMapping) bean);
