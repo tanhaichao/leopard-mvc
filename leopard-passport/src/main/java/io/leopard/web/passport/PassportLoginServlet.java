@@ -21,16 +21,25 @@ public class PassportLoginServlet extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		boolean flag = PassportValidateImpl.getInstance().login(request, response);
+		Boolean flag = PassportValidateImpl.getInstance().login(request, response);
+		if (flag == null) {
+			this.notImpl(response);
+			return;
+		}
+
 		if (flag) {
 			return;
 		}
 
+		String url = request.getParameter("url");
+		response.sendRedirect(url);
+	}
+
+	private void notImpl(HttpServletResponse response) throws IOException {
 		String html = "未实现PassportValidate.login接口";
 		byte[] bytes = html.getBytes();
 		response.setContentType("text/html");
 		response.setContentLength(bytes.length);
-
 		OutputStream out = response.getOutputStream();
 		out.write(bytes);
 		out.flush();

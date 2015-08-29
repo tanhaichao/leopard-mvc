@@ -16,7 +16,7 @@ public class PassportValidateLoaderImpl implements PassportValidate {
 
 	private PassportValidate getPassportValidate() {
 		if (passportValidate != null) {
-			return null;
+			return passportValidate;
 		}
 		this.passportValidate = this.getPassportValidateByApplicationContext();
 		if (passportValidate == null) {
@@ -57,13 +57,13 @@ public class PassportValidateLoaderImpl implements PassportValidate {
 	public boolean showLoginBox(HttpServletRequest request, HttpServletResponse response) {
 		PassportValidate passportValidate = this.getPassportValidate();
 		if (passportValidate == null) {
-			throw new NullPointerException("PassportValidate接口未实现.");
+			throw new UnsupportedOperationException("PassportValidate接口未实现.");
 		}
 		return passportValidate.showLoginBox(request, response);
 	}
 
 	@Override
-	public boolean login(HttpServletRequest request, HttpServletResponse response) {
+	public Boolean login(HttpServletRequest request, HttpServletResponse response) {
 		PassportValidate passportValidate = this.getPassportValidate();
 		if (passportValidate == null) {
 			return false;
