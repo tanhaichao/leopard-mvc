@@ -19,7 +19,7 @@ public class SessionFilter implements Filter {
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) req;
 		HttpServletResponse response = (HttpServletResponse) res;
-		// System.out.print("doFilter:" + request);
+		// System.out.print("SessionFilter doFilter:" + request);
 		LeopardRequestWrapper httpRequestWraper = new LeopardRequestWrapper(request, response);
 		chain.doFilter(httpRequestWraper, response);
 	}
