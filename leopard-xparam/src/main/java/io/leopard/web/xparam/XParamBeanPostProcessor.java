@@ -11,6 +11,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
+/**
+ * 注册HandlerMethodArgumentResolver
+ * @author 阿海
+ *
+ */
 @Component
 public class XParamBeanPostProcessor implements BeanPostProcessor, BeanFactoryAware {
 	private BeanFactory beanFactory;
