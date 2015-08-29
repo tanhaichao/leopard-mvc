@@ -18,7 +18,12 @@ public class PassportValidateImpl implements PassportValidate {
 	public Object validate(HttpServletRequest request, HttpServletResponse response) {
 		String uid = CookieUtil.getCookie("uid", request);
 		System.err.println("getCookie:" + uid);
-		return Long.parseLong(uid);
+		try {
+			return Long.parseLong(uid);
+		}
+		catch (NumberFormatException e) {
+			return null;
+		}
 	}
 
 	@Override
