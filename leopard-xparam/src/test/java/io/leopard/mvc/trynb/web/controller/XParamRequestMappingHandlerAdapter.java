@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class XParamRequestMappingHandlerAdapter implements InitializingBean, BeanFactoryAware {
 
+	
 	@Override
 	public void afterPropertiesSet() {
 		System.out.println("XParamRequestMappingHandlerAdapter afterPropertiesSet");
