@@ -2,7 +2,6 @@ package io.leopard.web.captcha;
 
 import java.awt.image.BufferedImage;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
@@ -23,61 +22,39 @@ import com.octo.captcha.image.ImageCaptcha;
  */
 public class CaptchaView extends ModelAndView {
 
+	private int width;
+	private int height;
+
+	private Class<? extends CaptchaEngine> engineClazz;
+
+	public CaptchaView() {
+		this(200, 70);
+	}
+
+	public CaptchaView(int width, int height) {
+		this(width, height, CaptchaEngineImpl.class);
+	}
+
+	public CaptchaView(int width, int height, Class<? extends CaptchaEngine> engineClazz) {
+		super.setView(view);
+		this.width = width;
+		this.height = height;
+		this.engineClazz = engineClazz;
+	}
+
 	private static final String SESSION_KEY = "sessCaptcha";
 
-	public static String getSessionKey(String captchaGroupId) {
+	private void saveSession(HttpServletRequest request, String code) {
+		HttpSession session = request.getSession();
+		String captchaGroupId = (String) request.getAttribute("captchaGroupId");
+		String sessionKey;
 		if (captchaGroupId == null || captchaGroupId.length() == 0) {
-			return SESSION_KEY;
+			sessionKey = SESSION_KEY;
 		}
 		else {
-			return SESSION_KEY + ":" + captchaGroupId;
+			sessionKey = SESSION_KEY + ":" + captchaGroupId;
 		}
-	}
-
-	private static final Map<String, LeopardEngine> engineMap = new ConcurrentHashMap<String, LeopardEngine>();
-
-	protected static LeopardEngine getLeopardEngine(final int width, final int height, Class<? extends LeopardEngine> engineClazz) {
-		String key = width + ":" + height + ":" + engineClazz.getName();
-		LeopardEngine engine = engineMap.get(key);
-		if (engine != null) {
-			return engine;
-		}
-		engine = createLeopardEngine(key, width, height, engineClazz);
-		return engine;
-	}
-
-	protected LeopardEngine getLeopardEngine() {
-		return getLeopardEngine(width, height, engineClazz);
-	}
-
-	protected static synchronized LeopardEngine createLeopardEngine(String key, final int width, final int height, Class<? extends LeopardEngine> engineClazz) {
-		LeopardEngine engine = engineMap.get(key);
-		if (engine != null) {
-			return engine;
-		}
-		try {
-			engine = engineClazz.newInstance();
-		}
-		catch (Exception e) {
-			throw new RuntimeException(e);
-		}
-		engine.setHeight(height);
-		engine.setWidth(width);
-
-		engine.initialFactories();
-		// engine = new LeopardEngineImpl() {
-		// @Override
-		// public int getWidth() {
-		// return width;
-		// }
-		//
-		// @Override
-		// public int getHeight() {
-		// return height;
-		// }
-		// };
-		engineMap.put(key, engine);
-		return engine;
+		session.setAttribute(sessionKey, code);
 	}
 
 	private AbstractUrlBasedView view = new AbstractUrlBasedView() {
@@ -93,18 +70,11 @@ public class CaptchaView extends ModelAndView {
 			// return a jpeg
 			response.setContentType("image/jpeg");
 			// create the image with the text
-			HttpSession session = request.getSession();
-			// String sessionId = session.getId();
 
-			// String key = "captcha:" + sessionId;
-			// imageCaptchaService.setCaptchaEngine(new DuowanEngine());
-			ImageCaptcha imageCaptcha = getLeopardEngine().getNextImageCaptcha();
+			ImageCaptcha imageCaptcha = EngineFactory.getCaptchaEngine(width, height, engineClazz).getNextImageCaptcha();
 			String code = imageCaptcha.getTextChallenge();
-			String captchaGroupId = (String) request.getAttribute("captchaGroupId");
 
-			String sessionKey = getSessionKey(captchaGroupId);
-			session.setAttribute(sessionKey, code);
-
+			saveSession(request, code);
 			// System.out.println("session:" + session.getId() + " code:" + code + " captchaGroupId:" + captchaGroupId + " url:" + request.getRequestURI());
 
 			BufferedImage bi = imageCaptcha.getImageChallenge();
@@ -119,25 +89,5 @@ public class CaptchaView extends ModelAndView {
 			}
 		}
 	};
-
-	private int width;
-	private int height;
-
-	private Class<? extends LeopardEngine> engineClazz;
-
-	public CaptchaView() {
-		this(200, 70);
-	}
-
-	public CaptchaView(int width, int height) {
-		this(width, height, LeopardEngineImpl.class);
-	}
-
-	public CaptchaView(int width, int height, Class<? extends LeopardEngine> engineClazz) {
-		super.setView(view);
-		this.width = width;
-		this.height = height;
-		this.engineClazz = engineClazz;
-	}
 
 }

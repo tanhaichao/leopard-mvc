@@ -22,5 +22,27 @@
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-webmvc</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- test -->
+		<dependency>
+			<groupId>io.leopard</groupId>
+			<artifactId>httpnb</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-jaxrs</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>io.leopard</groupId>
+			<artifactId>leopard-jetty</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<!-- test -->
 	</dependencies>
 </project>
