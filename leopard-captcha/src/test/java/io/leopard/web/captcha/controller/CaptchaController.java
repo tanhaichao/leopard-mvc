@@ -19,7 +19,7 @@ public class CaptchaController {
 	}
 
 	@RequestMapping("/check.do")
-	public JsonView check(Long sessCaptcha) {
+	public JsonView check(String sessCaptcha) {
 		return new JsonView("sessCaptcha:" + sessCaptcha);
 	}
 
