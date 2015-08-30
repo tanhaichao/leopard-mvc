@@ -1,8 +1,10 @@
 package io.leopard.web.xparam;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.ServiceLoader;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -29,9 +31,13 @@ public class XParamHandlerMethodArgumentResolver extends AbstractNamedValueMetho
 	// TODO ahai 这里有必要使用线程安全的Map吗？
 	private static final Map<String, XParam> data = new HashMap<String, XParam>();
 
-	// public static void registerPageParameter(PageParameter page) {
-	// data.put(page.getKey(), page);
-	// }
+	public XParamHandlerMethodArgumentResolver() {
+		Iterator<XParam> iterator = ServiceLoader.load(XParam.class).iterator();
+		while (iterator.hasNext()) {
+			XParam xparam = iterator.next();
+			data.put(xparam.getKey(), xparam);
+		}
+	}
 
 	@Override
 	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
