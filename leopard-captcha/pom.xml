@@ -23,6 +23,12 @@
 			<artifactId>spring-webmvc</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>io.leopard</groupId>
+			<artifactId>leopard-xparam</artifactId>
+			<version>0.0.2-SNAPSHOT</version>
+			<scope>provided</scope>
+		</dependency>
+		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
@@ -44,5 +50,6 @@
 			<scope>test</scope>
 		</dependency>
 		<!-- test -->
+
 	</dependencies>
 </project>

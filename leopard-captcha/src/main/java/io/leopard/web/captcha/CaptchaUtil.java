@@ -8,6 +8,10 @@ public class CaptchaUtil {
 
 	private static String getSessionKey(HttpServletRequest request) {
 		String captchaGroupId = (String) request.getAttribute("captchaGroupId");
+		return getSessionKey(captchaGroupId);
+	}
+
+	private static String getSessionKey(String captchaGroupId) {
 		if (captchaGroupId == null || captchaGroupId.length() == 0) {
 			return SESSION_KEY;
 		}
@@ -23,6 +27,11 @@ public class CaptchaUtil {
 
 	public static String getCode(HttpServletRequest request) {
 		String sessionKey = getSessionKey(request);
+		return (String) request.getSession().getAttribute(sessionKey);
+	}
+
+	public static String getCode(HttpServletRequest request, String captchaGroupId) {
+		String sessionKey = getSessionKey(captchaGroupId);
 		return (String) request.getSession().getAttribute(sessionKey);
 	}
 }
