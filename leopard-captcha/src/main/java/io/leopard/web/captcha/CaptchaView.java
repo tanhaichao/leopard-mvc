@@ -7,7 +7,6 @@ import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.AbstractUrlBasedView;
@@ -42,21 +41,6 @@ public class CaptchaView extends ModelAndView {
 		this.engineClazz = engineClazz;
 	}
 
-	private static final String SESSION_KEY = "sessCaptcha";
-
-	private void saveSession(HttpServletRequest request, String code) {
-		HttpSession session = request.getSession();
-		String captchaGroupId = (String) request.getAttribute("captchaGroupId");
-		String sessionKey;
-		if (captchaGroupId == null || captchaGroupId.length() == 0) {
-			sessionKey = SESSION_KEY;
-		}
-		else {
-			sessionKey = SESSION_KEY + ":" + captchaGroupId;
-		}
-		session.setAttribute(sessionKey, code);
-	}
-
 	private AbstractUrlBasedView view = new AbstractUrlBasedView() {
 		@Override
 		protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -74,7 +58,7 @@ public class CaptchaView extends ModelAndView {
 			ImageCaptcha imageCaptcha = EngineFactory.getCaptchaEngine(width, height, engineClazz).getNextImageCaptcha();
 			String code = imageCaptcha.getTextChallenge();
 
-			saveSession(request, code);
+			CaptchaUtil.saveSession(request, code);
 			// System.out.println("session:" + session.getId() + " code:" + code + " captchaGroupId:" + captchaGroupId + " url:" + request.getRequestURI());
 
 			BufferedImage bi = imageCaptcha.getImageChallenge();
