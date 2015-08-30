@@ -22,6 +22,7 @@ public class CaptchaUtil {
 
 	public static void saveSession(HttpServletRequest request, String code) {
 		String sessionKey = getSessionKey(request);
+		System.out.println("saveSession:" + sessionKey + ":" + code);
 		request.getSession().setAttribute(sessionKey, code);
 	}
 
@@ -32,6 +33,7 @@ public class CaptchaUtil {
 
 	public static String getCode(HttpServletRequest request, String captchaGroupId) {
 		String sessionKey = getSessionKey(captchaGroupId);
+		System.out.println("getCode:" + sessionKey + ":" + captchaGroupId);
 		return (String) request.getSession().getAttribute(sessionKey);
 	}
 }
