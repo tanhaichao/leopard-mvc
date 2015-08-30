@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CaptchaController {
 
 	@RequestMapping("/captcha.do")
-	public CaptchaView captcha(Long sessUid) {
+	public CaptchaView captcha() {
 		return new CaptchaView();
 	}
 
