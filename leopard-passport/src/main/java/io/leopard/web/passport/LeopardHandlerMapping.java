@@ -22,6 +22,7 @@ public class LeopardHandlerMapping extends RequestMappingHandlerMapping {
 	protected void initApplicationContext() throws BeansException {
 		System.out.println("LeopardHandlerMapping initApplicationContext:" + this);
 		new Exception("initApplicationContext").printStackTrace();
+		super.initApplicationContext();
 	}
 
 	@Override
