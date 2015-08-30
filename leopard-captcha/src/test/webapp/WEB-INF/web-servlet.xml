@@ -5,7 +5,8 @@
 	http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
 
 	<context:component-scan base-package="io.leopard.web.captcha.controller" />
-	
+
+	<context:component-scan base-package="io.leopard.web.xparam" />
 
 
 </beans>
