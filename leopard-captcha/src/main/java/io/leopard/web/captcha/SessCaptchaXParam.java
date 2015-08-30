@@ -6,6 +6,12 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.core.MethodParameter;
 
+/**
+ * 获取session中的验证码.
+ * 
+ * @author 阿海
+ * 
+ */
 public class SessCaptchaXParam implements XParam {
 
 	@Override
@@ -17,6 +23,7 @@ public class SessCaptchaXParam implements XParam {
 	@Override
 	public Object getValue(HttpServletRequest request, MethodParameter parameter) {
 		String captchaGroupId = this.getGroupId(parameter);
+		System.out.println("captchaGroupId:" + captchaGroupId);
 		return CaptchaUtil.getCode(request, captchaGroupId);
 	}
 
