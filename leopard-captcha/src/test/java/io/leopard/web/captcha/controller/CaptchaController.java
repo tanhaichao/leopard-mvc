@@ -27,6 +27,7 @@ public class CaptchaController {
 	@RequestMapping("/captcha2.do")
 	@CaptchaGroup("captcha2")
 	public CaptchaView captcha2() {
+		// TODO ahai groupId未传递
 		return new CaptchaView();
 	}
 
