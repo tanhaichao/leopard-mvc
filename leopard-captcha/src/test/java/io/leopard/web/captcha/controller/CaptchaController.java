@@ -3,6 +3,7 @@ package io.leopard.web.captcha.controller;
 import io.leopard.httpnb.Httpnb;
 import io.leopard.jetty.JettyServer;
 import io.leopard.web.captcha.CaptchaView;
+import io.leopard.web.view.JsonView;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -15,6 +16,11 @@ public class CaptchaController {
 	@RequestMapping("/captcha.do")
 	public CaptchaView captcha(Long sessUid) {
 		return new CaptchaView();
+	}
+
+	@RequestMapping("/check.do")
+	public JsonView check(Long sessCaptcha) {
+		return new JsonView("sessCaptcha:" + sessCaptcha);
 	}
 
 	@Test
