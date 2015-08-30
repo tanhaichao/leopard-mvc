@@ -2,6 +2,7 @@ package io.leopard.web.captcha.controller;
 
 import io.leopard.httpnb.Httpnb;
 import io.leopard.jetty.JettyServer;
+import io.leopard.web.captcha.CaptchaGroup;
 import io.leopard.web.captcha.CaptchaView;
 import io.leopard.web.view.JsonView;
 
@@ -20,6 +21,18 @@ public class CaptchaController {
 
 	@RequestMapping("/check.do")
 	public JsonView check(String sessCaptcha) {
+		return new JsonView("sessCaptcha:" + sessCaptcha);
+	}
+
+	@RequestMapping("/captcha2.do")
+	@CaptchaGroup("captcha2")
+	public CaptchaView captcha2() {
+		return new CaptchaView();
+	}
+
+	@RequestMapping("/check2.do")
+	@CaptchaGroup("captcha2")
+	public JsonView check2(String sessCaptcha) {
 		return new JsonView("sessCaptcha:" + sessCaptcha);
 	}
 
