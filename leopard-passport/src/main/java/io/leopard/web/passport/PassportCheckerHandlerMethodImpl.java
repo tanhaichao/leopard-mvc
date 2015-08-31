@@ -7,7 +7,9 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
 import org.springframework.core.MethodParameter;
+import org.springframework.core.ParameterNameDiscoverer;
 import org.springframework.web.method.HandlerMethod;
 
 public class PassportCheckerHandlerMethodImpl implements PassportChecker {
@@ -18,11 +20,13 @@ public class PassportCheckerHandlerMethodImpl implements PassportChecker {
 	}
 
 	private Map<String, Boolean> handlerCacheMap = new ConcurrentHashMap<String, Boolean>();
+	private final ParameterNameDiscoverer parameterNameDiscoverer = new LocalVariableTableParameterNameDiscoverer();
 
 	public boolean hasPassportParameter(HandlerMethod handlerMethod) {
 		MethodParameter[] parameters = handlerMethod.getMethodParameters();
 		if (parameters != null) {
 			for (MethodParameter parameter : parameters) {
+				parameter.initParameterNameDiscovery(parameterNameDiscoverer);
 				String parameterName = parameter.getParameterName();
 				System.out.println("parameterName:" + parameterName);
 				if (parameterNameSet.contains(parameterName)) {
