@@ -20,9 +20,6 @@ public class PassportCheckerHandlerMethodImpl implements PassportChecker {
 	private Map<String, Boolean> handlerCacheMap = new ConcurrentHashMap<String, Boolean>();
 
 	public boolean hasPassportParameter(HandlerMethod handlerMethod) {
-		if (true) {
-			return true;
-		}
 		MethodParameter[] parameters = handlerMethod.getMethodParameters();
 		if (parameters != null) {
 			for (MethodParameter parameter : parameters) {

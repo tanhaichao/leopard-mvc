@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.servlet.FrameworkServlet;
-import org.springframework.web.servlet.support.RequestContextUtils;
 
 public class PassportValidateLoaderImpl implements PassportValidate {
 

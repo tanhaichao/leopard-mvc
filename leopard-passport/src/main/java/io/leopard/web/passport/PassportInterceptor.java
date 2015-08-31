@@ -7,7 +7,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.MutablePropertyValues;
-import org.springframework.beans.PropertyValue;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -75,36 +74,21 @@ public class PassportInterceptor implements HandlerInterceptor, BeanFactoryAware
 		return false;
 	}
 
-	private void registerInterceptors(BeanDefinition beanDefinition) {
-		MutablePropertyValues propertyValues = beanDefinition.getPropertyValues();
-		System.out.println("PassportInterceptor postProcessBeanFactory BeanClassName:" + beanDefinition.getBeanClassName());
-		propertyValues.addPropertyValue("interceptors", new Object[] { this });
-		PropertyValue interceptors = propertyValues.getPropertyValue("interceptors");
-		Object[] values = (Object[]) interceptors.getValue();
-		for (Object value : values) {
-			System.out.println("PassportInterceptor postProcessBeanFactory  PropertyValue:" + value);
-		}
-	}
-
 	@Override
 	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
 		ConfigurableListableBeanFactory factory = ((ConfigurableListableBeanFactory) beanFactory);
 		for (String beanName : factory.getBeanDefinitionNames()) {
 			BeanDefinition beanDefinition = factory.getBeanDefinition(beanName);
 			if (isHandlerMapping(beanDefinition)) {
-				System.out.println("PassportInterceptor setBeanFactory source:" + beanDefinition.getSource());
-				this.registerInterceptors(beanDefinition);
+				MutablePropertyValues propertyValues = beanDefinition.getPropertyValues();
+				System.out.println("PassportInterceptor postProcessBeanFactory BeanClassName:" + beanDefinition.getBeanClassName());
+				propertyValues.addPropertyValue("interceptors", new Object[] { this });
 			}
 		}
 	}
 
 	@Override
 	public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
-		// if (bean instanceof RequestMappingHandlerMapping) {
-		// System.out.println("PassportInterceptor postProcessBeforeInitialization:" + bean);
-		// // RequestMappingHandlerMapping handlerMapping = (RequestMappingHandlerMapping) bean;
-		// // handlerMapping.setInterceptors(new Object[] { this });
-		// }
 		return bean;
 	}
 
