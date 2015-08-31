@@ -83,7 +83,7 @@ public class PassportInterceptor implements HandlerInterceptor, BeanFactoryAware
 			if (isHandlerMapping(beanDefinition)) {
 				MutablePropertyValues propertyValues = beanDefinition.getPropertyValues();
 				System.out.println("PassportInterceptor postProcessBeanFactory BeanClassName:" + beanDefinition.getBeanClassName());
-				propertyValues.addPropertyValue("interceptors", new Object[] { this });
+				propertyValues.addPropertyValue("interceptors", this);
 			}
 		}
 	}

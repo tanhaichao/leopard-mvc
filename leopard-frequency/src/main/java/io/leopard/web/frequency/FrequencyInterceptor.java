@@ -74,7 +74,7 @@ public class FrequencyInterceptor implements HandlerInterceptor, BeanFactoryAwar
 			if (isHandlerMapping(beanDefinition)) {
 				MutablePropertyValues propertyValues = beanDefinition.getPropertyValues();
 				System.out.println("FrequencyInterceptor postProcessBeanFactory BeanClassName:" + beanDefinition.getBeanClassName());
-				propertyValues.addPropertyValue("interceptors", new Object[] { this });
+				propertyValues.addPropertyValue("interceptors", this);
 			}
 		}
 	}
