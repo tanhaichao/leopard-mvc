@@ -16,7 +16,6 @@ public class SessCaptchaXParam implements XParam {
 
 	@Override
 	public String getKey() {
-		// new Exception("SessCaptchaXParam getKey").printStackTrace();
 		return "sessCaptcha";
 	}
 
