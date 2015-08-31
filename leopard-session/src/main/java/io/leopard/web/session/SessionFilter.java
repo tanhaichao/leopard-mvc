@@ -15,6 +15,10 @@ import javax.servlet.http.HttpServletResponse;
 @WebFilter(filterName = "aleopardSessionFilter", urlPatterns = "/*")
 public class SessionFilter implements Filter {
 
+	public SessionFilter() {
+		new Exception("SessionFilter").printStackTrace();
+	}
+
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest request = (HttpServletRequest) req;
