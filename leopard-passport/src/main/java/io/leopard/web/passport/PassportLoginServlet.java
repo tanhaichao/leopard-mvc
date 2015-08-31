@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 public class PassportLoginServlet extends HttpServlet {
 
 	public PassportLoginServlet() {
-		new Exception("PassportLoginServlet").printStackTrace();
+		System.err.println("new PassportLoginServlet.");
 	}
 
 	private static final long serialVersionUID = 1L;

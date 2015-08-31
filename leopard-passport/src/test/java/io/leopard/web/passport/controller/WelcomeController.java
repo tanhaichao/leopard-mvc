@@ -28,6 +28,7 @@ public class WelcomeController {
 		System.out.println("result:" + result);
 		Assert.assertEquals("{\"status\":\"RuntimeException\",\"message\":\"ok\",\"data\":null}", result);
 	}
+	
 
 	public static void main(String[] args) throws Exception {
 		JettyServer.start("src/test/webapp");
