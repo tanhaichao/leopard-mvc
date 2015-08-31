@@ -21,7 +21,8 @@ public class WelcomeController {
 	public void testWelcome() throws Exception {
 		JettyServer.start("src/test/webapp");
 		{
-			Httpnb.doGet("http://localhost/passport/login.leo?uid=1");
+			String str = Httpnb.doGet("http://localhost/passport/login.leo?uid=1");
+			System.out.println("str:" + str);
 		}
 		String result = Httpnb.doGet("http://localhost/welcome.do");
 		System.out.println("result:" + result);
