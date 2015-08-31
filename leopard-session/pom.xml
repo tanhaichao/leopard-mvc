@@ -31,6 +31,7 @@
 
 
 		<!-- test -->
+		<!-- 
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-jetty</artifactId>
@@ -51,6 +52,7 @@
 			<artifactId>httpnb</artifactId>
 			<scope>test</scope>
 		</dependency>
+		 -->
 		<!-- test -->
 
 	</dependencies>

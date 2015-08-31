@@ -1,10 +1,5 @@
 package io.leopard.web.session;
 
-import io.leopard.httpnb.Httpnb;
-import io.leopard.jetty.JettyServer;
-import io.leopard.redis.Redis;
-import io.leopard.redis.util.RedisFactory;
-
 import java.io.IOException;
 import java.util.Date;
 
@@ -15,8 +10,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.junit.Test;
 
 @WebServlet(name = "userServlet", urlPatterns = "/index")
 public class UserServlet extends HttpServlet {
@@ -33,22 +26,20 @@ public class UserServlet extends HttpServlet {
 		out.println("now:" + now.toString());
 	}
 
-	@Test
-	public void testMemory() throws Exception {
-		JettyServer.start("src/test/webapp");
-		// System.out.println("ok");
-		String result = Httpnb.doGet("http://localhost/index");
-		System.out.println("result:" + result);
-	}
-
-	@Test
-	public void testRedis() throws Exception {
-		StoreMemoryImpl.setEnable(false);
-		Redis redis = RedisFactory.create("112.126.75.27:6311");
-		StoreRedisImpl.setRedis(redis);
-		JettyServer.start("src/test/webapp");
-		// System.out.println("ok");
-		String result = Httpnb.doGet("http://localhost/index");
-		System.out.println("result:" + result);
-	}
+	// @Test
+	// public void testMemory() throws Exception {
+	// JettyServer.start("src/test/webapp");
+	// String result = Httpnb.doGet("http://localhost/index");
+	// System.out.println("result:" + result);
+	// }
+	//
+	// @Test
+	// public void testRedis() throws Exception {
+	// StoreMemoryImpl.setEnable(false);
+	// Redis redis = RedisFactory.create("112.126.75.27:6311");
+	// StoreRedisImpl.setRedis(redis);
+	// JettyServer.start("src/test/webapp");
+	// String result = Httpnb.doGet("http://localhost/index");
+	// System.out.println("result:" + result);
+	// }
 }

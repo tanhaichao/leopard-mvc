@@ -1,7 +1,5 @@
 package io.leopard.web.session;
 
-import io.leopard.jetty.JettyServer;
-
 import org.junit.Test;
 
 public class JettyTest {
@@ -12,7 +10,7 @@ public class JettyTest {
 
 	@Test
 	public void test() throws Exception {
-		JettyServer.start("src/test/webapp");
+		// JettyServer.start("src/test/webapp");
 		System.out.println("ok");
 	}
 }
