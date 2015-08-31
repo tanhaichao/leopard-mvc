@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.BeansException;
+import org.springframework.beans.Mergeable;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
@@ -25,7 +26,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
  */
 @Component
 // TODO ahai 在site项目必须实现BeanPostProcessor接口才能成功配置拦截器.
-public class PassportInterceptor implements HandlerInterceptor, BeanFactoryAware, BeanPostProcessor {
+public class PassportInterceptor implements HandlerInterceptor, BeanFactoryAware, BeanPostProcessor, Mergeable {
 	protected Log logger = LogFactory.getLog(this.getClass());
 
 	private PassportChecker passportChecker = new PassportCheckerImpl();
@@ -97,4 +98,22 @@ public class PassportInterceptor implements HandlerInterceptor, BeanFactoryAware
 		return bean;
 	}
 
+	@Override
+	public boolean isMergeEnabled() {
+		return true;
+	}
+
+	@Override
+	public Object merge(Object parent) {
+		if (parent instanceof Object[]) {
+			Object[] interceptors = (Object[]) parent;
+			Object[] args = new Object[interceptors.length + 1];
+			System.arraycopy(interceptors, 0, args, 1, interceptors.length);
+			args[0] = this;
+			return args;
+		}
+		else {
+			return new Object[] { this, parent };
+		}
+	}
 }

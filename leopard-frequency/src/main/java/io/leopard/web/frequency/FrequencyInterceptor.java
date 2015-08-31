@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.BeansException;
+import org.springframework.beans.Mergeable;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
@@ -23,7 +24,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
  */
 // TODO ahai 在site项目必须实现BeanPostProcessor接口才能成功配置拦截器.
 @Component
-public class FrequencyInterceptor implements HandlerInterceptor, BeanFactoryAware, BeanPostProcessor {
+public class FrequencyInterceptor implements HandlerInterceptor, BeanFactoryAware, BeanPostProcessor, Mergeable {
 
 	private FrequencyResolver frequencyResolver = new FrequencyResolver();
 	private FrequencyChecker frequencyChecker = new FrequencyChecker();
@@ -67,7 +68,6 @@ public class FrequencyInterceptor implements HandlerInterceptor, BeanFactoryAwar
 
 	@Override
 	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
-
 		ConfigurableListableBeanFactory factory = ((ConfigurableListableBeanFactory) beanFactory);
 		for (String beanName : factory.getBeanDefinitionNames()) {
 			BeanDefinition beanDefinition = factory.getBeanDefinition(beanName);
@@ -87,5 +87,24 @@ public class FrequencyInterceptor implements HandlerInterceptor, BeanFactoryAwar
 	@Override
 	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
 		return bean;
+	}
+
+	@Override
+	public boolean isMergeEnabled() {
+		return true;
+	}
+
+	@Override
+	public Object merge(Object parent) {
+		if (parent instanceof Object[]) {
+			Object[] interceptors = (Object[]) parent;
+			Object[] args = new Object[interceptors.length + 1];
+			System.arraycopy(interceptors, 0, args, 1, interceptors.length);
+			args[0] = this;
+			return args;
+		}
+		else {
+			return new Object[] { this, parent };
+		}
 	}
 }
