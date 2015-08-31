@@ -35,10 +35,15 @@ public class CaptchaUtil {
 		return (String) request.getSession().getAttribute(sessionKey);
 	}
 
+	public static String getCode(HttpServletRequest request, String captchaGroupId) {
+		String sessionKey = getSessionKey(captchaGroupId);
+		System.out.println("getCode:" + sessionKey + " captchaGroupId:" + captchaGroupId);
+		return (String) request.getSession().getAttribute(sessionKey);
+	}
+
 	public static String getCodeAndRemove(HttpServletRequest request, String captchaGroupId) {
 		String sessionKey = getSessionKey(captchaGroupId);
 		System.out.println("getCode:" + sessionKey + " captchaGroupId:" + captchaGroupId);
-
 		String code = (String) request.getSession().getAttribute(sessionKey);
 		if (code != null) {
 			request.getSession().removeAttribute(sessionKey);
