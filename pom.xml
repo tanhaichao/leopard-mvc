@@ -64,5 +64,6 @@
 		<module>leopard-passport</module>
 		<module>leopard-servlet</module>
 		<module>leopard-captcha</module>
+		<module>leopard-frequency</module>
 	</modules>
 </project>
