@@ -4,9 +4,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 
 @WebServlet(name = "testServlet", urlPatterns = "/passport/test.leo")
+@SuppressWarnings("serial")
 public class TestServlet extends HttpServlet {
-
-	private static final long serialVersionUID = 1L;
 
 	public TestServlet() {
 		System.err.println("new TestServlet.");
