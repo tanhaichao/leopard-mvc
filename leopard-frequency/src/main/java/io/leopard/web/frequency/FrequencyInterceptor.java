@@ -25,7 +25,6 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 @Component
 public class FrequencyInterceptor implements HandlerInterceptor, BeanFactoryAware, BeanPostProcessor {
 
-	
 	private FrequencyResolver frequencyResolver = new FrequencyResolver();
 	private FrequencyChecker frequencyChecker = new FrequencyChecker();
 
@@ -37,7 +36,7 @@ public class FrequencyInterceptor implements HandlerInterceptor, BeanFactoryAwar
 			return true;
 		}
 
-		frequencyChecker.check(request, seconds);
+		frequencyChecker.check(request, seconds, handler);
 		return true;
 	}
 

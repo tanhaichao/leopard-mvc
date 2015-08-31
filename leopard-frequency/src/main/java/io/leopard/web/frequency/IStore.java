@@ -4,8 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 public interface IStore {
 
-	
-	Object getPassport(HttpServletRequest request);
+	Object getPassport(HttpServletRequest request, Object handler);
 
 	boolean set(String key);
 

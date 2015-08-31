@@ -20,7 +20,7 @@ public class StoreRedisImpl implements IStore {
 	}
 
 	@Override
-	public Object getPassport(HttpServletRequest request) {
+	public Object getPassport(HttpServletRequest request, Object handler) {
 		return request.getAttribute("passport");
 	}
 

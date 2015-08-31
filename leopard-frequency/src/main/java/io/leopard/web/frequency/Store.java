@@ -29,8 +29,8 @@ public class Store implements IStore {
 	}
 
 	@Override
-	public Object getPassport(HttpServletRequest request) {
-		Object passport = this.stroe.getPassport(request);
+	public Object getPassport(HttpServletRequest request, Object handler) {
+		Object passport = this.stroe.getPassport(request, handler);
 		if (passport == null) {
 			passport = request.getAttribute("passport");
 		}

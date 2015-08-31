@@ -5,9 +5,8 @@ import javax.servlet.http.HttpServletRequest;
 public class FrequencyChecker {
 	private IStore store = Store.getInstance();
 
-	
-	public void check(HttpServletRequest request, int seconds) throws FrequencyException {
-		Object passport = this.store.getPassport(request);
+	public void check(HttpServletRequest request, int seconds, Object handler) throws FrequencyException {
+		Object passport = this.store.getPassport(request, handler);
 		if (passport == null) {
 			return;
 		}
