@@ -1,17 +1,12 @@
 package io.leopard.web.frequency;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.MutablePropertyValues;
-import org.springframework.beans.PropertyValue;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
@@ -29,31 +24,20 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 // TODO ahai 在site项目必须实现BeanPostProcessor接口才能成功配置拦截器.
 @Component
 public class FrequencyInterceptor implements HandlerInterceptor, BeanFactoryAware, BeanPostProcessor {
-	@Autowired
-	private FrequencyLei frequencyLei;
 
-	private Map<Integer, Integer> data = new HashMap<Integer, Integer>();
+	private FrequencyResolver frequencyResolver = new FrequencyResolver();
+	private FrequencyChecker frequencyChecker = new FrequencyChecker();
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		int hashCode = handler.hashCode();
-		Integer seconds = data.get(hashCode);
-		if (seconds == null) {
+		Integer seconds = frequencyResolver.getSeconds(handler);
+		System.out.println("FrequencyInterceptor preHandle:" + handler + " seconds:" + seconds);
+		if (seconds == null || seconds <= 0) {
 			return true;
 		}
-		Object account = this.getAccount(request);
-		if (account == null) {
-			return true;
-		}
-		// String requestUri = RequestUtil.getRequestContextUri(request);
-		String requestUri = request.getRequestURI();// 包含ContextPath也没有问题
-		frequencyLei.request(account.toString(), requestUri, seconds);
-		return true;
-	}
 
-	protected Object getAccount(HttpServletRequest request) {
-		// TODO ahai 根据Controller方法中使用的session参数进行判断?
-		return request.getAttribute("account");
+		frequencyChecker.check(request, seconds);
+		return true;
 	}
 
 	@Override
@@ -81,25 +65,16 @@ public class FrequencyInterceptor implements HandlerInterceptor, BeanFactoryAwar
 		return false;
 	}
 
-	private void registerInterceptors(BeanDefinition beanDefinition) {
-		MutablePropertyValues propertyValues = beanDefinition.getPropertyValues();
-		System.out.println("FrequencyInterceptor postProcessBeanFactory BeanClassName:" + beanDefinition.getBeanClassName());
-		propertyValues.addPropertyValue("interceptors", new Object[] { this });
-		PropertyValue interceptors = propertyValues.getPropertyValue("interceptors");
-		Object[] values = (Object[]) interceptors.getValue();
-		for (Object value : values) {
-			System.out.println("FrequencyInterceptor postProcessBeanFactory  PropertyValue:" + value);
-		}
-	}
-
 	@Override
 	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+
 		ConfigurableListableBeanFactory factory = ((ConfigurableListableBeanFactory) beanFactory);
 		for (String beanName : factory.getBeanDefinitionNames()) {
 			BeanDefinition beanDefinition = factory.getBeanDefinition(beanName);
 			if (isHandlerMapping(beanDefinition)) {
-				System.out.println("FrequencyInterceptor setBeanFactory source:" + beanDefinition.getSource());
-				this.registerInterceptors(beanDefinition);
+				MutablePropertyValues propertyValues = beanDefinition.getPropertyValues();
+				System.out.println("FrequencyInterceptor postProcessBeanFactory BeanClassName:" + beanDefinition.getBeanClassName());
+				propertyValues.addPropertyValue("interceptors", new Object[] { this });
 			}
 		}
 	}
