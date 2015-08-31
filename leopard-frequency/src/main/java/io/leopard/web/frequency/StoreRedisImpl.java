@@ -12,6 +12,13 @@ public class StoreRedisImpl implements IStore {
 		StoreRedisImpl.redis = redis;
 	}
 
+	public static Redis getRedis() {
+		if (redis == null) {
+			throw new RuntimeException("redis未设置.");
+		}
+		return redis;
+	}
+
 	@Override
 	public Object getPassport(HttpServletRequest request) {
 		return request.getAttribute("passport");
@@ -19,13 +26,13 @@ public class StoreRedisImpl implements IStore {
 
 	@Override
 	public boolean set(String key) {
-		Long result = redis.setnx(key, "");
+		Long result = getRedis().setnx(key, "");
 		return (result > 0);
 	}
 
 	@Override
 	public void expire(String key, int seconds) {
-		redis.expire(key, seconds);
+		getRedis().expire(key, seconds);
 	}
 
 }
