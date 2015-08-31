@@ -32,6 +32,11 @@ public class CaptchaController {
 		return new JsonView("sessCaptcha:" + sessCaptcha);
 	}
 
+	// @RequestMapping("/check3.do")
+	// public JsonView check3(String sessCaptcha, @CaptchaGroup("captcha2") String captcha2) {
+	// return new JsonView("sessCaptcha:" + sessCaptcha + " captcha2:" + captcha2);
+	// }
+
 	public static void main(String[] args) throws Exception {
 		JettyServer.start("src/test/webapp");
 	}
