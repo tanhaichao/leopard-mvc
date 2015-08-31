@@ -65,5 +65,6 @@
 		<module>leopard-servlet</module>
 		<module>leopard-captcha</module>
 		<module>leopard-frequency</module>
+		<module>leopard-proxy</module>
 	</modules>
 </project>
