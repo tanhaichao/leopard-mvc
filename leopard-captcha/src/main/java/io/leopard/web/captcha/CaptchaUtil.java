@@ -6,10 +6,10 @@ public class CaptchaUtil {
 
 	private static final String SESSION_KEY = "sessCaptcha";
 
-	private static String getSessionKey(HttpServletRequest request) {
-		String captchaGroupId = (String) request.getAttribute("captchaGroupId");
-		return getSessionKey(captchaGroupId);
-	}
+	// private static String getSessionKey(HttpServletRequest request) {
+	// String captchaGroupId = (String) request.getAttribute("captchaGroupId");
+	// return getSessionKey(captchaGroupId);
+	// }
 
 	private static String getSessionKey(String captchaGroupId) {
 		if (captchaGroupId == null || captchaGroupId.length() == 0) {
@@ -20,20 +20,29 @@ public class CaptchaUtil {
 		}
 	}
 
-	public static void saveSession(HttpServletRequest request, String code) {
-		String sessionKey = getSessionKey(request);
-		System.out.println("saveSession:" + sessionKey + ":" + code);
+	public static String getCaptchaGroupId(HttpServletRequest request) {
+		return (String) request.getAttribute("captchaGroupId");
+	}
+
+	public static void saveSession(HttpServletRequest request, String captchaGroupId, String code) {
+		String sessionKey = getSessionKey(captchaGroupId);
+		System.out.println("saveSession:" + sessionKey + " captchaGroupId:" + captchaGroupId + " code:" + code);
 		request.getSession().setAttribute(sessionKey, code);
 	}
 
 	public static String getCode(HttpServletRequest request) {
-		String sessionKey = getSessionKey(request);
+		String sessionKey = getSessionKey(getCaptchaGroupId(request));
 		return (String) request.getSession().getAttribute(sessionKey);
 	}
 
-	public static String getCode(HttpServletRequest request, String captchaGroupId) {
+	public static String getCodeAndRemove(HttpServletRequest request, String captchaGroupId) {
 		String sessionKey = getSessionKey(captchaGroupId);
-		System.out.println("getCode:" + sessionKey + ":" + captchaGroupId);
-		return (String) request.getSession().getAttribute(sessionKey);
+		System.out.println("getCode:" + sessionKey + " captchaGroupId:" + captchaGroupId);
+
+		String code = (String) request.getSession().getAttribute(sessionKey);
+		if (code != null) {
+			request.getSession().removeAttribute(sessionKey);
+		}
+		return code;
 	}
 }

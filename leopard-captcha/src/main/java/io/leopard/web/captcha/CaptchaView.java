@@ -23,8 +23,13 @@ public class CaptchaView extends ModelAndView {
 
 	private int width;
 	private int height;
-
+	private String captchaGroupId;
 	private Class<? extends CaptchaEngine> engineClazz;
+
+	public CaptchaView(String captchaGroupId) {
+		this();
+		this.captchaGroupId = captchaGroupId;
+	}
 
 	public CaptchaView() {
 		this(200, 70);
@@ -57,8 +62,11 @@ public class CaptchaView extends ModelAndView {
 
 			ImageCaptcha imageCaptcha = EngineFactory.getCaptchaEngine(width, height, engineClazz).getNextImageCaptcha();
 			String code = imageCaptcha.getTextChallenge();
-
-			CaptchaUtil.saveSession(request, code);
+			
+			if (captchaGroupId == null) {
+				captchaGroupId = CaptchaUtil.getCaptchaGroupId(request);
+			}
+			CaptchaUtil.saveSession(request, captchaGroupId, code);
 			// System.out.println("session:" + session.getId() + " code:" + code + " captchaGroupId:" + captchaGroupId + " url:" + request.getRequestURI());
 
 			BufferedImage bi = imageCaptcha.getImageChallenge();

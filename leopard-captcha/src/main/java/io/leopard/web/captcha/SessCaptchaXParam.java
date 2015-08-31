@@ -23,7 +23,7 @@ public class SessCaptchaXParam implements XParam {
 	@Override
 	public Object getValue(HttpServletRequest request, MethodParameter parameter) {
 		String captchaGroupId = this.getGroupId(parameter);
-		return CaptchaUtil.getCode(request, captchaGroupId);
+		return CaptchaUtil.getCodeAndRemove(request, captchaGroupId);
 	}
 
 	private String getGroupId(MethodParameter parameter) {

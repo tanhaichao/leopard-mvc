@@ -25,15 +25,16 @@ public class CaptchaController {
 	}
 
 	@RequestMapping("/captcha2.do")
-	@CaptchaGroup("captcha2")
+	// @CaptchaGroup("captcha2")
 	public CaptchaView captcha2() {
 		// TODO ahai groupId未传递
-		return new CaptchaView();
+		return new CaptchaView("captcha2");
 	}
 
 	@RequestMapping("/check2.do")
 	@CaptchaGroup("captcha2")
 	public JsonView check2(String sessCaptcha) {
+		System.out.println("sessCaptcha:" + sessCaptcha);
 		return new JsonView("sessCaptcha:" + sessCaptcha);
 	}
 
