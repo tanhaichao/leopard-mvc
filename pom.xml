@@ -62,7 +62,6 @@
 		<module>leopard-trynb</module>
 		<module>leopard-session</module>
 		<module>leopard-passport</module>
-		<module>leopard-servlet</module>
 		<module>leopard-captcha</module>
 		<module>leopard-frequency</module>
 		<module>leopard-proxy</module>
