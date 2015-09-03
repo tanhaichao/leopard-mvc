@@ -16,7 +16,11 @@
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 		</dependency>
-
+		<dependency>
+			<groupId>io.leopard</groupId>
+			<artifactId>leopard-servlet</artifactId>
+			<scope>compile</scope>
+		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-redis</artifactId>

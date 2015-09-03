@@ -1,12 +1,12 @@
 package io.leopard.web.proxy;
 
+import io.leopard.web.servlet.RegisterHandlerInterceptor;
 import io.leopard.web.servlet.RequestUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.stereotype.Component;
-import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -16,7 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
  * 
  */
 @Component
-public class ProxyInterceptor implements HandlerInterceptor {
+public class ProxyInterceptor extends RegisterHandlerInterceptor {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
