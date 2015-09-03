@@ -28,7 +28,6 @@ public class PassportCheckerHandlerMethodImpl implements PassportChecker {
 			for (MethodParameter parameter : parameters) {
 				parameter.initParameterNameDiscovery(parameterNameDiscoverer);
 				String parameterName = parameter.getParameterName();
-				System.out.println("parameterName:" + parameterName);
 				if (parameterNameSet.contains(parameterName)) {
 					return true;
 				}
@@ -48,7 +47,7 @@ public class PassportCheckerHandlerMethodImpl implements PassportChecker {
 			return contain;
 		}
 		boolean hasPassportParameter = this.hasPassportParameter((HandlerMethod) handler);
-		System.out.println("hasPassportParameter:" + hasPassportParameter);
+		// System.out.println("hasPassportParameter:" + hasPassportParameter);
 		handlerCacheMap.put(key, hasPassportParameter);
 		return hasPassportParameter;
 	}
