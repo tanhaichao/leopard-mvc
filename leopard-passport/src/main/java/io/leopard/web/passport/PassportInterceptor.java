@@ -36,8 +36,6 @@ public class PassportInterceptor extends RegisterHandlerInterceptor {
 			passportValidateLei.showLoginBox(request, response);
 			return false;
 		}
-		// FrequencyInterceptor.setAccount(request, account);
-		// request.setAttribute("account", account);
 		return true;
 	}
 
