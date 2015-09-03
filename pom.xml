@@ -56,8 +56,8 @@
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
-				<artifactId>httpnb</artifactId>
-				<version>0.0.1</version>
+				<artifactId>leopard-httpnb</artifactId>
+				<version>0.0.2-SNAPSHOT</version>
 			</dependency>
 
 		</dependencies>

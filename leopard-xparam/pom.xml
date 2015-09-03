@@ -38,7 +38,7 @@
 		<!-- test -->
 		<dependency>
 			<groupId>io.leopard</groupId>
-			<artifactId>httpnb</artifactId>
+			<artifactId>leopard-httpnb</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
