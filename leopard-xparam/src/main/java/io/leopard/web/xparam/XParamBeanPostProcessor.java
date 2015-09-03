@@ -13,6 +13,7 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 
 /**
  * 注册HandlerMethodArgumentResolver
+ * 
  * @author 阿海
  *
  */
@@ -44,8 +45,15 @@ public class XParamBeanPostProcessor implements BeanPostProcessor, BeanFactoryAw
 			customArgumentResolvers = new ArrayList<HandlerMethodArgumentResolver>();
 			adapter.setCustomArgumentResolvers(customArgumentResolvers);
 		}
-		XParamHandlerMethodArgumentResolver argumentResolver = beanFactory.getBean(XParamHandlerMethodArgumentResolver.class);
-		customArgumentResolvers.add(argumentResolver);
+
+		{
+			XParamHandlerMethodArgumentResolver argumentResolver = beanFactory.getBean(XParamHandlerMethodArgumentResolver.class);
+			customArgumentResolvers.add(argumentResolver);
+		}
+		{
+			PathRegexHandlerMethodArgumentResolver argumentResolver = beanFactory.getBean(PathRegexHandlerMethodArgumentResolver.class);
+			customArgumentResolvers.add(argumentResolver);
+		}
 	}
 
 	@Override
