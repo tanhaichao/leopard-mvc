@@ -23,42 +23,46 @@
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-mock</artifactId>
-				<version>0.0.3</version>
+				<version>0.0.4</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-jetty</artifactId>
-				<version>0.0.3</version>
+				<version>0.0.4</version>
 				<scope>test</scope>
 			</dependency>
 
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-json</artifactId>
-				<version>0.0.1</version>
+				<version>0.0.3</version>
 			</dependency>
 
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-httpnb</artifactId>
+				<version>0.0.3</version>
+			</dependency>
+
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-servlet</artifactId>
+				<version>0.0.3</version>
+			</dependency>
+			
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-redis</artifactId>
 				<version>0.0.3-SNAPSHOT</version>
 			</dependency>
-			<dependency>
-				<groupId>io.leopard</groupId>
-				<artifactId>leopard-servlet</artifactId>
-				<version>0.0.2-SNAPSHOT</version>
-			</dependency>
+
 			<dependency>
 				<groupId>com.alibaba</groupId>
 				<artifactId>fastjson</artifactId>
 				<version>1.2.6</version>
 			</dependency>
-			<dependency>
-				<groupId>io.leopard</groupId>
-				<artifactId>leopard-httpnb</artifactId>
-				<version>0.0.2-SNAPSHOT</version>
-			</dependency>
+
 
 		</dependencies>
 	</dependencyManagement>
