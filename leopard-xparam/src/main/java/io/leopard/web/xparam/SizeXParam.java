@@ -18,7 +18,13 @@ public class SizeXParam implements XParam {
 	public Object getValue(HttpServletRequest request, MethodParameter parameter) {
 		int size = XParamUtil.toInt(request.getParameter("size"));
 		if (size <= 0) {
-			size = 10;
+			None none = parameter.getParameterAnnotation(None.class);
+			if (none == null) {
+				size = 10;
+			}
+			else {
+				size = Integer.parseInt(none.value());
+			}
 		}
 		return size;
 	}
