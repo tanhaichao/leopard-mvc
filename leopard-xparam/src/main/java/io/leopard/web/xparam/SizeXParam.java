@@ -26,7 +26,7 @@ public class SizeXParam implements XParam {
 		if (size <= 0) {
 			size = 10;
 		}
-		request.setAttribute("paging_size", size);
+		request.setAttribute("paging_size", size);// TODO ahai 耦合
 		return size;
 	}
 
