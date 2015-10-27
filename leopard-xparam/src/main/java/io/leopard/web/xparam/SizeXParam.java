@@ -19,12 +19,12 @@ public class SizeXParam implements XParam {
 		int size = XParamUtil.toInt(request.getParameter("size"));
 		if (size <= 0) {
 			None none = parameter.getParameterAnnotation(None.class);
-			if (none == null) {
-				size = 10;
-			}
-			else {
+			if (none != null) {
 				size = Integer.parseInt(none.value());
 			}
+		}
+		if (size <= 0) {
+			size = 10;
 		}
 		return size;
 	}
