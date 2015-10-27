@@ -26,6 +26,7 @@ public class SizeXParam implements XParam {
 		if (size <= 0) {
 			size = 10;
 		}
+		request.setAttribute("paging_size", size);
 		return size;
 	}
 
