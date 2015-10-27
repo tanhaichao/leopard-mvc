@@ -29,6 +29,7 @@ public class SizeXParam implements XParam {
 		return size;
 	}
 
+	// TODO ahai 增加缓存
 	protected int getSize(MethodParameter parameter) {
 		if (this.getKey().equalsIgnoreCase(parameter.getParameterName())) {
 			None none = parameter.getParameterAnnotation(None.class);
