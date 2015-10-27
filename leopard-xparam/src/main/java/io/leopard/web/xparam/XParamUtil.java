@@ -1,11 +1,11 @@
 package io.leopard.web.xparam;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.ParameterNameDiscoverer;
 
@@ -61,23 +61,8 @@ public class XParamUtil {
 
 	public static String[] getParameterNames(MethodParameter parameter) {
 		Method method = parameter.getMethod();
-
-		ParameterNameDiscoverer parameterNameDiscoverer;
-		try {
-			Field field = MethodParameter.class.getDeclaredField("parameterNameDiscoverer");
-			field.setAccessible(true);
-			parameterNameDiscoverer = (ParameterNameDiscoverer) field.get(parameter);
-		}
-		catch (NoSuchFieldException e) {
-			throw new RuntimeException(e.getMessage(), e);
-		}
-		catch (SecurityException e) {
-			throw new RuntimeException(e.getMessage(), e);
-		}
-		catch (IllegalAccessException e) {
-			throw new RuntimeException(e.getMessage(), e);
-		}
-
+		// ParameterNameDiscoverer parameterNameDiscoverer = null;
+		ParameterNameDiscoverer parameterNameDiscoverer = new LocalVariableTableParameterNameDiscoverer();
 		return parameterNameDiscoverer.getParameterNames(method);
 	}
 }

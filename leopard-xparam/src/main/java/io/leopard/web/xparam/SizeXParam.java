@@ -1,6 +1,6 @@
 package io.leopard.web.xparam;
 
-import java.lang.reflect.Parameter;
+import java.lang.annotation.Annotation;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -41,11 +41,10 @@ public class SizeXParam implements XParam {
 		}
 
 		String[] names = XParamUtil.getParameterNames(parameter);
-		Parameter[] parameters = parameter.getMethod().getParameters();
-
+		Annotation[][] annotations = parameter.getMethod().getParameterAnnotations();
 		for (int i = 0; i < names.length; i++) {
 			if (this.getKey().equalsIgnoreCase(names[i])) {
-				None none = parameters[i].getAnnotation(None.class);
+				None none = find(annotations[i]);
 				if (none == null) {
 					return 0;
 				}
@@ -55,6 +54,15 @@ public class SizeXParam implements XParam {
 			}
 		}
 		return 0;
+	}
+
+	protected None find(Annotation[] annotations) {
+		for (Annotation anno : annotations) {
+			if (anno instanceof None) {
+				return (None) anno;
+			}
+		}
+		return null;
 	}
 
 	@Override
