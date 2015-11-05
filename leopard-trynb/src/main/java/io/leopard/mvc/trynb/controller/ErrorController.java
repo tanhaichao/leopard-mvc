@@ -20,7 +20,7 @@ public class ErrorController {
 	public ModelAndView error(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		Object obj = request.getAttribute("javax.servlet.error.exception");
 		Throwable exception = (Throwable) obj;
-		logger.error(exception.getMessage(), exception);
+		logger.error("ErrorController:" + exception.getMessage(), exception);
 
 		response.setContentType("text/html; charset=utf-8");
 		Writer out = response.getWriter();
