@@ -18,6 +18,7 @@ import org.springframework.stereotype.Component;
 @Component
 // TODO ahai 在site项目必须实现BeanPostProcessor接口才能成功配置拦截器.
 public class PassportInterceptor extends RegisterHandlerInterceptor {
+
 	protected Log logger = LogFactory.getLog(this.getClass());
 
 	private PassportChecker passportChecker = new PassportCheckerImpl();
