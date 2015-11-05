@@ -3,7 +3,7 @@
 	<parent>
 		<groupId>io.leopard</groupId>
 		<artifactId>leopard-mvc-parent</artifactId>
-		<version>0.0.2</version>
+		<version>0.0.3-SNAPSHOT</version>
 	</parent>
 	<artifactId>leopard-captcha</artifactId>
 
@@ -24,7 +24,7 @@
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-xparam</artifactId>
-			<version>0.0.2</version>
+			<version>0.0.3-SNAPSHOT</version>
 			<scope>provided</scope>
 		</dependency>
 

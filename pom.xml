@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>io.leopard</groupId>
 	<artifactId>leopard-mvc-parent</artifactId>
-	<version>0.0.2</version>
+	<version>0.0.3-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<parent>
@@ -12,9 +12,9 @@
 	</parent>
 
 	<scm>
-		<url>https://github.com/tanhaichao/leopard-mvc/tags/leopard-mvc-parent-0.0.2</url>
-		<connection>scm:svn:https://github.com/tanhaichao/leopard-mvc/tags/leopard-mvc-parent-0.0.2</connection>
-		<developerConnection>scm:svn:https://github.com/tanhaichao/leopard-mvc/tags/leopard-mvc-parent-0.0.2</developerConnection>
+		<url>https://github.com/tanhaichao/leopard-mvc</url>
+		<connection>scm:svn:https://github.com/tanhaichao/leopard-mvc/trunk</connection>
+		<developerConnection>scm:svn:https://github.com/tanhaichao/leopard-mvc/trunk</developerConnection>
 	</scm>
 
 
