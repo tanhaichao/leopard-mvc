@@ -22,12 +22,7 @@ public class ErrorController {
 		Throwable exception = (Throwable) obj;
 		logger.error(exception.getMessage(), exception);
 
-		// String uri = request.getRequestURI();
-		// String clientInfo = ErrorUtil.getClientInfo(request, uri, exception.getMessage());
-		// logger.error(clientInfo, exception);
-
 		response.setContentType("text/html; charset=utf-8");
-		// response.setStatus(200);
 		Writer out = response.getWriter();
 		out.write("error msg:" + exception.getMessage());
 		return null;
