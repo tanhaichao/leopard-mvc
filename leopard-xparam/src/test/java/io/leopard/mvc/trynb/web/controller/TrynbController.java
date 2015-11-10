@@ -1,7 +1,6 @@
 package io.leopard.mvc.trynb.web.controller;
 
-import io.leopard.httpnb.Httpnb;
-import io.leopard.jetty.JettyServer;
+import io.leopard.jetty.test.JettyHttpnb;
 import io.leopard.web.view.JsonView;
 
 import org.junit.Assert;
@@ -31,24 +30,22 @@ public class TrynbController {
 
 	@Test
 	public void testIndex() throws Exception {
-		JettyServer.start("src/test/webapp");
-		String result = Httpnb.doGet("http://localhost/index.do");
+		// Server server = JettyServer.start("src/test/webapp");
+		String result = JettyHttpnb.doGet("http://localhost/index.do");
 		System.out.println("result:" + result);
 		Assert.assertEquals("error1.", result);
 	}
 
 	@Test
 	public void testWelcome() throws Exception {
-		JettyServer.start("src/test/webapp");
-		String result = Httpnb.doGet("http://localhost/welcome.do");
+		String result = JettyHttpnb.doGet("http://localhost/welcome.do");
 		System.out.println("result:" + result);
 		Assert.assertEquals("error2.", result);
 	}
 
 	@Test
 	public void testUser() throws Exception {
-		JettyServer.start("src/test/webapp");
-		String result = Httpnb.doGet("http://localhost/user.do");
+		String result = JettyHttpnb.doGet("http://localhost/user.do");
 		System.out.println("result:" + result);
 		Assert.assertEquals("{\"status\":\"RuntimeException\",\"message\":\"ok\",\"data\":null}", result);
 	}
