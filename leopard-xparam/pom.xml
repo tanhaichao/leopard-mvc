@@ -34,12 +34,10 @@
 			<artifactId>leopard-json</artifactId>
 		</dependency>
 
-
 		<!-- test -->
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-jetty-test</artifactId>
-			<version>0.0.4-SNAPSHOT</version>
 			<scope>test</scope>
 		</dependency>
 

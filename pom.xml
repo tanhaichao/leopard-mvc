@@ -32,7 +32,12 @@
 				<version>0.0.4</version>
 				<scope>test</scope>
 			</dependency>
-
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-jetty-test</artifactId>
+				<version>0.0.5-SNAPSHOT</version>
+				<scope>test</scope>
+			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-json</artifactId>
@@ -50,7 +55,7 @@
 				<artifactId>leopard-servlet</artifactId>
 				<version>0.0.3</version>
 			</dependency>
-			
+
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-redis</artifactId>
