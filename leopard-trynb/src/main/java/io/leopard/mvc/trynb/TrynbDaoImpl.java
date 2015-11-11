@@ -21,7 +21,7 @@ public class TrynbDaoImpl implements TrynbDao {
 
 	@Override
 	public ErrorConfig find(String url) {
-		for (ErrorConfig error : trynbDao.list()) {
+		for (ErrorConfig error : list()) {
 			String prefix = error.getUrl();
 			if (url.startsWith(prefix)) {
 				return error;
