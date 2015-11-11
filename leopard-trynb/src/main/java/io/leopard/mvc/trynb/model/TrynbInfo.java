@@ -2,8 +2,17 @@ package io.leopard.mvc.trynb.model;
 
 public class TrynbInfo {
 
+	private String page;
 	private String message;
 	private String statusCode;
+
+	public String getPage() {
+		return page;
+	}
+
+	public void setPage(String page) {
+		this.page = page;
+	}
 
 	public String getMessage() {
 		return message;

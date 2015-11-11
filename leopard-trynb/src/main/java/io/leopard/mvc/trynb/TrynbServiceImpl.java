@@ -15,8 +15,8 @@ public class TrynbServiceImpl implements TrynbService {
 	private final TrynbDao trynbDao = new TrynbDaoImpl();
 	private final TrynbLogger trynbLogger = new TrynbLoggerImpl();
 
-	protected ExceptionConfig find(String uri, Exception exception) {
-		ErrorConfig errorConfig = trynbDao.find(uri);
+	protected ExceptionConfig find(ErrorConfig errorConfig, Exception exception) {
+
 		List<ExceptionConfig> exceptionConfigList = errorConfig.getExceptionConfigList();
 		String exceptionClassName = exception.getClass().getName();
 
@@ -31,7 +31,9 @@ public class TrynbServiceImpl implements TrynbService {
 
 	@Override
 	public TrynbInfo parse(HttpServletRequest request, String uri, Exception exception) {
-		ExceptionConfig exceptionConfig = this.find(uri, exception);
+		ErrorConfig errorConfig = trynbDao.find(uri);
+
+		ExceptionConfig exceptionConfig = this.find(errorConfig, exception);
 
 		String message;
 		if (exceptionConfig == null || StringUtils.isEmpty(exceptionConfig.getMessage())) {
@@ -44,6 +46,7 @@ public class TrynbServiceImpl implements TrynbService {
 		String statusCode = this.parseStatusCode(exceptionConfig, request, uri, exception);
 
 		TrynbInfo trynbInfo = new TrynbInfo();
+		trynbInfo.setPage(errorConfig.getPage());
 		trynbInfo.setMessage(message);
 		trynbInfo.setStatusCode(statusCode);
 		return trynbInfo;
