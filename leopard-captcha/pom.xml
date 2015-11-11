@@ -36,17 +36,7 @@
 		<!-- test -->
 		<dependency>
 			<groupId>io.leopard</groupId>
-			<artifactId>leopard-httpnb</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-jaxrs</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.leopard</groupId>
-			<artifactId>leopard-jetty</artifactId>
+			<artifactId>leopard-jetty-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 		<!-- test -->
