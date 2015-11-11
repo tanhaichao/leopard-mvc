@@ -23,13 +23,13 @@
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-mock</artifactId>
-				<version>0.0.4</version>
+				<version>0.0.5</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-jetty-test</artifactId>
-				<version>0.0.5-SNAPSHOT</version>
+				<version>0.0.5</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
@@ -38,11 +38,7 @@
 				<version>0.0.3</version>
 			</dependency>
 
-			<dependency>
-				<groupId>io.leopard</groupId>
-				<artifactId>leopard-httpnb</artifactId>
-				<version>0.0.3</version>
-			</dependency>
+
 
 			<dependency>
 				<groupId>io.leopard</groupId>
