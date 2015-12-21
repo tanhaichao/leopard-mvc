@@ -8,6 +8,7 @@ import io.leopard.web.view.StatusCodeException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -21,7 +22,10 @@ public class JsonViewTrynbResolver implements TrynbResolver {
 	public ModelAndView resolveView(HttpServletRequest request, HttpServletResponse response, HandlerMethod handler, Exception exception, TrynbInfo trynbInfo) {
 		Class<?> returnType = handler.getMethod().getReturnType();
 		if (!JsonView.class.isAssignableFrom(returnType)) {
-			return null;
+			ResponseBody body = handler.getMethodAnnotation(ResponseBody.class);
+			if (body == null) {
+				return null;
+			}
 		}
 
 		JsonView jsonView = new JsonView();
