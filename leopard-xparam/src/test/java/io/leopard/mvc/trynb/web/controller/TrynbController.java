@@ -18,16 +18,6 @@ public class TrynbController {
 		throw new RuntimeException("error1.");
 	}
 
-	@RequestMapping("/welcome.do")
-	public ModelAndView welcome() {
-		throw new RuntimeException("error2.");
-	}
-
-	@RequestMapping("/user.do")
-	public JsonView user() {
-		throw new RuntimeException("ok");
-	}
-
 	@Test
 	public void testIndex() throws Exception {
 		// Server server = JettyServer.start("src/test/webapp");
@@ -36,11 +26,21 @@ public class TrynbController {
 		Assert.assertEquals("error1.", result);
 	}
 
+	@RequestMapping("/welcome.do")
+	public ModelAndView welcome() {
+		throw new RuntimeException("error2.");
+	}
+
 	@Test
 	public void testWelcome() throws Exception {
 		String result = JettyTester.doGet("http://localhost/welcome.do");
 		System.out.println("result:" + result);
 		Assert.assertEquals("error2.", result);
+	}
+
+	@RequestMapping("/user.do")
+	public JsonView user() {
+		throw new RuntimeException("ok");
 	}
 
 	@Test
