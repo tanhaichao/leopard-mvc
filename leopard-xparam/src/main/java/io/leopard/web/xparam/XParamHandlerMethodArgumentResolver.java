@@ -37,7 +37,7 @@ public class XParamHandlerMethodArgumentResolver extends AbstractNamedValueMetho
 			XParam xparam = iterator.next();
 			data.put(xparam.getKey(), xparam);
 		}
-		
+
 	}
 
 	@Override
@@ -67,7 +67,7 @@ public class XParamHandlerMethodArgumentResolver extends AbstractNamedValueMetho
 
 	@Override
 	protected Object resolveName(String name, MethodParameter parameter, NativeWebRequest request) throws Exception {
-		System.err.println("resolveName name:" + name);
+		// System.err.println("resolveName name:" + name);
 		XParam xparam = data.get(name);
 		if (xparam == null) {
 			throw new IllegalArgumentException("未知参数名称[" + name + "].");
