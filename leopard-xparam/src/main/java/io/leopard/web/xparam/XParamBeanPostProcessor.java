@@ -54,6 +54,10 @@ public class XParamBeanPostProcessor implements BeanPostProcessor, BeanFactoryAw
 			PathRegexHandlerMethodArgumentResolver argumentResolver = beanFactory.getBean(PathRegexHandlerMethodArgumentResolver.class);
 			customArgumentResolvers.add(argumentResolver);
 		}
+		{
+			UnderlineHandlerMethodArgumentResolver argumentResolver = beanFactory.getBean(UnderlineHandlerMethodArgumentResolver.class);
+			customArgumentResolvers.add(argumentResolver);
+		}
 	}
 
 	@Override
