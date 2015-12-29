@@ -18,7 +18,7 @@ public class UnderlineHandlerMethodArgumentResolver extends AbstractNamedValueMe
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
 		String name = parameter.getParameterName();
-		System.err.println("UnderlineHandlerMethodArgumentResolver supportsParameter:" + name);
+		// System.err.println("UnderlineHandlerMethodArgumentResolver supportsParameter:" + name);
 		for (char ch : name.toCharArray()) {
 			if (Character.isUpperCase(ch)) {
 				// 有大写就返回true.
