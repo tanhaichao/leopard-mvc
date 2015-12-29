@@ -1,6 +1,6 @@
 package io.leopard.web.xparam;
 
-import java.awt.List;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -25,7 +25,7 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 		}
 		String name = parameter.getParameterName();
 		boolean support = name.endsWith("List");
-		System.err.println("ParamListHandlerMethodArgumentResolver supportsParameter name:" + name + " support:" + support);
+		System.err.println("ParamListHandlerMethodArgumentResolver supportsParameter name:" + name + " support:" + support + " type:" + type.getName());
 		return support;
 	}
 
@@ -33,8 +33,10 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 	protected Object resolveName(String name, MethodParameter parameter, NativeWebRequest request) throws Exception {
 		HttpServletRequest req = (HttpServletRequest) request.getNativeRequest();
 		name = name.replaceFirst("List$", "");
-		String value = req.getParameter(name);
-		return value;
+
+		String[] values = req.getParameterValues(name);
+		// String value = req.getParameter(name);
+		return values;
 	}
 
 }
