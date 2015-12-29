@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class PassportValidateImpl implements PassportValidate {
 
+	
 	@Override
 	public Object validate(HttpServletRequest request, HttpServletResponse response) {
 		String uid = CookieUtil.getCookie("uid", request);

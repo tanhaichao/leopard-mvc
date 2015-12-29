@@ -40,7 +40,7 @@ public class PassportValidateImpl implements PassportValidate {
 		if (passport != null) {
 			request.getSession().setAttribute(SESSION_KEY, passport);
 		}
-		return null;
+		return passport;
 	}
 
 	@Override
