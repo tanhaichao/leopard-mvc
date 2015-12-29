@@ -25,7 +25,7 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 		}
 		String name = parameter.getParameterName();
 		boolean support = name.endsWith("List");
-		System.err.println("ParamListHandlerMethodArgumentResolver supportsParameter name:" + name + " support:" + support + " type:" + type.getName());
+		// System.err.println("ParamListHandlerMethodArgumentResolver supportsParameter name:" + name + " support:" + support + " type:" + type.getName());
 		return support;
 	}
 
