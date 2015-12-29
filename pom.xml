@@ -69,5 +69,6 @@
 		<module>leopard-captcha</module>
 		<module>leopard-frequency</module>
 		<module>leopard-proxy</module>
+		<module>leopard-upload</module>
 	</modules>
 </project>
