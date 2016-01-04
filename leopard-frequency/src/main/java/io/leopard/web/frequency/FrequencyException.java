@@ -6,7 +6,7 @@ package io.leopard.web.frequency;
  * @author ahai
  * 
  */
-public class FrequencyException extends RuntimeException {
+public class FrequencyException extends Exception {
 
 	private static final long serialVersionUID = 1L;
 
