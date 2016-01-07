@@ -1,14 +1,15 @@
 package io.leopard.mvc.trynb;
 
-import io.leopard.mvc.trynb.model.ErrorConfig;
-import io.leopard.mvc.trynb.model.ExceptionConfig;
-import io.leopard.mvc.trynb.model.TrynbInfo;
-
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.util.StringUtils;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
+
+import io.leopard.mvc.trynb.model.ErrorConfig;
+import io.leopard.mvc.trynb.model.ExceptionConfig;
+import io.leopard.mvc.trynb.model.TrynbInfo;
 
 public class TrynbServiceImpl implements TrynbService {
 
@@ -32,6 +33,11 @@ public class TrynbServiceImpl implements TrynbService {
 	@Override
 	public TrynbInfo parse(HttpServletRequest request, String uri, Exception exception) {
 		ErrorConfig errorConfig = trynbDao.find(uri);
+
+		if (exception instanceof MethodArgumentTypeMismatchException) {
+			MethodArgumentTypeMismatchException e2 = (MethodArgumentTypeMismatchException) exception;
+			exception = (Exception) e2.getCause().getCause();
+		}
 
 		ExceptionConfig exceptionConfig = this.find(errorConfig, exception);
 
