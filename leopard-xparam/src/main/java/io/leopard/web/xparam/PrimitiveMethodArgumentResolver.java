@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ValueConstants;
 public class PrimitiveMethodArgumentResolver extends org.springframework.web.method.annotation.RequestParamMethodArgumentResolver {
 
 	public PrimitiveMethodArgumentResolver() {
-		super(true);
+		super(false);
 	}
 
 	// @Override
@@ -25,6 +25,9 @@ public class PrimitiveMethodArgumentResolver extends org.springframework.web.met
 
 	@Override
 	protected NamedValueInfo createNamedValueInfo(MethodParameter parameter) {
+		if (true) {
+			return super.createNamedValueInfo(parameter);
+		}
 		RequestParam ann = parameter.getParameterAnnotation(RequestParam.class);
 		if (ann != null) {
 			return new RequestParamNamedValueInfo(ann);
@@ -34,7 +37,9 @@ public class PrimitiveMethodArgumentResolver extends org.springframework.web.met
 		String defaultValue;
 		if (clazz.isPrimitive()) {
 			if (clazz.equals(long.class)) {
-				defaultValue = "0";
+				new Exception("long " + parameter.getParameterName()).printStackTrace();
+				// defaultValue = "0";
+				defaultValue = ValueConstants.DEFAULT_NONE;
 			}
 			else if (clazz.equals(int.class)) {
 				defaultValue = "0";
