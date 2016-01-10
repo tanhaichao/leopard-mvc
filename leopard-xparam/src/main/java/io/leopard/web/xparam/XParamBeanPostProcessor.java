@@ -46,12 +46,13 @@ public class XParamBeanPostProcessor implements BeanPostProcessor, BeanFactoryAw
 			adapter.setCustomArgumentResolvers(customArgumentResolvers);
 		}
 
-		customArgumentResolvers.add(new PrimitiveMethodArgumentResolver());
-
 		{
 			XParamHandlerMethodArgumentResolver argumentResolver = beanFactory.getBean(XParamHandlerMethodArgumentResolver.class);
 			customArgumentResolvers.add(argumentResolver);
 		}
+
+		customArgumentResolvers.add(new PrimitiveMethodArgumentResolver());
+
 		{
 			PathRegexHandlerMethodArgumentResolver argumentResolver = beanFactory.getBean(PathRegexHandlerMethodArgumentResolver.class);
 			customArgumentResolvers.add(argumentResolver);
@@ -66,6 +67,7 @@ public class XParamBeanPostProcessor implements BeanPostProcessor, BeanFactoryAw
 			UnderlineHandlerMethodArgumentResolver argumentResolver = beanFactory.getBean(UnderlineHandlerMethodArgumentResolver.class);
 			customArgumentResolvers.add(argumentResolver);
 		}
+		customArgumentResolvers.add(new PrimitiveMethodArgumentResolver());
 	}
 
 	@Override

@@ -1,8 +1,12 @@
 package io.leopard.web.xparam;
 
+import javax.servlet.ServletException;
+
 import org.springframework.core.MethodParameter;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ValueConstants;
+import org.springframework.web.context.request.NativeWebRequest;
+import org.springframework.web.method.annotation.AbstractNamedValueMethodArgumentResolver;
 
 /**
  * 基本数据类型
@@ -10,54 +14,83 @@ import org.springframework.web.bind.annotation.ValueConstants;
  * @author ahai
  *
  */
-public class PrimitiveMethodArgumentResolver extends org.springframework.web.method.annotation.RequestParamMethodArgumentResolver {
+public class PrimitiveMethodArgumentResolver extends AbstractNamedValueMethodArgumentResolver {
 
 	public PrimitiveMethodArgumentResolver() {
-		super(false);
+
 	}
 
-	// @Override
-	// public boolean supportsParameter(MethodParameter parameter) {
-	// boolean supports = super.supportsParameter(parameter);
-	// new Exception("supportsParameter:" + parameter.getParameterName() + " supports:" + supports).printStackTrace();
-	// return supports;
-	// }
+	@Override
+	public boolean supportsParameter(MethodParameter parameter) {
+		RequestParam ann = parameter.getParameterAnnotation(RequestParam.class);
+		if (ann != null) {
+			return false;
+		}
+
+		Class<?> clazz = parameter.getParameterType();
+		if (clazz.equals(long.class)) {
+			return true;
+		}
+		else if (clazz.equals(int.class)) {
+			return true;
+		}
+		else if (clazz.equals(double.class)) {
+			return true;
+		}
+		else if (clazz.equals(float.class)) {
+			return true;
+		}
+		return false;
+	}
 
 	@Override
 	protected NamedValueInfo createNamedValueInfo(MethodParameter parameter) {
-		if (true) {
-			return super.createNamedValueInfo(parameter);
-		}
-		RequestParam ann = parameter.getParameterAnnotation(RequestParam.class);
-		if (ann != null) {
-			return new RequestParamNamedValueInfo(ann);
-		}
-		// ValueConstants.DEFAULT_NONE
-		Class<?> clazz = parameter.getParameterType();
-		String defaultValue;
-		if (clazz.isPrimitive()) {
-			if (clazz.equals(long.class)) {
-				new Exception("long " + parameter.getParameterName()).printStackTrace();
-				// defaultValue = "0";
-				defaultValue = ValueConstants.DEFAULT_NONE;
-			}
-			else if (clazz.equals(int.class)) {
-				defaultValue = "0";
-			}
-			else {
-				defaultValue = ValueConstants.DEFAULT_NONE;
-			}
-		}
-		else {
-			defaultValue = ValueConstants.DEFAULT_NONE;
-		}
-		return new RequestParamNamedValueInfo(defaultValue);
+		return new RequestParamNamedValueInfo();
 	}
 
+	@Override
+	protected Object resolveName(String name, MethodParameter parameter, NativeWebRequest webRequest) throws Exception {
+		Object arg = null;
+		String[] paramValues = webRequest.getParameterValues(name);
+		if (paramValues != null) {
+			arg = (paramValues.length == 1 ? paramValues[0] : paramValues);
+		}
+
+		if (arg == null) {
+			arg = this.getDefaultValue(name, parameter);
+		}
+
+		return arg;
+	}
+
+	protected Object getDefaultValue(String name, MethodParameter parameter) {
+
+		Class<?> clazz = parameter.getParameterType();
+		if (clazz.equals(long.class)) {
+			return 0L;
+		}
+		else if (clazz.equals(int.class)) {
+			return 0;
+		}
+		else if (clazz.equals(double.class)) {
+			return 0D;
+		}
+		else if (clazz.equals(float.class)) {
+			return 0f;
+		}
+		return null;
+	}
+
+	@Override
+	protected void handleMissingValue(String name, MethodParameter parameter) throws ServletException {
+
+	}
+
+	//
 	private static class RequestParamNamedValueInfo extends NamedValueInfo {
 
-		public RequestParamNamedValueInfo(String defaultValue) {
-			super("", false, defaultValue);
+		public RequestParamNamedValueInfo() {
+			super("", false, ValueConstants.DEFAULT_NONE);
 		}
 
 		public RequestParamNamedValueInfo(RequestParam annotation) {
