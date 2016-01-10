@@ -46,6 +46,8 @@ public class XParamBeanPostProcessor implements BeanPostProcessor, BeanFactoryAw
 			adapter.setCustomArgumentResolvers(customArgumentResolvers);
 		}
 
+		customArgumentResolvers.add(new PrimitiveMethodArgumentResolver());
+
 		{
 			XParamHandlerMethodArgumentResolver argumentResolver = beanFactory.getBean(XParamHandlerMethodArgumentResolver.class);
 			customArgumentResolvers.add(argumentResolver);
