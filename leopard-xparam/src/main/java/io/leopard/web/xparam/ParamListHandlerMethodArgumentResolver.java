@@ -1,7 +1,5 @@
 package io.leopard.web.xparam;
 
-import io.leopard.json.Json;
-
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -19,6 +17,8 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.multipart.MultipartFile;
 
+import io.leopard.json.Json;
+
 /**
  * List<?>参数解析.
  * 
@@ -31,6 +31,7 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 	private Set<String> simpleClassSet = new HashSet<String>();
 
 	public ParamListHandlerMethodArgumentResolver() {
+		simpleClassSet.add(String.class.getName());
 		simpleClassSet.add(Long.class.getName());
 		simpleClassSet.add(Float.class.getName());
 		simpleClassSet.add(Integer.class.getName());
@@ -51,7 +52,7 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 		boolean support = name.endsWith("List");
 
 		if (!support) {
-			return support;
+			return false;
 		}
 
 		{
@@ -60,11 +61,10 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 			boolean isModel = isModelClass(clazz);
 			if (isModel) {
 				modelMap.put(parameter.hashCode(), clazz);
+				System.err.println("name:" + name + " typeName:" + args[0] + " isModel:" + isModel);
 			}
-			System.out.println("name:" + name + " typeName:" + args[0] + " isModel:" + isModel);
 		}
 
-		// System.err.println("ParamListHandlerMethodArgumentResolver supportsParameter name:" + name + " support:" + support + " type:" + type.getName());
 		return support;
 	}
 
@@ -76,20 +76,11 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 	protected Object resolveName(String name, MethodParameter parameter, NativeWebRequest request) throws Exception {
 		HttpServletRequest req = (HttpServletRequest) request.getNativeRequest();
 		name = name.replaceFirst("List$", "");
-		// System.out.println("names:" + StringUtils.collectionToDelimitedString(req.getParameterNames(), ","));
 
-		// {
-		// Enumeration<String> e = req.getParameterNames();
-		// while (e.hasMoreElements()) {
-		// String name2 = e.nextElement();
-		// // System.out.println("resolveName name2:" + name2);
-		// }
-		// }
 		String[] values = req.getParameterValues(name);
 		{
 			int hashCode = parameter.hashCode();
 			Class<?> clazz = modelMap.get(hashCode);
-			// System.out.println("resolveName name:" + name + " clazz:" + clazz);
 			if (clazz != null) {
 				return this.toList(clazz, values);
 			}
@@ -100,7 +91,7 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	protected List toList(Class<?> clazz, String[] values) {
-		// System.out.println("toList clazz:" + clazz + " values:" + values);
+		System.out.println("toList clazz:" + clazz + " values:" + values);
 		List list = new ArrayList();
 		if (values != null) {
 			for (String json : values) {
