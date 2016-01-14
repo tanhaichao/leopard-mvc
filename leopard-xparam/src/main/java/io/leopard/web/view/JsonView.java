@@ -12,6 +12,7 @@ import org.apache.commons.logging.LogFactory;
  * @author 阿海
  * 
  */
+@Deprecated
 public class JsonView extends AjaxView {
 	public JsonView() {
 
