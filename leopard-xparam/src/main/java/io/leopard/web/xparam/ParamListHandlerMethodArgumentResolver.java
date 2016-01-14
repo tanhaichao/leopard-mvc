@@ -74,6 +74,7 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 
 	@Override
 	protected Object resolveName(String name, MethodParameter parameter, NativeWebRequest request) throws Exception {
+		// System.err.println("ParamListHandlerMethodArgumentResolver resolveName name:" + name);
 		HttpServletRequest req = (HttpServletRequest) request.getNativeRequest();
 		name = name.replaceFirst("List$", "");
 

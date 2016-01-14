@@ -50,6 +50,8 @@ public class PrimitiveMethodArgumentResolver extends AbstractNamedValueMethodArg
 
 	@Override
 	protected Object resolveName(String name, MethodParameter parameter, NativeWebRequest webRequest) throws Exception {
+		// System.err.println("PrimitiveMethodArgumentResolver resolveName name:" + name);
+
 		Object arg = null;
 		String[] paramValues = webRequest.getParameterValues(name);
 		if (paramValues != null) {
@@ -64,7 +66,6 @@ public class PrimitiveMethodArgumentResolver extends AbstractNamedValueMethodArg
 	}
 
 	protected Object getDefaultValue(String name, MethodParameter parameter) {
-
 		Class<?> clazz = parameter.getParameterType();
 		if (clazz.equals(long.class)) {
 			return 0L;
@@ -78,7 +79,7 @@ public class PrimitiveMethodArgumentResolver extends AbstractNamedValueMethodArg
 		else if (clazz.equals(float.class)) {
 			return 0f;
 		}
-		return null;
+		throw new RuntimeException("未知类型[" + clazz.getName() + "].");
 	}
 
 	@Override
