@@ -87,7 +87,6 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 			return this.toList(clazz, values);
 		}
 		else if (values != null && values.length == 1) {
-			// if (values[0].indexOf(", "));
 			return StringUtils.split(values[0], ", ");
 		}
 		// String value = req.getParameter(name);
