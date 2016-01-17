@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -79,12 +80,15 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 		name = name.replaceFirst("List$", "");
 
 		String[] values = req.getParameterValues(name);
-		{
-			int hashCode = parameter.hashCode();
-			Class<?> clazz = modelMap.get(hashCode);
-			if (clazz != null) {
-				return this.toList(clazz, values);
-			}
+
+		int hashCode = parameter.hashCode();
+		Class<?> clazz = modelMap.get(hashCode);
+		if (clazz != null) {
+			return this.toList(clazz, values);
+		}
+		else if (values != null && values.length == 1) {
+			// if (values[0].indexOf(", "));
+			return StringUtils.split(values[0], ", ");
 		}
 		// String value = req.getParameter(name);
 		return values;
