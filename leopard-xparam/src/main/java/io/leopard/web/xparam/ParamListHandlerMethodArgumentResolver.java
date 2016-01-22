@@ -96,14 +96,18 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	protected List toList(Class<?> clazz, String[] values) {
 		System.out.println("toList clazz:" + clazz + " values:" + values);
-		List list = new ArrayList();
-		if (values != null) {
-			for (String json : values) {
-				// System.out.println("toList json:" + json);
-				Object obj = Json.toObject(json, clazz);
-				list.add(obj);
-			}
+		if (values == null || values.length == 0) {
+			return null;
 		}
-		return list;
+		return Json.toListObject(values[0], clazz);
+		// List list = new ArrayList();
+		// if (values != null) {
+		// for (String json : values) {
+		// // System.out.println("toList json:" + json);
+		// Object obj = Json.toObject(json, clazz);
+		// list.add(obj);
+		// }
+		// }
+		// return list;
 	}
 }
