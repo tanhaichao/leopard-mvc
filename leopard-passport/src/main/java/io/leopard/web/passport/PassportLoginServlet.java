@@ -17,10 +17,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "passportLoginServlet", urlPatterns = "/passport/login.leo")
 public class PassportLoginServlet extends HttpServlet {
 
-	public PassportLoginServlet() {
-		System.err.println("new PassportLoginServlet.");
-	}
-
 	private static final long serialVersionUID = 1L;
 
 	@Override
