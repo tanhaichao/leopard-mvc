@@ -80,7 +80,7 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 
 		String[] values = req.getParameterValues(name);
 
-		System.out.println("values:" + StringUtils.join(values, ", "));
+		// System.out.println("values:" + StringUtils.join(values, ", "));
 
 		int hashCode = parameter.hashCode();
 		Class<?> clazz = modelMap.get(hashCode);
@@ -88,7 +88,7 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 			return this.toList(clazz, values);
 		}
 		else if (values != null && values.length == 1) {
-			return StringUtils.split(values[0], ", ");
+			return StringUtils.split(values[0], ", ");// spring的StringUtils.split有问题?
 		}
 		// String value = req.getParameter(name);
 		return values;
