@@ -2,7 +2,6 @@ package io.leopard.web.xparam;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -12,9 +11,9 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -81,6 +80,8 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 
 		String[] values = req.getParameterValues(name);
 
+		System.out.println("values:" + StringUtils.join(values, ", "));
+
 		int hashCode = parameter.hashCode();
 		Class<?> clazz = modelMap.get(hashCode);
 		if (clazz != null) {
@@ -93,7 +94,7 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 		return values;
 	}
 
-	@SuppressWarnings({ "rawtypes", "unchecked" })
+	@SuppressWarnings({ "rawtypes" })
 	protected List toList(Class<?> clazz, String[] values) {
 		System.out.println("toList clazz:" + clazz + " values:" + values);
 		if (values == null || values.length == 0) {
