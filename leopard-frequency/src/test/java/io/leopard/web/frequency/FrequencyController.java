@@ -1,18 +1,19 @@
 package io.leopard.web.frequency;
 
-import io.leopard.jetty.JettyServer;
-import io.leopard.web.view.JsonView;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import io.leopard.jetty.JettyServer;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class FrequencyController {
 
 	@RequestMapping("/welcome.do")
 	@Frequency
-	public JsonView welcome(Long uid) {
-		return new JsonView(uid);
+	@ResponseBody
+	public long welcome(Long uid) {
+		return uid;
 	}
 
 	public static void main(String[] args) throws Exception {

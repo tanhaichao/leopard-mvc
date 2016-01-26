@@ -1,12 +1,12 @@
 package io.leopard.web.captcha.controller;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import io.leopard.jetty.JettyServer;
 import io.leopard.web.captcha.CaptchaGroup;
 import io.leopard.web.captcha.CaptchaView;
-import io.leopard.web.view.JsonView;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 public class CaptchaController {
@@ -17,8 +17,9 @@ public class CaptchaController {
 	}
 
 	@RequestMapping("/check.do")
-	public JsonView check(String sessCaptcha) {
-		return new JsonView("sessCaptcha:" + sessCaptcha);
+	@ResponseBody
+	public String check(String sessCaptcha) {
+		return "sessCaptcha:" + sessCaptcha;
 	}
 
 	@RequestMapping("/captcha2.do")
@@ -28,8 +29,9 @@ public class CaptchaController {
 
 	@RequestMapping("/check2.do")
 	@CaptchaGroup("captcha2")
-	public JsonView check2(String sessCaptcha) {
-		return new JsonView("sessCaptcha:" + sessCaptcha);
+	@ResponseBody
+	public String check2(String sessCaptcha) {
+		return "sessCaptcha:" + sessCaptcha;
 	}
 
 	// @RequestMapping("/check3.do")

@@ -1,20 +1,21 @@
 package io.leopard.web.passport.controller;
 
-import io.leopard.httpnb.Httpnb;
-import io.leopard.jetty.JettyServer;
-import io.leopard.web.view.JsonView;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import io.leopard.httpnb.Httpnb;
+import io.leopard.jetty.JettyServer;
 
 @Controller
 public class WelcomeController {
 
 	@RequestMapping("/welcome.do")
-	public JsonView welcome(Long sessUid) {
-		return new JsonView(sessUid);
+	@ResponseBody
+	public long welcome(Long sessUid) {
+		return sessUid;
 	}
 
 	@Test
@@ -28,7 +29,6 @@ public class WelcomeController {
 		System.out.println("result:" + result);
 		Assert.assertEquals("{\"status\":\"RuntimeException\",\"message\":\"ok\",\"data\":null}", result);
 	}
-	
 
 	public static void main(String[] args) throws Exception {
 		JettyServer.start("src/test/webapp");

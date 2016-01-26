@@ -69,7 +69,9 @@ public class JsonViewTrynbResolver implements TrynbResolver {
 
 		@Override
 		public String getBody(HttpServletRequest request, HttpServletResponse response) {
-			return Json.toJson(map);
+			String json = Json.toJson(map);
+			request.setAttribute("result.json", json);
+			return json;
 		}
 
 	}

@@ -1,13 +1,13 @@
 package io.leopard.mvc.trynb.web.controller;
 
-import io.leopard.jetty.test.JettyTester;
-import io.leopard.web.view.JsonView;
-
 import org.junit.Assert;
 import org.junit.Test;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+
+import io.leopard.jetty.test.JettyTester;
 
 @Controller
 @RequestMapping("/")
@@ -39,7 +39,8 @@ public class TrynbController {
 	}
 
 	@RequestMapping("/user.do")
-	public JsonView user() {
+	@ResponseBody
+	public String user() {
 		throw new RuntimeException("ok");
 	}
 
