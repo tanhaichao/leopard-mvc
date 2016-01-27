@@ -77,6 +77,7 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 		// System.err.println("ParamListHandlerMethodArgumentResolver resolveName name:" + name);
 		HttpServletRequest req = (HttpServletRequest) request.getNativeRequest();
 		name = name.replaceFirst("List$", "");
+		name = UnderlineHandlerMethodArgumentResolver.camelToUnderline(name);
 
 		String[] values = req.getParameterValues(name);
 
