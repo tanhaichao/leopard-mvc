@@ -8,7 +8,7 @@
 	<artifactId>leopard-trynb</artifactId>
 
 	<name>TryNB</name>
-	<description>异常处理，细到URL级别的异常的配置(状态码转换、日志开关)，兼容Json、HTML。</description>
+	<description>异常处理，细到URL级别的异常的配置(状态码转换、日志开关)，兼容各种接口返回的数据类型(Json、HTML)。默认使用异常类名作为状态码，极大程度简化状态码转换工作。</description>
 
 	<dependencies>
 		<dependency>

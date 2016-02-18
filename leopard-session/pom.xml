@@ -6,7 +6,8 @@
 		<version>0.0.3-SNAPSHOT</version>
 	</parent>
 	<artifactId>leopard-session</artifactId>
-
+	<name>Leopard-Session</name>
+	<description>分布式session实现。基于Leopard Memcache接口实现，目前Leopard已实现基于Memcached、Redis两种实现。</description>
 
 	<dependencies>
 		<dependency>
