@@ -6,7 +6,8 @@
 		<version>0.0.3-SNAPSHOT</version>
 	</parent>
 	<artifactId>leopard-passport</artifactId>
-
+	<name>Leopard-Passport</name>
+	<description>通行证验证。包含登录验证、登录框、自定义登录框、自定义登录验证实现。</description>
 
 	<dependencies>
 		<dependency>

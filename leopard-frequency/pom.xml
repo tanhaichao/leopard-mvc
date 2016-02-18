@@ -6,6 +6,8 @@
 		<version>0.0.3-SNAPSHOT</version>
 	</parent>
 	<artifactId>leopard-frequency</artifactId>
+	<name>Leopard-Frequency</name>
+	<description>接口访问频率限制。使用注解进行配置，支持时长配置。应用场景，如涉及金钱、经验等业务操作，限制用户单线程访问，在编写业务代码时不需要过多考虑并发安全问题。</description>
 
 	<dependencies>
 		<dependency>
