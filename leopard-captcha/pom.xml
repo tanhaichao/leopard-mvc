@@ -6,6 +6,8 @@
 		<version>0.0.3-SNAPSHOT</version>
 	</parent>
 	<artifactId>leopard-captcha</artifactId>
+	<name>Leopard-Captcha</name>
+	<description>验证码生成和验证。使用注解简化业务代码编写，支持验证码分组。</description>
 
 	<dependencies>
 		<dependency>
