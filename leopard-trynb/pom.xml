@@ -7,8 +7,8 @@
 	</parent>
 	<artifactId>leopard-trynb</artifactId>
 
-	<name>trynb</name>
-	<description>细到URL级别的异常处理</description>
+	<name>TryNB</name>
+	<description>异常处理，细到URL级别的异常的配置(状态码转换、日志开关)，兼容Json、HTML。</description>
 
 	<dependencies>
 		<dependency>
