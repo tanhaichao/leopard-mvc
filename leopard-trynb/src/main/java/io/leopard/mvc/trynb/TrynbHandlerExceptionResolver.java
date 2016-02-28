@@ -21,7 +21,7 @@ public class TrynbHandlerExceptionResolver implements HandlerExceptionResolver {
 
 	@Override
 	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception exception) {
-		// System.err.println("resolveException:" + request);
+		// logger.error("resolveException:" + exception.toString());
 		if (!(handler instanceof HandlerMethod)) {
 			return null;
 		}
