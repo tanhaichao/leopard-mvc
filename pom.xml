@@ -10,7 +10,7 @@
 	<parent>
 		<groupId>io.leopard.depend</groupId>
 		<artifactId>depend</artifactId>
-		<version>0.0.15</version>
+		<version>0.1-SNAPSHOT</version>
 	</parent>
 
 	<scm>
@@ -72,12 +72,5 @@
 		<module>leopard-frequency</module>
 		<module>leopard-proxy</module>
 	</modules>
-	
-	<distributionManagement>
-		<snapshotRepository>
-			<id>sonatype-nexus-snapshots</id>
-			<name>Sonatype Nexus Snapshots</name>
-			<url>http://leopard.io/nexus/content/repositories/framework-snapshots/</url>
-		</snapshotRepository>
-	</distributionManagement>	
+		
 </project>
