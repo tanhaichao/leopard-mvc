@@ -31,7 +31,7 @@
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-jetty-test</artifactId>
-				<version>0.0.5</version>
+				<version>0.0.6-SNAPSHOT</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
