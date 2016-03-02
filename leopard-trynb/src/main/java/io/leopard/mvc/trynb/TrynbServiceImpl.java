@@ -36,7 +36,13 @@ public class TrynbServiceImpl implements TrynbService {
 
 		if (exception instanceof MethodArgumentTypeMismatchException) {
 			MethodArgumentTypeMismatchException e2 = (MethodArgumentTypeMismatchException) exception;
-			exception = (Exception) e2.getCause().getCause();
+			Exception e = (Exception) e2.getCause().getCause();
+			if (e != null) {
+				exception = e;
+			}
+			else {
+				exception = (Exception) e2.getCause();
+			}
 		}
 
 		ExceptionConfig exceptionConfig = this.find(errorConfig, exception);
