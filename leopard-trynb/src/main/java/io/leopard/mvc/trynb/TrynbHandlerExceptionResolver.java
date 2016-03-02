@@ -21,6 +21,9 @@ public class TrynbHandlerExceptionResolver implements HandlerExceptionResolver {
 
 	@Override
 	public ModelAndView resolveException(HttpServletRequest request, HttpServletResponse response, Object handler, Exception exception) {
+		if (exception == null) {
+			throw new NullPointerException("exception参数怎么会为null?");
+		}
 		// logger.error("resolveException:" + exception.toString());
 		if (!(handler instanceof HandlerMethod)) {
 			return null;
