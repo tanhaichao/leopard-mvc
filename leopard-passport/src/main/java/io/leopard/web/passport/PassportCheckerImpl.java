@@ -1,6 +1,7 @@
 package io.leopard.web.passport;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,6 +29,7 @@ public class PassportCheckerImpl implements PassportChecker {
 	@Override
 	public boolean isNeedCheckLogin(HttpServletRequest request, Object handler) {
 		for (PassportChecker checker : passportCheckerList) {
+			System.err.println("checker:" + checker);
 			boolean isNeedCheckLogin = checker.isNeedCheckLogin(request, handler);
 			if (isNeedCheckLogin) {
 				return true;
