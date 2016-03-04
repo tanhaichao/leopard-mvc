@@ -21,6 +21,7 @@ public class PassportCheckerImpl implements PassportChecker {
 	}
 
 	public static void addPassportChecker(PassportChecker checker) {
+		new Exception("addPassportChecker").printStackTrace();
 		passportCheckerList.add(checker);
 	}
 
