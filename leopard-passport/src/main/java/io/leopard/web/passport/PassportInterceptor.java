@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
@@ -17,6 +18,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 // TODO ahai 在site项目必须实现BeanPostProcessor接口才能成功配置拦截器.
+@Order(9)
 public class PassportInterceptor extends RegisterHandlerInterceptor {
 
 	protected Log logger = LogFactory.getLog(this.getClass());
