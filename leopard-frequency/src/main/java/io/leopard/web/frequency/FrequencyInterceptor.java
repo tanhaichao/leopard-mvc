@@ -23,7 +23,7 @@ public class FrequencyInterceptor extends RegisterHandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 		Integer seconds = frequencyResolver.getSeconds(handler);
-		System.out.println("FrequencyInterceptor preHandle:" + handler + " seconds:" + seconds);
+		// System.out.println("FrequencyInterceptor preHandle:" + handler + " seconds:" + seconds);
 		if (seconds == null || seconds <= 0) {
 			return true;
 		}
