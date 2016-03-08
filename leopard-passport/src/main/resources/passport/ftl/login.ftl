@@ -23,8 +23,8 @@
 <div class="view-container"   >
 <div id="account_login" class="account-box-wrapper">
     <div class="account-box">
-        <form class="login-form" action="login.leo" method="post">
-        	<input type="hidden" name="url" value=""/>
+        <form class="login-form" action="/passport/login.leo" method="post">
+        	<input type="hidden" name="url" value="${url}"/>
             <div class="account-form-title"><label>登录</label></div>
             <div class="account-input-area">
                 <input name="username" type="text" placeholder="账号" >
