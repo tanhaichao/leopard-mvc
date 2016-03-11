@@ -26,6 +26,9 @@ public class UidXParam implements XParam {
 		}
 		String passport = request.getParameter("username");
 		if (StringUtils.isEmpty(passport)) {
+			passport = request.getParameter("passport");
+		}
+		if (StringUtils.isEmpty(passport)) {
 			return 0;
 		}
 		return UserinfoResolverImpl.getInstance().getUid(passport);
