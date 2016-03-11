@@ -7,6 +7,8 @@ import org.apache.commons.lang.math.NumberUtils;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Service;
 
+import io.leopard.web.xparam.api.UserinfoResolverImpl;
+
 /**
  * 根据username解析uid.
  * 
@@ -22,9 +24,11 @@ public class UidXParam implements XParam {
 		if (StringUtils.isNotEmpty(uid)) {
 			return NumberUtils.toLong(uid);
 		}
-		String username = request.getParameter("username");
-		
-		return 0L;
+		String passport = request.getParameter("username");
+		if (StringUtils.isEmpty(passport)) {
+			return 0;
+		}
+		return UserinfoResolverImpl.getInstance().getUid(passport);
 	}
 
 	@Override

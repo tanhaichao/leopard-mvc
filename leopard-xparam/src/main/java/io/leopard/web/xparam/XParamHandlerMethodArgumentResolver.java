@@ -16,6 +16,8 @@ import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.NativeWebRequest;
 
+import io.leopard.web.xparam.api.UserinfoResolverImpl;
+
 /**
  * 页面特殊参数.
  * 
@@ -38,6 +40,8 @@ public class XParamHandlerMethodArgumentResolver extends AbstractNamedValueMetho
 
 	@Override
 	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+		UserinfoResolverImpl.setBeanFactory(beanFactory);
+		
 		ListableBeanFactory factory = (ListableBeanFactory) beanFactory;
 		Map<String, XParam> map = factory.getBeansOfType(XParam.class);
 		for (Entry<String, XParam> entry : map.entrySet()) {
