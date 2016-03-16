@@ -9,6 +9,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * 性能监控数据
  * 
@@ -16,12 +19,24 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "passportLoginServlet", urlPatterns = "/passport/login.leo")
 public class PassportLoginServlet extends HttpServlet {
+	protected Log logger = LogFactory.getLog(this.getClass());
 
 	private static final long serialVersionUID = 1L;
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		boolean flag = PassportValidateImpl.getInstance().login(request, response);
+		boolean flag;
+		try {
+			flag = PassportValidateImpl.getInstance().login(request, response);
+		}
+		catch (RuntimeException e) {
+			logger.error(e.getMessage(), e);
+			throw e;
+		}
+		catch (IOException e) {
+			logger.error(e.getMessage(), e);
+			throw e;
+		}
 		if (!flag) {
 			this.notImpl(response);
 			return;
