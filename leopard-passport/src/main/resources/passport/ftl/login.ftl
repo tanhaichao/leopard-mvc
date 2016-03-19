@@ -33,8 +33,8 @@
                 <input name="password" type="password" placeholder="密码">
             </div>
             <div class="check-box">
-                <input id="remember_me" name="remember_me" type="checkbox">
-                <label for="remember_me"></label>
+                <input id="remember" name="remember" type="checkbox">
+                <label for="remember"></label>
                 <span>记住我</span>
             </div>
             <button class="account-button login-btn" type="submit"><span>登录</span></button>
