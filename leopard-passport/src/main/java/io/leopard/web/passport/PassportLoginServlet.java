@@ -47,7 +47,7 @@ public class PassportLoginServlet extends HttpServlet {
 
 	private void output(HttpServletResponse response, String text) throws IOException {
 		byte[] bytes = text.getBytes();
-		response.setContentType("text/plain");
+		response.setContentType("text/plain; charset=UTF-8");
 		response.setContentLength(bytes.length);
 		OutputStream out = response.getOutputStream();
 		out.write(bytes);
