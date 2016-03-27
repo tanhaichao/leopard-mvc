@@ -31,22 +31,23 @@ public class PassportLoginServlet extends HttpServlet {
 		}
 		catch (RuntimeException e) {
 			logger.error(e.getMessage(), e);
-			throw e;
+			this.output(response, e.getMessage());
+			return;
 		}
 		catch (IOException e) {
 			logger.error(e.getMessage(), e);
-			throw e;
+			this.output(response, e.getMessage());
+			return;
 		}
 		if (!flag) {
-			this.notImpl(response);
+			this.output(response, "未实现PassportValidate.login接口");
 			return;
 		}
 	}
 
-	private void notImpl(HttpServletResponse response) throws IOException {
-		String html = "未实现PassportValidate.login接口";
-		byte[] bytes = html.getBytes();
-		response.setContentType("text/html");
+	private void output(HttpServletResponse response, String text) throws IOException {
+		byte[] bytes = text.getBytes();
+		response.setContentType("text/plain");
 		response.setContentLength(bytes.length);
 		OutputStream out = response.getOutputStream();
 		out.write(bytes);
