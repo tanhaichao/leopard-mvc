@@ -40,11 +40,9 @@ public class UnderlineHandlerMethodArgumentResolver extends AbstractNamedValueMe
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
 		String name = parameter.getParameterName();
-		// System.err.println("UnderlineHandlerMethodArgumentResolver supportsParameter:" + name);
 		if (StringUtils.isEmpty(name)) {
 			return false;
 		}
-		// TODO ahai 这里要判断model就返回false?
 		// TODO 重启的时候name会为null?
 		for (char ch : name.toCharArray()) {
 			if (Character.isUpperCase(ch)) {
