@@ -1,8 +1,10 @@
 package io.leopard.web.xparam;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.NativeWebRequest;
@@ -15,6 +17,25 @@ import org.springframework.web.context.request.NativeWebRequest;
  */
 @Component
 public class UnderlineHandlerMethodArgumentResolver extends AbstractNamedValueMethodArgumentResolver {
+
+	@Value("${xparam.underline}")
+	private String underline;
+
+	@PostConstruct
+	public void init() {
+		// System.err.println("UnderlineHandlerMethodArgumentResolver underline:" + underline);
+		enable = !"false".equals(underline);
+	}
+
+	private static boolean enable = true;
+
+	public static boolean isEnable() {
+		return enable;
+	}
+
+	public static void setEnable(boolean enable) {
+		UnderlineHandlerMethodArgumentResolver.enable = enable;
+	}
 
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
