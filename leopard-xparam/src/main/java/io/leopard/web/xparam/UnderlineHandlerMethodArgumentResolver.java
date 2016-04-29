@@ -23,7 +23,6 @@ public class UnderlineHandlerMethodArgumentResolver extends AbstractNamedValueMe
 
 	@PostConstruct
 	public void init() {
-		// System.err.println("UnderlineHandlerMethodArgumentResolver underline:" + underline);
 		enable = !"false".equals(underline);
 	}
 
@@ -58,7 +57,6 @@ public class UnderlineHandlerMethodArgumentResolver extends AbstractNamedValueMe
 		HttpServletRequest req = (HttpServletRequest) request.getNativeRequest();
 
 		String underlineName = camelToUnderline(name);
-		// System.err.println("UnderlineHandlerMethodArgumentResolver resolveName name:" + name + " underlineName:" + underlineName);
 
 		String value = req.getParameter(underlineName);
 		return value;
