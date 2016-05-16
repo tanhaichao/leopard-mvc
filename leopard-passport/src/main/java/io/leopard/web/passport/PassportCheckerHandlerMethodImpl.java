@@ -37,7 +37,7 @@ public class PassportCheckerHandlerMethodImpl implements PassportChecker {
 	}
 
 	@Override
-	public boolean isNeedCheckLogin(HttpServletRequest request, Object handler) {
+	public Boolean isNeedCheckLogin(HttpServletRequest request, Object handler) {
 		if (!(handler instanceof HandlerMethod)) {
 			return false;
 		}

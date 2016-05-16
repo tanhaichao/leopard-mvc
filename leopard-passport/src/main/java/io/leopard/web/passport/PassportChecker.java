@@ -11,6 +11,6 @@ public interface PassportChecker {
 	 * @param handler
 	 * @return
 	 */
-	boolean isNeedCheckLogin(HttpServletRequest request, Object handler);
+	Boolean isNeedCheckLogin(HttpServletRequest request, Object handler);
 
 }

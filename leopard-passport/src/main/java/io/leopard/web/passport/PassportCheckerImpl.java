@@ -2,8 +2,14 @@ package io.leopard.web.passport;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
+
+import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.BeanFactory;
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 
 import io.leopard.web.servlet.RequestUtil;
 import io.leopard.web.servlet.UriListChecker;
@@ -20,14 +26,17 @@ public class PassportCheckerImpl implements PassportChecker {
 		passportCheckerList.add(new PassportCheckerHandlerMethodImpl());
 	}
 
-	public static void addPassportChecker(PassportChecker checker) {
-		passportCheckerList.add(checker);
+	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
+		DefaultListableBeanFactory factory = (DefaultListableBeanFactory) beanFactory;
+		Map<String, PassportChecker> map = factory.getBeansOfType(PassportChecker.class);
+		for (Entry<String, PassportChecker> entry : map.entrySet()) {
+			passportCheckerList.add(entry.getValue());
+		}
 	}
 
 	@Override
-	public boolean isNeedCheckLogin(HttpServletRequest request, Object handler) {
+	public Boolean isNeedCheckLogin(HttpServletRequest request, Object handler) {
 		for (PassportChecker checker : passportCheckerList) {
-			// System.err.println("checker:" + checker);
 			boolean isNeedCheckLogin = checker.isNeedCheckLogin(request, handler);
 			if (isNeedCheckLogin) {
 				return true;
