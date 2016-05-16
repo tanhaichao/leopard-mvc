@@ -1,7 +1,5 @@
 package io.leopard.web.passport;
 
-import io.leopard.web.servlet.RegisterHandlerInterceptor;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -11,6 +9,8 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+
+import io.leopard.web.servlet.RegisterHandlerInterceptor;
 
 /**
  * 检查是否已登录.
@@ -25,15 +25,13 @@ public class PassportInterceptor extends RegisterHandlerInterceptor {
 
 	protected Log logger = LogFactory.getLog(this.getClass());
 
-	private PassportChecker passportChecker;
+	private PassportCheckerImpl passportChecker = new PassportCheckerImpl();
 	private PassportValidate passportValidateLei = PassportValidateImpl.getInstance();
 
 	@Override
 	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
 		super.setBeanFactory(beanFactory);
-		PassportCheckerImpl passportChecker = new PassportCheckerImpl();
 		passportChecker.setBeanFactory(beanFactory);
-		this.passportChecker = passportChecker;
 	}
 
 	@Override

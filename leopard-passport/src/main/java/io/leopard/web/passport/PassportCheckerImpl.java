@@ -11,12 +11,9 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 
-import io.leopard.web.servlet.RequestUtil;
-import io.leopard.web.servlet.UriListChecker;
-
 public class PassportCheckerImpl implements PassportChecker {
 
-	protected UriListChecker uriListChecker = new UriListChecker();// 需要做登录验证的URL列表
+	// protected UriListChecker uriListChecker = new UriListChecker();// 需要做登录验证的URL列表
 
 	// private PassportChecker passportCheckerHandlerMethodImpl = new PassportCheckerHandlerMethodImpl();
 
@@ -37,14 +34,14 @@ public class PassportCheckerImpl implements PassportChecker {
 	@Override
 	public Boolean isNeedCheckLogin(HttpServletRequest request, Object handler) {
 		for (PassportChecker checker : passportCheckerList) {
-			boolean isNeedCheckLogin = checker.isNeedCheckLogin(request, handler);
-			if (isNeedCheckLogin) {
-				return true;
+			Boolean isNeedCheckLogin = checker.isNeedCheckLogin(request, handler);
+			if (isNeedCheckLogin != null) {
+				return isNeedCheckLogin;
 			}
 		}
-		if (uriListChecker.exists(RequestUtil.getRequestContextUri(request))) {
-			return true;
-		}
+		// if (uriListChecker.exists(RequestUtil.getRequestContextUri(request))) {
+		// return true;
+		// }
 		return false;
 	}
 }
