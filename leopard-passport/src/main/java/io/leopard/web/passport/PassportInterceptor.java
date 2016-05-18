@@ -37,7 +37,10 @@ public class PassportInterceptor extends RegisterHandlerInterceptor {
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		boolean isNeedCheckLogin = passportChecker.isNeedCheckLogin(request, handler);
+		Boolean isNeedCheckLogin = passportChecker.isNeedCheckLogin(request, handler);
+		if (isNeedCheckLogin == null) {
+			return true;
+		}
 		// System.out.println("PassportInterceptor preHandle:" + isNeedCheckLogin + " " + handler);
 		if (!isNeedCheckLogin) {
 			return true;
