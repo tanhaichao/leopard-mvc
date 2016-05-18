@@ -36,13 +36,11 @@ public class PassportCheckerImpl implements PassportChecker {
 	public Boolean isNeedCheckLogin(HttpServletRequest request, Object handler) {
 		for (PassportChecker checker : passportCheckerList) {
 			Boolean isNeedCheckLogin = checker.isNeedCheckLogin(request, handler);
+			// System.out.println("checker:" + checker + " isNeedCheckLogin:" + isNeedCheckLogin);
 			if (isNeedCheckLogin != null) {
 				return isNeedCheckLogin;
 			}
 		}
-		// if (uriListChecker.exists(RequestUtil.getRequestContextUri(request))) {
-		// return true;
-		// }
-		return false;
+		return null;
 	}
 }
