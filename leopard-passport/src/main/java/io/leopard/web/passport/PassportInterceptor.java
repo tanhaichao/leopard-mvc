@@ -31,6 +31,7 @@ public class PassportInterceptor extends RegisterHandlerInterceptor {
 	@Override
 	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
 		super.setBeanFactory(beanFactory);
+		// System.err.println("setBeanFactory setBeanFactory:" + beanFactory);
 		passportChecker.setBeanFactory(beanFactory);
 	}
 

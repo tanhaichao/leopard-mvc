@@ -26,6 +26,7 @@ public class PassportCheckerImpl implements PassportChecker {
 	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
 		DefaultListableBeanFactory factory = (DefaultListableBeanFactory) beanFactory;
 		Map<String, PassportChecker> map = factory.getBeansOfType(PassportChecker.class);
+		// System.err.println("PassportCheckerImpl setBeanFactory:" + map);
 		for (Entry<String, PassportChecker> entry : map.entrySet()) {
 			passportCheckerList.add(entry.getValue());
 		}
