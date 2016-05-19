@@ -17,7 +17,7 @@ public class SessionIdXParam implements XParam {
 	@Override
 	public Object getValue(HttpServletRequest request, MethodParameter parameter) {
 		String sessionId = request.getSession().getId();
-		System.err.println("sessionId:" + sessionId);
+		// System.err.println("sessionId:" + sessionId);
 		// String sessionId = CookieUtil.getCookie(SessionUtil.SESSIONID_COOKIE_NAME, request);
 		// if (StringUtils.isEmpty(sessionId)) {
 		// // 页面第一次写cookie时可能会获取不到sessionId，就通过getAttribute获取
