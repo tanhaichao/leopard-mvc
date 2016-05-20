@@ -8,7 +8,8 @@ import java.util.ServiceLoader;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.BeansException;
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
+import org.springframework.beans.factory.NoUniqueBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.servlet.FrameworkServlet;
 
@@ -21,7 +22,7 @@ public class PassportValidateLoaderImpl implements PassportValidate {
 			return passportValidate;
 		}
 		this.passportValidate = this.getPassportValidateByApplicationContext(request);
-		System.out.println("getPassportValidateByApplicationContext:" + passportValidate);
+		// System.out.println("getPassportValidateByApplicationContext:" + passportValidate);
 		if (passportValidate == null) {
 			this.passportValidate = this.getPassportValidateByServiceLoader();
 		}
@@ -51,7 +52,10 @@ public class PassportValidateLoaderImpl implements PassportValidate {
 		try {
 			return context.getBean(PassportValidate.class);
 		}
-		catch (BeansException e) {
+		catch (NoUniqueBeanDefinitionException e) {
+			throw e;
+		}
+		catch (NoSuchBeanDefinitionException e) {
 			// TODO ahai
 			return null;
 		}
