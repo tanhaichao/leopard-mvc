@@ -41,12 +41,16 @@ public class XParamHandlerMethodArgumentResolver extends AbstractNamedValueMetho
 	@Override
 	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
 		UserinfoResolverImpl.setBeanFactory(beanFactory);
-		
+
 		ListableBeanFactory factory = (ListableBeanFactory) beanFactory;
 		Map<String, XParam> map = factory.getBeansOfType(XParam.class);
+
 		for (Entry<String, XParam> entry : map.entrySet()) {
 			XParam xparam = entry.getValue();
-			// System.out.println("xparam.getKey() " + entry.getKey() + ":" + xparam.getKey());
+			XParam old = data.get(xparam.getKey());
+			if (old != null) {
+				xparam.override(old);
+			}
 			data.put(xparam.getKey(), xparam);
 		}
 	}

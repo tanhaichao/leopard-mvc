@@ -28,4 +28,5 @@ public interface XParam {
 	 */
 	Object getValue(HttpServletRequest request, MethodParameter parameter);
 
+	void override(XParam xparam);
 }
