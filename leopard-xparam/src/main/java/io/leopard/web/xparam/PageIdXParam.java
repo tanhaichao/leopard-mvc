@@ -43,4 +43,9 @@ public class PageIdXParam implements XParam {
 		return "pageId";
 	}
 
+	@Override
+	public void override(XParam xparam) {
+
+	}
+
 }

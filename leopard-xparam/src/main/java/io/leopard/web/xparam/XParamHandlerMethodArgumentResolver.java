@@ -44,7 +44,7 @@ public class XParamHandlerMethodArgumentResolver extends AbstractNamedValueMetho
 
 		ListableBeanFactory factory = (ListableBeanFactory) beanFactory;
 		Map<String, XParam> map = factory.getBeansOfType(XParam.class);
-
+		// TODO ahai 这里加上排序?
 		for (Entry<String, XParam> entry : map.entrySet()) {
 			XParam xparam = entry.getValue();
 			XParam old = data.get(xparam.getKey());

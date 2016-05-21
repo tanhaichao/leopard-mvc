@@ -38,4 +38,9 @@ public class UidXParam implements XParam {
 	public String getKey() {
 		return "uid";
 	}
+
+	@Override
+	public void override(XParam xparam) {
+
+	}
 }

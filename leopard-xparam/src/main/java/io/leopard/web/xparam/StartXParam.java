@@ -43,10 +43,8 @@ public class StartXParam implements XParam {
 	/**
 	 * 计算默认起始记录
 	 * 
-	 * @param pageid
-	 *            分页编号
-	 * @param size
-	 *            分页大小
+	 * @param pageid 分页编号
+	 * @param size 分页大小
 	 * @return 当前分页的起始记录编号
 	 */
 	public static int getPageStart(int pageId, int size) {
@@ -62,6 +60,11 @@ public class StartXParam implements XParam {
 	@Override
 	public String getKey() {
 		return "start";
+	}
+
+	@Override
+	public void override(XParam xparam) {
+
 	}
 
 }

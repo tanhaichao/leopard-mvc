@@ -29,4 +29,9 @@ public class SessUidXParam implements XParam {
 	public String getKey() {
 		return "sessUid";
 	}
+
+	@Override
+	public void override(XParam xparam) {
+
+	}
 }
