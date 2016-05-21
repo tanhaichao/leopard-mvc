@@ -28,5 +28,10 @@ public interface XParam {
 	 */
 	Object getValue(HttpServletRequest request, MethodParameter parameter);
 
+	/**
+	 * 当存在多个相同key的实现时，被覆盖的实现类通过此方法传递给新的实现类
+	 * 
+	 * @param xparam
+	 */
 	void override(XParam xparam);
 }
