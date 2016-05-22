@@ -39,7 +39,7 @@ public class PassportCheckerHandlerMethodImpl implements PassportChecker {
 	@Override
 	public Boolean isNeedCheckLogin(HttpServletRequest request, Object handler) {
 		if (!(handler instanceof HandlerMethod)) {
-			return false;
+			return null;
 		}
 		String key = handler.toString();
 		Boolean contain = handlerCacheMap.get(key);
