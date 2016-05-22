@@ -11,15 +11,9 @@ import java.util.ServiceLoader;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryUtils;
-import org.springframework.beans.factory.NoSuchBeanDefinitionException;
-import org.springframework.beans.factory.NoUniqueBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.event.EventListenerFactory;
 import org.springframework.core.annotation.AnnotationAwareOrderComparator;
-import org.springframework.util.StringUtils;
-import org.springframework.web.servlet.DispatcherServlet;
 import org.springframework.web.servlet.FrameworkServlet;
 
 public class PassportValidateLoaderImpl implements PassportValidate {
@@ -64,6 +58,9 @@ public class PassportValidateLoaderImpl implements PassportValidate {
 		}
 		List<PassportValidate> beanList = new ArrayList<PassportValidate>(beans.values());
 		AnnotationAwareOrderComparator.sort(beanList);
+		// for (PassportValidate bean : beanList) {
+		// System.err.println("PassportValidate:" + bean);
+		// }
 		return beanList.get(0);
 		//
 		// try {

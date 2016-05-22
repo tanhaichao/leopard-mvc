@@ -26,8 +26,8 @@ public class PassportCheckerImpl implements PassportChecker {
 	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
 		DefaultListableBeanFactory factory = (DefaultListableBeanFactory) beanFactory;
 		Map<String, PassportChecker> map = factory.getBeansOfType(PassportChecker.class);
-		// System.err.println("PassportCheckerImpl setBeanFactory:" + map);
 		for (Entry<String, PassportChecker> entry : map.entrySet()) {
+			// System.err.println("PassportCheckerImpl entry:" + entry.getValue());
 			passportCheckerList.add(entry.getValue());
 		}
 	}
@@ -36,7 +36,7 @@ public class PassportCheckerImpl implements PassportChecker {
 	public Boolean isNeedCheckLogin(HttpServletRequest request, Object handler) {
 		for (PassportChecker checker : passportCheckerList) {
 			Boolean isNeedCheckLogin = checker.isNeedCheckLogin(request, handler);
-			// System.out.println("checker:" + checker + " isNeedCheckLogin:" + isNeedCheckLogin);
+			// System.out.println("PassportCheckerImpl checker:" + checker + " isNeedCheckLogin:" + isNeedCheckLogin);
 			if (isNeedCheckLogin != null) {
 				return isNeedCheckLogin;
 			}
