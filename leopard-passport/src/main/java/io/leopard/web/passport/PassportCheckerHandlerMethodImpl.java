@@ -44,12 +44,15 @@ public class PassportCheckerHandlerMethodImpl implements PassportChecker {
 		String key = handler.toString();
 		Boolean contain = handlerCacheMap.get(key);
 		if (contain != null) {
-			return contain;
+			if (contain) {
+				return true;
+			}
+			return null;
 		}
 		boolean hasPassportParameter = this.hasPassportParameter((HandlerMethod) handler);
 		// System.out.println("hasPassportParameter:" + hasPassportParameter);
+		handlerCacheMap.put(key, hasPassportParameter);
 		if (hasPassportParameter) {
-			handlerCacheMap.put(key, hasPassportParameter);
 			return true;
 		}
 		return null;
