@@ -7,7 +7,7 @@ public class StoreRedisImpl implements IStore {
 	private static Redis redis;
 
 	public static void setRedis(Redis redis) {
-		// StoreRedisImpl.redis = redis;
+		 StoreRedisImpl.redis = redis;
 	}
 
 	@Override
