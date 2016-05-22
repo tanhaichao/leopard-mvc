@@ -7,7 +7,7 @@ public class StoreRedisImpl implements IStore {
 	private static Redis redis;
 
 	public static void setRedis(Redis redis) {
-		StoreRedisImpl.redis = redis;
+		// StoreRedisImpl.redis = redis;
 	}
 
 	@Override
@@ -17,7 +17,7 @@ public class StoreRedisImpl implements IStore {
 
 	@Override
 	public String get(String key) {
-		System.err.println("StoreRedisImpl get:" + key);
+		// System.err.println("StoreRedisImpl get:" + key);
 		return redis.get(key);
 	}
 
