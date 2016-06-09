@@ -4,7 +4,7 @@
 	<artifactId>leopard-mvc-parent</artifactId>
 	<version>0.0.3-SNAPSHOT</version>
 	<packaging>pom</packaging>
-	<name>Leopard-MVC</name>
+	<name>Leopard MVC框架</name>
 	<description>请求特殊参数、通行证验证、异常处理、验证码、访问频率限制、分布式session、服务器代理等</description>
 
 	<parent>
