@@ -11,9 +11,10 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang.StringUtils;
+//import org.apache.commons.lang.StringUtils;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -74,24 +75,21 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 
 	@Override
 	protected Object resolveName(String name, MethodParameter parameter, NativeWebRequest request) throws Exception {
-		// System.err.println("ParamListHandlerMethodArgumentResolver resolveName name:" + name);
 		HttpServletRequest req = (HttpServletRequest) request.getNativeRequest();
 		name = name.replaceFirst("List$", "");
 		name = UnderlineHandlerMethodArgumentResolver.camelToUnderline(name);
 
 		String[] values = req.getParameterValues(name);
 
-		// System.out.println("values:" + StringUtils.join(values, ", "));
-
 		int hashCode = parameter.hashCode();
 		Class<?> clazz = modelMap.get(hashCode);
 		if (clazz != null) {
 			return this.toList(clazz, values);
 		}
-		else if (values != null && values.length == 1) {
-			return StringUtils.split(values[0], ", ");// spring的StringUtils.split有问题?
+
+		if (values != null && values.length == 1) {
+			return StringUtils.split(values[0], ", ");// commons的StringUtils.split有问题?
 		}
-		// String value = req.getParameter(name);
 		return values;
 	}
 
@@ -102,14 +100,5 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 			return null;
 		}
 		return Json.toListObject(values[0], clazz);
-		// List list = new ArrayList();
-		// if (values != null) {
-		// for (String json : values) {
-		// // System.out.println("toList json:" + json);
-		// Object obj = Json.toObject(json, clazz);
-		// list.add(obj);
-		// }
-		// }
-		// return list;
 	}
 }
