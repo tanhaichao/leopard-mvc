@@ -88,7 +88,7 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 		}
 
 		if (values != null && values.length == 1) {
-			return StringUtils.split(values[0], ", ");// commons的StringUtils.split有问题?
+			return StringUtils.split(values[0], ", ");// commons的StringUtils.split有问题，需要使用spring的StringUtils
 		}
 		return values;
 	}
