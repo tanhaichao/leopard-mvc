@@ -19,48 +19,44 @@
 		<developerConnection>scm:svn:https://github.com/tanhaichao/leopard-mvc/trunk</developerConnection>
 	</scm>
 
+	<properties>
+		<leopard.unified.version>${project.version}</leopard.unified.version>
+	</properties>
 
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-mock</artifactId>
-				<version>0.0.5</version>
+				<version>${leopard.unified.version}</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-jetty-test</artifactId>
-				<version>0.0.6-SNAPSHOT</version>
+				<version>${leopard.unified.version}</version>
 				<scope>test</scope>
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-json</artifactId>
-				<version>0.8</version>
+				<version>${leopard.unified.version}</version>
 			</dependency>
-
-
-
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-servlet</artifactId>
-				<version>0.8</version>
+				<version>${leopard.unified.version}</version>
 			</dependency>
-
 			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-redis</artifactId>
-				<version>0.8</version>
+				<version>${leopard.unified.version}</version>
 			</dependency>
-
 			<dependency>
 				<groupId>com.alibaba</groupId>
 				<artifactId>fastjson</artifactId>
 				<version>1.2.6</version>
 			</dependency>
-
-
 		</dependencies>
 	</dependencyManagement>
 	<modules>
