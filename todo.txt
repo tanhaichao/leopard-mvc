@@ -5,4 +5,7 @@
 	4、图片上传需要支持尺寸信息
 
 
+	5、securityCode和captcha，在Leopard-MVC做验证，找当前类的对应接口.
+	6、一个接口支持2个TimeRange参数，如何实现?
+
 
