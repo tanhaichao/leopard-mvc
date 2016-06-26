@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -71,9 +72,25 @@ public class JsonViewTrynbResolver implements TrynbResolver {
 		public String getBody(HttpServletRequest request, HttpServletResponse response) {
 			String json = Json.toJson(map);
 			request.setAttribute("result.json", json);
+			
+			
+			String callback = request.getParameter("callback");
+			if (StringUtils.isNotEmpty(callback)) {
+				if (!isValidCallback(callback)) {
+					callback = "callback";
+				}
+				return callback + "(" + json + ");";
+			}
 			return json;
 		}
 
 	}
 
+	protected static boolean isValidCallback(String callback) {
+		if (StringUtils.isEmpty(callback)) {
+			throw new IllegalArgumentException("参数callback不能为空.");
+		}
+		boolean isValidCallback = callback.matches("^[a-zA-Z0-9_\\.]+$");
+		return isValidCallback;
+	}
 }
