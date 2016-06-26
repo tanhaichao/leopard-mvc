@@ -2,6 +2,8 @@ package io.leopard.web.captcha;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.util.StringUtils;
 
 import io.leopard.core.exception.forbidden.CaptchaWrongException;
@@ -9,6 +11,8 @@ import io.leopard.core.exception.forbidden.CaptchaWrongException;
 public class CaptchaUtil {
 
 	private static final String SESSION_KEY = "sessCaptcha";
+
+	protected static Log logger = LogFactory.getLog(CaptchaUtil.class);
 
 	// private static String getSessionKey(HttpServletRequest request) {
 	// String captchaGroupId = (String) request.getAttribute("captchaGroupId");
@@ -20,6 +24,7 @@ public class CaptchaUtil {
 			throw new CaptchaInvalidException("验证码不能为空.");
 		}
 		if (!captcha.equals(sessCaptcha)) {
+			logger.warn("错误验证码 sessCaptcha:" + sessCaptcha + " captcha:" + captcha);
 			throw new CaptchaWrongException(captcha);
 		}
 	}
