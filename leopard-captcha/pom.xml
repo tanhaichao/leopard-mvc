@@ -43,5 +43,9 @@
 		</dependency>
 		<!-- test -->
 
+		<dependency>
+			<groupId>io.leopard</groupId>
+			<artifactId>leopard-exception</artifactId>
+		</dependency>
 	</dependencies>
 </project>
