@@ -46,6 +46,10 @@ public class CaptchaView extends ModelAndView {
 		this.engineClazz = engineClazz;
 	}
 
+	public void save(HttpServletRequest request, String captchaGroupId, String code) {
+		CaptchaUtil.saveSession(request, captchaGroupId, code);
+	}
+
 	private AbstractUrlBasedView view = new AbstractUrlBasedView() {
 		@Override
 		protected void renderMergedOutputModel(Map<String, Object> model, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -62,11 +66,17 @@ public class CaptchaView extends ModelAndView {
 
 			ImageCaptcha imageCaptcha = EngineFactory.getCaptchaEngine(width, height, engineClazz).getNextImageCaptcha();
 			String code = imageCaptcha.getTextChallenge();
-			
+
+			String groupId;
 			if (captchaGroupId == null) {
-				captchaGroupId = CaptchaUtil.getCaptchaGroupId(request);
+				groupId = CaptchaUtil.getCaptchaGroupId(request);
 			}
-			CaptchaUtil.saveSession(request, captchaGroupId, code);
+			else {
+				groupId = captchaGroupId;
+			}
+			// CaptchaUtil.saveSession(request, groupId, code);
+
+			save(request, groupId, code);
 			// System.out.println("session:" + session.getId() + " code:" + code + " captchaGroupId:" + captchaGroupId + " url:" + request.getRequestURI());
 
 			BufferedImage bi = imageCaptcha.getImageChallenge();

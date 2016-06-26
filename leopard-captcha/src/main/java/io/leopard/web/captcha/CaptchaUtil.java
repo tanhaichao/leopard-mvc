@@ -2,6 +2,8 @@ package io.leopard.web.captcha;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.util.StringUtils;
+
 public class CaptchaUtil {
 
 	private static final String SESSION_KEY = "sessCaptcha";
@@ -10,6 +12,15 @@ public class CaptchaUtil {
 	// String captchaGroupId = (String) request.getAttribute("captchaGroupId");
 	// return getSessionKey(captchaGroupId);
 	// }
+
+	public static void checkCaptcha(String captcha, String sessCaptcha) {
+		if (StringUtils.isEmpty(captcha)) {
+			throw new IllegalArgumentException("验证码不能为空.");
+		}
+		if (!captcha.equals(sessCaptcha)) {
+			throw new IllegalArgumentException("验证码不正确.");
+		}
+	}
 
 	private static String getSessionKey(String captchaGroupId) {
 		if (captchaGroupId == null || captchaGroupId.length() == 0) {
