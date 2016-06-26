@@ -13,4 +13,6 @@ public @interface CaptchaGroup {
 
 	String value() default "";
 
+	String uri() default "";
+
 }
