@@ -10,6 +10,9 @@
 	7、测试contentType为text/plain的问题
 	8、测试contentType为application/json、text/json的安全问题
 	9、测试错误message中括号过滤的安全问题.
+	10、图片验证码的生成和检查合并到一个方法定义
+
+		
 
 
 
