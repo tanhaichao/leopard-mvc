@@ -8,7 +8,7 @@
 	5、securityCode和captcha，在Leopard-MVC做验证，找当前类的对应接口.
 	6、一个接口支持2个TimeRange参数，如何实现?
 	7、测试contentType为text/plain的问题
-	8、测试contentType为application/json的安全问题
+	8、测试contentType为application/json、text/json的安全问题
 	9、测试错误message中括号过滤的安全问题.
 
 
