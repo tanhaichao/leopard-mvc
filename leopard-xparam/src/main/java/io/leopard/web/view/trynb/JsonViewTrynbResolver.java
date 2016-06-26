@@ -24,7 +24,7 @@ public class JsonViewTrynbResolver implements TrynbResolver {
 
 	@Override
 	public ModelAndView resolveView(HttpServletRequest request, HttpServletResponse response, HandlerMethod handler, Exception exception, TrynbInfo trynbInfo) {
-		Class<?> returnType = handler.getMethod().getReturnType();
+		// Class<?> returnType = handler.getMethod().getReturnType();
 		// if (!JsonView.class.isAssignableFrom(returnType)) {
 		ResponseBody body = handler.getMethodAnnotation(ResponseBody.class);
 		if (body == null) {
