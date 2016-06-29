@@ -1,8 +1,5 @@
 package io.leopard.web.passport;
 
-import io.leopard.web.servlet.RequestUtil;
-
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -11,6 +8,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import io.leopard.web.servlet.RequestUtil;
 
 public class PassportValidateImpl implements PassportValidate {
 
@@ -71,7 +70,7 @@ public class PassportValidateImpl implements PassportValidate {
 	}
 
 	@Override
-	public boolean login(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public boolean login(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		return passportValidate.login(request, response);
 	}
 

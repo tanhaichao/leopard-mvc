@@ -44,6 +44,6 @@ public interface PassportValidate {
 	 * @return 未实现返回null，已实现跳转返回true，未跳转返回false
 	 * @throws IOException
 	 */
-	boolean login(HttpServletRequest request, HttpServletResponse response) throws IOException;
+	boolean login(HttpServletRequest request, HttpServletResponse response) throws Exception;
 
 }

@@ -29,12 +29,7 @@ public class PassportLoginServlet extends HttpServlet {
 		try {
 			flag = PassportValidateImpl.getInstance().login(request, response);
 		}
-		catch (RuntimeException e) {
-			logger.error(e.getMessage(), e);
-			this.output(response, e.getMessage());
-			return;
-		}
-		catch (IOException e) {
+		catch (Exception e) {
 			logger.error(e.getMessage(), e);
 			this.output(response, e.getMessage());
 			return;
