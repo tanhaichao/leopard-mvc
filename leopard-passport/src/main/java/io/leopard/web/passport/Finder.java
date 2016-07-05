@@ -58,6 +58,7 @@ public class Finder {
 				isNeedCheckLogin = passportChecker.isNeedCheckLogin(request, handler);
 			}
 			if (isNeedCheckLogin != null && isNeedCheckLogin) {
+				System.err.println("validator:" + Finder.getSessionKey(validator));
 				list.add(validator);
 			}
 		}
