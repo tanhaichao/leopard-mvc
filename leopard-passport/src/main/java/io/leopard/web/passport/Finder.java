@@ -14,13 +14,15 @@ import org.springframework.util.StringUtils;
 
 public class Finder {
 
+	private PassportCheckerImpl passportChecker = new PassportCheckerImpl();
+
 	private static Finder instance = new Finder();
 
 	public static Finder getInstance() {
 		return instance;
 	}
 
-	List<PassportValidator> list = new ArrayList<PassportValidator>();
+	private List<PassportValidator> list = new ArrayList<PassportValidator>();
 
 	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
 		DefaultListableBeanFactory factory = (DefaultListableBeanFactory) beanFactory;
@@ -28,6 +30,7 @@ public class Finder {
 		for (Entry<String, PassportValidator> entry : map.entrySet()) {
 			list.add(new PassportValidatorWrapper(entry.getValue()));
 		}
+		passportChecker.setBeanFactory(beanFactory);
 	}
 
 	public static String getSessionKey(PassportValidator validator) {
@@ -48,6 +51,16 @@ public class Finder {
 	}
 
 	public List<PassportValidator> find(HttpServletRequest request, Object handler) {
+		List<PassportValidator> list = new ArrayList<PassportValidator>();
+		for (PassportValidator validator : this.list) {
+			Boolean isNeedCheckLogin = validator.isNeedCheckLogin(request, handler);
+			if (isNeedCheckLogin == null) {
+				isNeedCheckLogin = passportChecker.isNeedCheckLogin(request, handler);
+			}
+			if (isNeedCheckLogin != null && isNeedCheckLogin) {
+				list.add(validator);
+			}
+		}
 		return list;
 	}
 }

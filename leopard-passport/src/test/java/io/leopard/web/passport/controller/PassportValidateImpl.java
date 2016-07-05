@@ -50,4 +50,10 @@ public class PassportValidateImpl implements PassportValidator {
 		return true;
 	}
 
+	@Override
+	public Boolean isNeedCheckLogin(HttpServletRequest request, Object handler) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -1,6 +1,5 @@
 package io.leopard.web.passport;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -28,8 +27,6 @@ public class PassportInterceptor extends RegisterHandlerInterceptor {
 
 	protected Log logger = LogFactory.getLog(this.getClass());
 
-	private PassportCheckerImpl passportChecker = new PassportCheckerImpl();
-
 	private Finder finder = new Finder();
 
 	@Override
@@ -37,7 +34,6 @@ public class PassportInterceptor extends RegisterHandlerInterceptor {
 		super.setBeanFactory(beanFactory);
 		// System.err.println("setBeanFactory setBeanFactory:" + beanFactory);
 		finder.setBeanFactory(beanFactory);
-		passportChecker.setBeanFactory(beanFactory);
 	}
 
 	@Override
