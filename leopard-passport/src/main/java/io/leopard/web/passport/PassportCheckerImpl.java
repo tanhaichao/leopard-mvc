@@ -20,7 +20,7 @@ public class PassportCheckerImpl implements PassportChecker {
 	private static List<PassportChecker> passportCheckerList = new ArrayList<PassportChecker>();
 
 	static {
-		passportCheckerList.add(new PassportCheckerHandlerMethodImpl());
+		passportCheckerList.add(new PassportCheckerHandlerMethodImpl("sessUid", "sessUsername"));
 	}
 
 	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {

@@ -13,10 +13,16 @@ import org.springframework.core.ParameterNameDiscoverer;
 import org.springframework.web.method.HandlerMethod;
 
 public class PassportCheckerHandlerMethodImpl implements PassportChecker {
-	private static final Set<String> parameterNameSet = new HashSet<String>();
-	static {
-		parameterNameSet.add("sessUid");
-		parameterNameSet.add("sessUsername");
+	private Set<String> parameterNameSet = new HashSet<String>();
+	// static {
+	// parameterNameSet.add("sessUid");
+	// parameterNameSet.add("sessUsername");
+	// }
+
+	public PassportCheckerHandlerMethodImpl(String... names) {
+		for (String name : names) {
+			parameterNameSet.add(name);
+		}
 	}
 
 	private Map<String, Boolean> handlerCacheMap = new ConcurrentHashMap<String, Boolean>();
