@@ -28,6 +28,10 @@ public class PassportValidatorWrapper implements PassportValidator {
 		}
 	}
 
+	public PassportValidator getValidator() {
+		return validator;
+	}
+
 	@Override
 	public Object validate(HttpServletRequest request, HttpServletResponse response) {
 		Object passport = request.getSession().getAttribute(sessionKey);

@@ -27,7 +27,7 @@ public class PassportInterceptor extends RegisterHandlerInterceptor {
 
 	protected Log logger = LogFactory.getLog(this.getClass());
 
-	private Finder finder = new Finder();
+	private Finder finder = Finder.getInstance();
 
 	@Override
 	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {

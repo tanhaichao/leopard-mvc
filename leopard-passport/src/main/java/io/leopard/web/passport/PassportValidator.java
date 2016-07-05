@@ -11,7 +11,16 @@ import javax.servlet.http.HttpServletResponse;
  * @author 阿海
  *
  */
-public interface PassportValidator extends PassportChecker {
+public interface PassportValidator {
+	
+	/**
+	 * 是否需要做登陆检查?
+	 * 
+	 * @param request
+	 * @param handler
+	 * @return
+	 */
+	Boolean isNeedCheckLogin(HttpServletRequest request, Object handler);
 
 	/**
 	 * 获取当前登录的用户信息(Leopard会自动将返回值存入session作缓存).
