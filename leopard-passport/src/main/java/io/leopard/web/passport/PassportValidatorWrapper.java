@@ -8,36 +8,35 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.util.StringUtils;
 
 import io.leopard.web.servlet.RequestUtil;
 
-public class PassportValidateImpl implements PassportValidate {
-
-	private static final String SESSION_KEY = "passport";
+public class PassportValidatorWrapper implements PassportValidator {
 
 	protected Log logger = LogFactory.getLog(this.getClass());
 
-	private PassportValidate passportValidate = new PassportValidateLoaderImpl();
+	private PassportValidator validator;
 
-	private final static PassportValidate instance = new PassportValidateImpl();
+	private String sessionKey;
 
-	public static PassportValidate getInstance() {
-		return instance;
-	}
-
-	private PassportValidateImpl() {
-
+	public PassportValidatorWrapper(PassportValidator validator) {
+		this.validator = validator;
+		this.sessionKey = Finder.getSessionKey(validator);
+		if (StringUtils.isEmpty(sessionKey)) {
+			sessionKey = "sessUid";
+		}
 	}
 
 	@Override
 	public Object validate(HttpServletRequest request, HttpServletResponse response) {
-		Object passport = request.getSession().getAttribute(SESSION_KEY);
+		Object passport = request.getSession().getAttribute(sessionKey);
 		if (passport != null) {
 			return passport;
 		}
-		passport = passportValidate.validate(request, response);
+		passport = validator.validate(request, response);
 		if (passport != null) {
-			request.getSession().setAttribute(SESSION_KEY, passport);
+			request.getSession().setAttribute(sessionKey, passport);
 		}
 		return passport;
 	}
@@ -47,7 +46,7 @@ public class PassportValidateImpl implements PassportValidate {
 		String ip = RequestUtil.getProxyIp(request);
 		String message = "您[" + ip + "]未登录,uri:" + request.getRequestURI();
 		logger.info(message);
-		if (passportValidate.showLoginBox(request, response)) {
+		if (validator.showLoginBox(request, response)) {
 			return true;
 		}
 
@@ -58,8 +57,8 @@ public class PassportValidateImpl implements PassportValidate {
 			url += "?" + queryString;
 		}
 		Map<String, Object> model = new HashMap<String, Object>();
-
 		model.put("url", url);
+		model.put("type", sessionKey);
 		try {
 			view.render(model, request, response);
 			return true;
@@ -71,7 +70,12 @@ public class PassportValidateImpl implements PassportValidate {
 
 	@Override
 	public boolean login(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		return passportValidate.login(request, response);
+		return validator.login(request, response);
+	}
+
+	@Override
+	public Boolean isNeedCheckLogin(HttpServletRequest request, Object handler) {
+		return validator.isNeedCheckLogin(request, handler);
 	}
 
 }

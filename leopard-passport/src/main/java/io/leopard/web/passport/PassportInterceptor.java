@@ -1,5 +1,8 @@
 package io.leopard.web.passport;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -26,32 +29,34 @@ public class PassportInterceptor extends RegisterHandlerInterceptor {
 	protected Log logger = LogFactory.getLog(this.getClass());
 
 	private PassportCheckerImpl passportChecker = new PassportCheckerImpl();
-	
-	private PassportValidate passportValidateLei = PassportValidateImpl.getInstance();
+
+	private Finder finder = new Finder();
 
 	@Override
 	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
 		super.setBeanFactory(beanFactory);
 		// System.err.println("setBeanFactory setBeanFactory:" + beanFactory);
+		finder.setBeanFactory(beanFactory);
 		passportChecker.setBeanFactory(beanFactory);
 	}
 
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
-		Boolean isNeedCheckLogin = passportChecker.isNeedCheckLogin(request, handler);
-		// logger.info("PassportInterceptor preHandle:" + isNeedCheckLogin + " " + handler + " isNeedCheckLogin:" + isNeedCheckLogin);
-		if (isNeedCheckLogin == null) {
-			return true;
-		}
-		if (!isNeedCheckLogin) {
-			return true;
-		}
-
-		Object account = passportValidateLei.validate(request, response);
-		// logger.info("PassportInterceptor validate:" + account);
-		if (account == null) {
-			passportValidateLei.showLoginBox(request, response);
-			return false;
+		// Boolean isNeedCheckLogin = passportChecker.isNeedCheckLogin(request, handler);
+		// // logger.info("PassportInterceptor preHandle:" + isNeedCheckLogin + " " + handler + " isNeedCheckLogin:" + isNeedCheckLogin);
+		// if (isNeedCheckLogin == null) {
+		// return true;
+		// }
+		// if (!isNeedCheckLogin) {
+		// return true;
+		// }
+		List<PassportValidator> list = finder.find(request, handler);
+		for (PassportValidator validator : list) {
+			Object account = validator.validate(request, response);
+			if (account == null) {
+				validator.showLoginBox(request, response);
+				return false;
+			}
 		}
 		return true;
 	}

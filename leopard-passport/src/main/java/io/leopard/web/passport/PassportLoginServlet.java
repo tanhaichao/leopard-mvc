@@ -25,9 +25,10 @@ public class PassportLoginServlet extends HttpServlet {
 
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String type = request.getParameter("type");
 		boolean flag;
 		try {
-			flag = PassportValidateImpl.getInstance().login(request, response);
+			flag = Finder.getInstance().find(type).login(request, response);
 		}
 		catch (Exception e) {
 			logger.error(e.getMessage(), e);

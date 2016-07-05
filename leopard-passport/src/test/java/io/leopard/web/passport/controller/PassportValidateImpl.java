@@ -1,6 +1,6 @@
 package io.leopard.web.passport.controller;
 
-import io.leopard.web.passport.PassportValidate;
+import io.leopard.web.passport.PassportValidator;
 import io.leopard.web.servlet.CookieUtil;
 
 import java.io.IOException;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PassportValidateImpl implements PassportValidate {
+public class PassportValidateImpl implements PassportValidator {
 
 	
 	@Override
