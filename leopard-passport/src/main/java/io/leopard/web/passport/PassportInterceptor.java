@@ -26,6 +26,7 @@ public class PassportInterceptor extends RegisterHandlerInterceptor {
 	protected Log logger = LogFactory.getLog(this.getClass());
 
 	private PassportCheckerImpl passportChecker = new PassportCheckerImpl();
+	
 	private PassportValidate passportValidateLei = PassportValidateImpl.getInstance();
 
 	@Override
