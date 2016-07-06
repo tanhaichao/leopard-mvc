@@ -46,6 +46,9 @@ public class JsonViewTrynbResolver implements TrynbResolver {
 		jsonView.setException(exception.getClass().getName());
 		return jsonView;
 	}
+	
+	
+	
 
 	public class ErrorJsonView extends AbstractView {
 
