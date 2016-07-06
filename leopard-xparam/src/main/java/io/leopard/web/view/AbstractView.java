@@ -1,6 +1,5 @@
 package io.leopard.web.view;
 
-import java.io.IOException;
 import java.io.Writer;
 import java.util.Map;
 
@@ -42,16 +41,9 @@ public abstract class AbstractView extends ModelAndView {
 			response.setContentType(AbstractView.this.getContentType());
 			response.setContentLength(body.getBytes().length);
 			// Flush byte array to servlet output stream.
-
-			try {
-				Writer out = response.getWriter();
-				out.write(body);
-				out.flush();
-			}
-			catch (IOException e) {
-				logger.error("uri:" + request.getRequestURI());
-				logger.error(e.getMessage(), e);
-			}
+			Writer out = response.getWriter();
+			out.write(body);
+			out.flush();
 		}
 	};
 
