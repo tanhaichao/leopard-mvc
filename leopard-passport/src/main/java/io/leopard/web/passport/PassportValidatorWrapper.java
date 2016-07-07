@@ -82,4 +82,8 @@ public class PassportValidatorWrapper implements PassportValidator {
 		return validator.isNeedCheckLogin(request, handler);
 	}
 
+	@Override
+	public String toString() {
+		return "PassportValidator[" + this.sessionKey + "]";
+	}
 }

@@ -41,6 +41,7 @@ public class PassportInterceptor extends RegisterHandlerInterceptor {
 		List<PassportValidator> list = finder.find(request, handler);
 		for (PassportValidator validator : list) {
 			Object account = validator.validate(request, response);
+			logger.info("validator:" + validator + " handler:" + handler);
 			if (account == null) {
 				validator.showLoginBox(request, response);
 				return false;
