@@ -53,7 +53,20 @@ public class Finder {
 			validator = ((PassportValidatorWrapper) validator).getValidator();
 		}
 
-		PassportGroup anno = validator.getClass().getAnnotation(PassportGroup.class);
+		Class<?> clazz = validator.getClass();
+
+		while (true) {
+			String name = clazz.getName();
+			if (name.indexOf("$$") == -1) {
+				break;
+			}
+			clazz = clazz.getSuperclass();
+			if (clazz == null || clazz.equals(Object.class)) {
+				break;
+			}
+		}
+
+		PassportGroup anno = clazz.getAnnotation(PassportGroup.class);
 		if (anno == null || StringUtils.isEmpty(anno.value())) {
 			return "sessUid";
 		}
