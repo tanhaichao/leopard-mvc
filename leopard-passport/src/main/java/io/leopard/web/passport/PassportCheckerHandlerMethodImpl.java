@@ -1,8 +1,6 @@
 package io.leopard.web.passport;
 
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,20 +11,15 @@ import org.springframework.core.ParameterNameDiscoverer;
 import org.springframework.web.method.HandlerMethod;
 
 public class PassportCheckerHandlerMethodImpl implements PassportChecker {
-	private Set<String> parameterNameSet = new HashSet<String>();
-	// static {
-	// parameterNameSet.add("sessUid");
-	// parameterNameSet.add("sessUsername");
-	// }
+	private final Map<String, String> parameterNameMap = new ConcurrentHashMap<String, String>();
+	private final Map<String, Boolean> handlerCacheMap = new ConcurrentHashMap<String, Boolean>();
+	private final ParameterNameDiscoverer parameterNameDiscoverer = new LocalVariableTableParameterNameDiscoverer();
 
 	public PassportCheckerHandlerMethodImpl(String... names) {
 		for (String name : names) {
-			parameterNameSet.add(name);
+			parameterNameMap.put(name, "");
 		}
 	}
-
-	private Map<String, Boolean> handlerCacheMap = new ConcurrentHashMap<String, Boolean>();
-	private final ParameterNameDiscoverer parameterNameDiscoverer = new LocalVariableTableParameterNameDiscoverer();
 
 	public boolean hasPassportParameter(HandlerMethod handlerMethod) {
 		MethodParameter[] parameters = handlerMethod.getMethodParameters();
@@ -34,7 +27,7 @@ public class PassportCheckerHandlerMethodImpl implements PassportChecker {
 			for (MethodParameter parameter : parameters) {
 				parameter.initParameterNameDiscovery(parameterNameDiscoverer);
 				String parameterName = parameter.getParameterName();
-				if (parameterNameSet.contains(parameterName)) {
+				if (parameterNameMap.containsKey(parameterName)) {
 					return true;
 				}
 			}
