@@ -18,6 +18,12 @@ public class WelcomeController {
 		return sessUid;
 	}
 
+	@RequestMapping("/welcome.do")
+	@ResponseBody
+	public long welcome2(Long sessShopId) {
+		return sessShopId;
+	}
+
 	@Test
 	public void testWelcome() throws Exception {
 		JettyServer.start("src/test/webapp");
