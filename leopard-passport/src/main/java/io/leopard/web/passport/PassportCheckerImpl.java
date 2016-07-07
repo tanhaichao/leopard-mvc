@@ -1,6 +1,7 @@
 package io.leopard.web.passport;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -17,7 +18,7 @@ public class PassportCheckerImpl implements PassportChecker {
 
 	// private PassportChecker passportCheckerHandlerMethodImpl = new PassportCheckerHandlerMethodImpl();
 
-	private static List<PassportChecker> passportCheckerList = new ArrayList<PassportChecker>();
+	private static List<PassportChecker> passportCheckerList = Collections.synchronizedList(new ArrayList<PassportChecker>());
 
 	static {
 		passportCheckerList.add(new PassportCheckerHandlerMethodImpl("sessUid", "sessUsername"));
