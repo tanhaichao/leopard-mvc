@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.stereotype.Component;
 
 @Component
-public class PassportValidateImpl implements PassportValidator {
+public class PassportValidatorImpl implements PassportValidator {
 
 	
 	@Override
