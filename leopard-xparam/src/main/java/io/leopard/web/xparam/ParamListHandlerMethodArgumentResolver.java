@@ -105,6 +105,8 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 		if (values == null || values.length == 0) {
 			return null;
 		}
+
+		// TODO ahai 这里要支持下划线
 		return Json.toListObject(values[0], clazz);
 	}
 }
