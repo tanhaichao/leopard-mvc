@@ -109,6 +109,8 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 
 		// TODO ahai 这里要支持下划线
 
+		boolean underline = UnderlineHandlerMethodArgumentResolver.isEnable();
+
 		if (values.length == 1) {
 			return Json.toListObject(values[0], clazz);
 		}
