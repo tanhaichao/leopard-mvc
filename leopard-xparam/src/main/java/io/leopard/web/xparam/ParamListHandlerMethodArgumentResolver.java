@@ -2,6 +2,7 @@ package io.leopard.web.xparam;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -99,7 +100,7 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 		return values;
 	}
 
-	@SuppressWarnings({ "rawtypes" })
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	protected List toList(Class<?> clazz, String[] values) {
 		System.out.println("toList clazz:" + clazz + " values:" + values);
 		if (values == null || values.length == 0) {
@@ -107,6 +108,16 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 		}
 
 		// TODO ahai 这里要支持下划线
-		return Json.toListObject(values[0], clazz);
+
+		if (values.length == 1) {
+			return Json.toListObject(values[0], clazz);
+		}
+		List list = new ArrayList();
+		for (String value : values) {
+			Object bean = Json.toObject(value, clazz);
+			list.add(bean);
+		}
+		return list;
+
 	}
 }
