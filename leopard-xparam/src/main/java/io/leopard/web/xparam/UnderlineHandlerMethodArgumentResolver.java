@@ -4,6 +4,8 @@ import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
@@ -17,6 +19,8 @@ import org.springframework.web.context.request.NativeWebRequest;
  */
 @Component
 public class UnderlineHandlerMethodArgumentResolver extends AbstractNamedValueMethodArgumentResolver {
+
+	protected Log logger = LogFactory.getLog(this.getClass());
 
 	@Value("${xparam.underline}")
 	private String underline;
@@ -43,21 +47,23 @@ public class UnderlineHandlerMethodArgumentResolver extends AbstractNamedValueMe
 			return false;
 		}
 		// TODO 重启的时候name会为null?
+		boolean supports = false;
 		for (char ch : name.toCharArray()) {
 			if (Character.isUpperCase(ch)) {
 				// 有大写就返回true.
-				return true;
+				supports = true;
+				break;
 			}
 		}
-		return false;
+		logger.info("supportsParameter name:" + name + " supports:" + supports);
+		return supports;
 	}
 
 	@Override
 	protected Object resolveName(String name, MethodParameter parameter, NativeWebRequest request) throws Exception {
 		HttpServletRequest req = (HttpServletRequest) request.getNativeRequest();
-
 		String underlineName = camelToUnderline(name);
-
+		logger.info("resolveName name:" + name + " underlineName:" + underlineName);
 		String value = req.getParameter(underlineName);
 		return value;
 	}

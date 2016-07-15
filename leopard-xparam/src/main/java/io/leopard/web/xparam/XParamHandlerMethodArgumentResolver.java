@@ -8,6 +8,8 @@ import java.util.ServiceLoader;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
@@ -28,6 +30,8 @@ import io.leopard.web.xparam.api.UserinfoResolverImpl;
 public class XParamHandlerMethodArgumentResolver extends AbstractNamedValueMethodArgumentResolver implements BeanFactoryAware {
 	// TODO ahai 这里有必要使用线程安全的Map吗？
 	private static final Map<String, XParam> data = new HashMap<String, XParam>();
+
+	protected Log logger = LogFactory.getLog(this.getClass());
 
 	public XParamHandlerMethodArgumentResolver() {
 		Iterator<XParam> iterator = ServiceLoader.load(XParam.class).iterator();
@@ -59,7 +63,7 @@ public class XParamHandlerMethodArgumentResolver extends AbstractNamedValueMetho
 	public boolean supportsParameter(MethodParameter parameter) {
 		String name = parameter.getParameterName();
 		boolean isSpecialName = data.containsKey(name);
-		// System.out.println("name:" + name + " isSpecialName:" + isSpecialName);
+		logger.info("supportsParameter name:" + name + " isSpecialName:" + isSpecialName);
 		return isSpecialName;
 	}
 
