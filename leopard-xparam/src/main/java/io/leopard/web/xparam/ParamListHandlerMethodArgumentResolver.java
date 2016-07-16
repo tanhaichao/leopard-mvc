@@ -127,9 +127,9 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 			return null;
 		}
 
-		// TODO ahai 这里要支持下划线
-		boolean underline = UnderlineHandlerMethodArgumentResolver.isEnable();
+		// boolean underline = UnderlineHandlerMethodArgumentResolver.isEnable();
 		if (values.length == 1) {
+			// 这里是否要判断传递的是不是数据组?
 			return toListObject(values[0], clazz);
 		}
 		List list = new ArrayList();
@@ -157,11 +157,14 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 		if (json == null || json.length() == 0) {
 			return null;
 		}
+
 		JavaType javaType = mapper.getTypeFactory().constructParametrizedType(ArrayList.class, List.class, clazz);
 		try {
 			return mapper.readValue(json, javaType);
 		}
 		catch (Exception e) {
+			System.out.println("toListObjectjson:" + json);
+			System.out.println("toListObject clazz:" + clazz.getName());
 			throw new JsonException(e.getMessage(), e);
 		}
 	}
