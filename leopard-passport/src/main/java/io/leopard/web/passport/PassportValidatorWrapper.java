@@ -16,9 +16,9 @@ public class PassportValidatorWrapper implements PassportValidator {
 
 	protected Log logger = LogFactory.getLog(this.getClass());
 
-	private PassportValidator validator;
+	protected PassportValidator validator;
 
-	private String sessionKey;
+	protected String sessionKey;
 
 	public PassportValidatorWrapper(PassportValidator validator) {
 		this.validator = validator;

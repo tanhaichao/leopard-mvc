@@ -8,11 +8,15 @@ import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 
 public class PassportCheckerImpl implements PassportChecker {
+
+	protected Log logger = LogFactory.getLog(this.getClass());
 
 	// protected UriListChecker uriListChecker = new UriListChecker();// 需要做登录验证的URL列表
 
@@ -37,7 +41,7 @@ public class PassportCheckerImpl implements PassportChecker {
 	public Boolean isNeedCheckLogin(HttpServletRequest request, Object handler) {
 		for (PassportChecker checker : passportCheckerList) {
 			Boolean isNeedCheckLogin = checker.isNeedCheckLogin(request, handler);
-			// System.err.println("PassportCheckerImpl checker:" + checker + " isNeedCheckLogin:" + isNeedCheckLogin);
+			// logger.info("PassportCheckerImpl checker:" + checker + " isNeedCheckLogin:" + isNeedCheckLogin);
 			if (isNeedCheckLogin != null) {
 				return isNeedCheckLogin;
 			}

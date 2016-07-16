@@ -7,14 +7,17 @@ import java.util.Map.Entry;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.util.StringUtils;
 
 public class Finder {
+	protected Log logger = LogFactory.getLog(this.getClass());
 
-	private PassportCheckerImpl passportChecker = new PassportCheckerImpl();
+	private static PassportCheckerImpl passportChecker = new PassportCheckerImpl();
 
 	private static Finder instance = new Finder();
 
@@ -32,16 +35,33 @@ public class Finder {
 		DefaultListableBeanFactory factory = (DefaultListableBeanFactory) beanFactory;
 		Map<String, PassportValidator> map = factory.getBeansOfType(PassportValidator.class);
 		for (Entry<String, PassportValidator> entry : map.entrySet()) {
-			list.add(new PassportValidatorWrapper(entry.getValue()));
+			list.add(new DefaultPassportValidatorWrapper(entry.getValue()));
 		}
 		// System.err.println("list:" + list);
 		passportChecker.setBeanFactory(beanFactory);
 	}
 
+	public static class DefaultPassportValidatorWrapper extends PassportValidatorWrapper {
+		public DefaultPassportValidatorWrapper(PassportValidator validator) {
+			super(validator);
+		}
+
+		@Override
+		public Boolean isNeedCheckLogin(HttpServletRequest request, Object handler) {
+			Boolean isNeedCheckLogin = super.isNeedCheckLogin(request, handler);
+			// logger.info("custom:" + validator + " isNeedCheckLogin:" + isNeedCheckLogin + " request:" + request.getRequestURI());
+			if (isNeedCheckLogin == null && "sessUid".equals(this.sessionKey)) {
+				isNeedCheckLogin = passportChecker.isNeedCheckLogin(request, handler);
+				// logger.info("default:" + validator + " isNeedCheckLogin:" + isNeedCheckLogin + " request:" + request.getRequestURI());
+			}
+			return isNeedCheckLogin;
+		}
+	}
+
 	public PassportValidator find(String type) {
 		for (PassportValidator validator : list) {
 			if (type.equals(getSessionKey(validator))) {
-				System.err.println("find:" + validator + " sessionKey:" + getSessionKey(validator));
+				// System.err.println("find:" + validator + " sessionKey:" + getSessionKey(validator));
 				return validator;
 			}
 		}
@@ -77,11 +97,8 @@ public class Finder {
 		List<PassportValidator> list = new ArrayList<PassportValidator>();
 		for (PassportValidator validator : this.list) {
 			Boolean isNeedCheckLogin = validator.isNeedCheckLogin(request, handler);
-			if (isNeedCheckLogin == null) {
-				isNeedCheckLogin = passportChecker.isNeedCheckLogin(request, handler);
-				// System.err.println("default:" + validator + " isNeedCheckLogin:" + isNeedCheckLogin + " request:" + request.getRequestURI());
+			logger.info("validator:" + validator + " isNeedCheckLogin:" + isNeedCheckLogin + " request:" + request.getRequestURI());
 
-			}
 			if (isNeedCheckLogin != null && isNeedCheckLogin) {
 				// System.err.println("validator:" + Finder.getSessionKey(validator) + " isNeedCheckLogin:" + isNeedCheckLogin + " request:" + request.getRequestURI());
 				list.add(validator);

@@ -5,12 +5,16 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.ParameterNameDiscoverer;
 import org.springframework.web.method.HandlerMethod;
 
 public class PassportCheckerHandlerMethodImpl implements PassportChecker {
+	protected Log logger = LogFactory.getLog(this.getClass());
+
 	private final Map<String, String> parameterNameMap = new ConcurrentHashMap<String, String>();
 	private final Map<String, Boolean> handlerCacheMap = new ConcurrentHashMap<String, Boolean>();
 	private final ParameterNameDiscoverer parameterNameDiscoverer = new LocalVariableTableParameterNameDiscoverer();
@@ -28,6 +32,7 @@ public class PassportCheckerHandlerMethodImpl implements PassportChecker {
 				parameter.initParameterNameDiscovery(parameterNameDiscoverer);
 				String parameterName = parameter.getParameterName();
 				if (parameterNameMap.containsKey(parameterName)) {
+					// logger.info("hasPassportParameter parameterName:" + parameterName);
 					return true;
 				}
 			}
@@ -49,7 +54,7 @@ public class PassportCheckerHandlerMethodImpl implements PassportChecker {
 			return null;
 		}
 		boolean hasPassportParameter = this.hasPassportParameter((HandlerMethod) handler);
-		// System.out.println("hasPassportParameter:" + hasPassportParameter);
+		logger.info("isNeedCheckLogin hasPassportParameter:" + hasPassportParameter);
 		handlerCacheMap.put(key, hasPassportParameter);
 		if (hasPassportParameter) {
 			return true;
