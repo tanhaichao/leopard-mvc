@@ -97,7 +97,7 @@ public class Finder {
 		List<PassportValidator> list = new ArrayList<PassportValidator>();
 		for (PassportValidator validator : this.list) {
 			Boolean isNeedCheckLogin = validator.isNeedCheckLogin(request, handler);
-			logger.info("validator:" + validator + " isNeedCheckLogin:" + isNeedCheckLogin + " request:" + request.getRequestURI());
+			// logger.info("validator:" + validator + " isNeedCheckLogin:" + isNeedCheckLogin + " request:" + request.getRequestURI());
 
 			if (isNeedCheckLogin != null && isNeedCheckLogin) {
 				// System.err.println("validator:" + Finder.getSessionKey(validator) + " isNeedCheckLogin:" + isNeedCheckLogin + " request:" + request.getRequestURI());

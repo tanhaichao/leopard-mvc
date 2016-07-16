@@ -54,7 +54,7 @@ public class PassportCheckerHandlerMethodImpl implements PassportChecker {
 			return null;
 		}
 		boolean hasPassportParameter = this.hasPassportParameter((HandlerMethod) handler);
-		logger.info("isNeedCheckLogin hasPassportParameter:" + hasPassportParameter);
+		// logger.info("isNeedCheckLogin hasPassportParameter:" + hasPassportParameter);
 		handlerCacheMap.put(key, hasPassportParameter);
 		if (hasPassportParameter) {
 			return true;
