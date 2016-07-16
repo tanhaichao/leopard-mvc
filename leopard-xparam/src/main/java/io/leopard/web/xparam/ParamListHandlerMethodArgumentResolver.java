@@ -99,15 +99,12 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 		HttpServletRequest req = (HttpServletRequest) request.getNativeRequest();
 		name = name.replaceFirst("List$", "");
 		name = UnderlineHandlerMethodArgumentResolver.camelToUnderline(name);
-
 		String[] values = req.getParameterValues(name);
-
 		int hashCode = parameter.hashCode();
 		Class<?> clazz = modelMap.get(hashCode);
 		if (clazz != null) {
 			return this.toList(clazz, values);
 		}
-
 		if (values != null && values.length == 1) {
 			// StringUtils.split("", "");
 			// return StringUtils.split(values[0], ", ");// commons的StringUtils.split有问题，需要使用spring的StringUtils
@@ -115,7 +112,8 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 			if (StringUtils.isEmpty(values[0])) {
 				return null;
 			}
-			return values[0].split(", ");
+			// TODO 暂时删除
+			// return values[0].split(", ");
 		}
 		return values;
 	}
@@ -129,7 +127,7 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 
 		// boolean underline = UnderlineHandlerMethodArgumentResolver.isEnable();
 		if (values.length == 1) {
-			// 这里是否要判断传递的是不是数据组?
+			// TODO 这里是否要判断传递的是不是数据组?
 			return toListObject(values[0], clazz);
 		}
 		List list = new ArrayList();
