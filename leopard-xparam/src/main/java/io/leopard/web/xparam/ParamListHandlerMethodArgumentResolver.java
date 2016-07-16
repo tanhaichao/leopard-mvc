@@ -10,8 +10,10 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Value;
 //import org.apache.commons.lang.StringUtils;
 import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
@@ -19,7 +21,12 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.databind.JavaType;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy;
+
 import io.leopard.json.Json;
+import io.leopard.json.JsonException;
 
 /**
  * List<?>参数解析.
@@ -43,6 +50,19 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 	}
 
 	private Map<Integer, Class<?>> modelMap = new ConcurrentHashMap<Integer, Class<?>>();
+
+	@Value("${xparam.underline}")
+	private String underline;
+	private static ObjectMapper mapper; // can reuse, share
+
+	@PostConstruct
+	public void init() {
+		boolean enable = !"false".equals(underline);
+		mapper = new ObjectMapper();
+		if (enable) {
+			mapper = mapper.setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
+		}
+	}
 
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
@@ -102,17 +122,15 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	protected List toList(Class<?> clazz, String[] values) {
-		System.out.println("toList clazz:" + clazz + " values:" + values);
+		// System.out.println("toList clazz:" + clazz + " values:" + values);
 		if (values == null || values.length == 0) {
 			return null;
 		}
 
 		// TODO ahai 这里要支持下划线
-
 		boolean underline = UnderlineHandlerMethodArgumentResolver.isEnable();
-
 		if (values.length == 1) {
-			return Json.toListObject(values[0], clazz);
+			return toListObject(values[0], clazz);
 		}
 		List list = new ArrayList();
 		for (String value : values) {
@@ -120,6 +138,31 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 			list.add(bean);
 		}
 		return list;
+	}
 
+	public static <T> T toObject(String json, Class<T> clazz, boolean ignoreUnknownField) {
+		if (json == null || json.length() == 0) {
+			return null;
+		}
+
+		try {
+			return mapper.readValue(json, clazz);
+		}
+		catch (Exception e) {
+			throw new JsonException(e.getMessage(), e);
+		}
+	}
+
+	public static <T> List<T> toListObject(String json, Class<T> clazz) {
+		if (json == null || json.length() == 0) {
+			return null;
+		}
+		JavaType javaType = mapper.getTypeFactory().constructParametrizedType(ArrayList.class, List.class, clazz);
+		try {
+			return mapper.readValue(json, javaType);
+		}
+		catch (Exception e) {
+			throw new JsonException(e.getMessage(), e);
+		}
 	}
 }
