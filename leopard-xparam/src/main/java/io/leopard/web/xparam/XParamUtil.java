@@ -5,11 +5,26 @@ import java.lang.reflect.Method;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.propertyeditors.CustomBooleanEditor;
 import org.springframework.core.LocalVariableTableParameterNameDiscoverer;
 import org.springframework.core.MethodParameter;
 import org.springframework.core.ParameterNameDiscoverer;
 
 public class XParamUtil {
+
+	public static boolean isFalse(String value) {
+		return CustomBooleanEditor.VALUE_FALSE.equalsIgnoreCase(value)//
+				|| CustomBooleanEditor.VALUE_NO.equalsIgnoreCase(value)//
+				|| CustomBooleanEditor.VALUE_0.equals(value)//
+				|| CustomBooleanEditor.VALUE_OFF.equalsIgnoreCase(value);
+	}
+
+	public static boolean isTrue(String value) {
+		return CustomBooleanEditor.VALUE_TRUE.equalsIgnoreCase(value)//
+				|| CustomBooleanEditor.VALUE_YES.equalsIgnoreCase(value)//
+				|| CustomBooleanEditor.VALUE_1.equals(value)//
+				|| CustomBooleanEditor.VALUE_ON.equalsIgnoreCase(value);
+	}
 
 	public static int toInt(String str) {
 		if (str == null || str.length() == 0) {
@@ -26,10 +41,8 @@ public class XParamUtil {
 	/**
 	 * 获取cookie的值</br>
 	 * 
-	 * @param name
-	 *            cookie名称
-	 * @param request
-	 *            http请求
+	 * @param name cookie名称
+	 * @param request http请求
 	 * @return cookie值
 	 */
 	public static String getCookie(String name, HttpServletRequest request) {
