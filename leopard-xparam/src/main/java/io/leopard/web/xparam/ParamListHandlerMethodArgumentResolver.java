@@ -126,10 +126,11 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 		}
 
 		// boolean underline = UnderlineHandlerMethodArgumentResolver.isEnable();
-		// if (values.length == 1) {
-		// // TODO 这里是否要判断传递的是不是数据组?
-		// return toListObject(values[0], clazz);
-		// }
+		if (values.length == 1) {
+			if (values[0].startsWith("[")) {
+				return toListObject(values[0], clazz);
+			}
+		}
 
 		List list = new ArrayList();
 		for (String value : values) {
@@ -152,19 +153,17 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 		}
 	}
 
-	// public static <T> List<T> toListObject(String json, Class<T> clazz) {
-	// if (json == null || json.length() == 0) {
-	// return null;
-	// }
-	// // System.out.println("toListObject json:" + json);
-	// // System.out.println("toListObject clazz:" + clazz.getName());
-	// JavaType javaType = mapper.getTypeFactory().constructParametrizedType(ArrayList.class, List.class, clazz);
-	// try {
-	// return mapper.readValue(json, javaType);
-	// }
-	// catch (Exception e) {
-	//
-	// throw new JsonException(e.getMessage(), e);
-	// }
-	// }
+	public static <T> List<T> toListObject(String json, Class<T> clazz) {
+		if (json == null || json.length() == 0) {
+			return null;
+		}
+		JavaType javaType = mapper.getTypeFactory().constructParametrizedType(ArrayList.class, List.class, clazz);
+		try {
+			return mapper.readValue(json, javaType);
+		}
+		catch (Exception e) {
+
+			throw new JsonException(e.getMessage(), e);
+		}
+	}
 }
