@@ -25,9 +25,9 @@ public class CookieLoginedUidXParam implements XParam {
 		return "cookieLoginedUid";
 	}
 
-	@Override
-	public void override(XParam xparam) {
-
-	}
+	// @Override
+	// public void override(XParam xparam) {
+	//
+	// }
 
 }

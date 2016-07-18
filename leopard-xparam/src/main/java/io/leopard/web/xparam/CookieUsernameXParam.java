@@ -31,9 +31,9 @@ public class CookieUsernameXParam implements XParam {
 		return "cookieUsername";
 	}
 
-	@Override
-	public void override(XParam xparam) {
-
-	}
+	// @Override
+	// public void override(XParam xparam) {
+	//
+	// }
 
 }

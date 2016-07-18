@@ -20,9 +20,9 @@ public class RequestUriXParam implements XParam {
 		return "requestUri";
 	}
 
-	@Override
-	public void override(XParam xparam) {
-
-	}
+	// @Override
+	// public void override(XParam xparam) {
+	//
+	// }
 
 }

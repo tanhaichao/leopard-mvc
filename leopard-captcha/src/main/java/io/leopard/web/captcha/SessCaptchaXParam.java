@@ -33,9 +33,9 @@ public class SessCaptchaXParam implements XParam {
 		return null;
 	}
 
-	@Override
-	public void override(XParam xparam) {
-
-	}
+	// @Override
+	// public void override(XParam xparam) {
+	//
+	// }
 
 }

@@ -41,9 +41,9 @@ public class ProxyIpXParam implements XParam {
 		return "proxyIp";
 	}
 
-	@Override
-	public void override(XParam xparam) {
-
-	}
+	// @Override
+	// public void override(XParam xparam) {
+	//
+	// }
 
 }

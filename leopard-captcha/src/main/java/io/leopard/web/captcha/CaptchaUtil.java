@@ -24,7 +24,7 @@ public class CaptchaUtil {
 			throw new CaptchaInvalidException("验证码不能为空.");
 		}
 		if (StringUtils.isEmpty(sessCaptcha)) {
-			throw new CaptchaInvalidException("验证码未生成.");
+			throw new CaptchaInvalidException("验证码未生成，验证码使用");
 		}
 		if (!captcha.equals(sessCaptcha)) {
 			logger.warn("错误验证码 sessCaptcha:" + sessCaptcha + " captcha:" + captcha);

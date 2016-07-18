@@ -1,10 +1,10 @@
 package io.leopard.web.xparam;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.ServiceLoader;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -15,6 +15,7 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.core.MethodParameter;
+import org.springframework.core.annotation.AnnotationAwareOrderComparator;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.NativeWebRequest;
 
@@ -29,18 +30,17 @@ import io.leopard.web.xparam.api.UserinfoResolverImpl;
 @Component
 public class XParamHandlerMethodArgumentResolver extends AbstractNamedValueMethodArgumentResolver implements BeanFactoryAware {
 	// TODO ahai 这里有必要使用线程安全的Map吗？
-	private static final Map<String, XParam> data = new HashMap<String, XParam>();
+	private static final Map<String, List<XParam>> data = new HashMap<String, List<XParam>>();
 
 	protected Log logger = LogFactory.getLog(this.getClass());
 
-	public XParamHandlerMethodArgumentResolver() {
-		Iterator<XParam> iterator = ServiceLoader.load(XParam.class).iterator();
-		while (iterator.hasNext()) {
-			XParam xparam = iterator.next();
-			data.put(xparam.getKey(), xparam);
-		}
-
-	}
+	// public XParamHandlerMethodArgumentResolver() {
+	// Iterator<XParam> iterator = ServiceLoader.load(XParam.class).iterator();
+	// while (iterator.hasNext()) {
+	// XParam xparam = iterator.next();
+	// data.put(xparam.getKey(), xparam);
+	// }
+	// }
 
 	@Override
 	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
@@ -48,14 +48,20 @@ public class XParamHandlerMethodArgumentResolver extends AbstractNamedValueMetho
 
 		ListableBeanFactory factory = (ListableBeanFactory) beanFactory;
 		Map<String, XParam> map = factory.getBeansOfType(XParam.class);
-		// TODO ahai 这里加上排序?
 		for (Entry<String, XParam> entry : map.entrySet()) {
 			XParam xparam = entry.getValue();
-			XParam old = data.get(xparam.getKey());
-			if (old != null) {
-				xparam.override(old);
+			List<XParam> xparamList = data.get(xparam.getKey());
+			if (xparamList == null) {
+				xparamList = new ArrayList<XParam>();
+				data.put(xparam.getKey(), xparamList);
 			}
-			data.put(xparam.getKey(), xparam);
+			xparamList.add(xparam);
+		}
+		for (Entry<String, List<XParam>> entry : data.entrySet()) {
+			List<XParam> xparamList = entry.getValue();
+			if (xparamList.size() > 1) {
+				AnnotationAwareOrderComparator.sort(xparamList);
+			}
 		}
 	}
 
@@ -70,11 +76,18 @@ public class XParamHandlerMethodArgumentResolver extends AbstractNamedValueMetho
 	@Override
 	protected Object resolveName(String name, MethodParameter parameter, NativeWebRequest request) throws Exception {
 		// System.err.println("resolveName name:" + name);
-		XParam xparam = data.get(name);
-		if (xparam == null) {
+		List<XParam> xparamList = data.get(name);
+		if (xparamList == null) {
 			throw new IllegalArgumentException("未知参数名称[" + name + "].");
 		}
-		return xparam.getValue((HttpServletRequest) request.getNativeRequest(), parameter);
+		Object value = null;
+		for (XParam xparam : xparamList) {
+			value = xparam.getValue((HttpServletRequest) request.getNativeRequest(), parameter);
+			if (value != null) {
+				break;
+			}
+		}
+		return value;
 	}
 
 }

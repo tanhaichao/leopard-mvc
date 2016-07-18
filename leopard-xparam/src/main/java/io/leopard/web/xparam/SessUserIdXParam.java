@@ -25,9 +25,9 @@ public class SessUserIdXParam implements XParam {
 		return "sessUserId";
 	}
 
-	@Override
-	public void override(XParam xparam) {
-
-	}
+	// @Override
+	// public void override(XParam xparam) {
+	//
+	// }
 
 }
