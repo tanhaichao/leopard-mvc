@@ -1,10 +1,12 @@
 package io.leopard.web.captcha;
 
-import io.leopard.web.xparam.XParam;
-
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.core.MethodParameter;
+
+import io.leopard.web.xparam.XParam;
 
 /**
  * 获取session中的验证码.
@@ -14,6 +16,8 @@ import org.springframework.core.MethodParameter;
  */
 public class SessCaptchaXParam implements XParam {
 
+	protected Log logger = LogFactory.getLog(this.getClass());
+
 	@Override
 	public String getKey() {
 		return "sessCaptcha";
@@ -22,7 +26,9 @@ public class SessCaptchaXParam implements XParam {
 	@Override
 	public Object getValue(HttpServletRequest request, MethodParameter parameter) {
 		String captchaGroupId = this.getGroupId(parameter);
-		return CaptchaUtil.getCodeAndRemove(request, captchaGroupId);
+		Object captcha = CaptchaUtil.getCodeAndRemove(request, captchaGroupId);
+		logger.info("getValue captcha:" + captcha + " captchaGroupId:" + captchaGroupId);
+		return captcha;
 	}
 
 	private String getGroupId(MethodParameter parameter) {

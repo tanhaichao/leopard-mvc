@@ -83,6 +83,7 @@ public class XParamHandlerMethodArgumentResolver extends AbstractNamedValueMetho
 		Object value = null;
 		for (XParam xparam : xparamList) {
 			value = xparam.getValue((HttpServletRequest) request.getNativeRequest(), parameter);
+			// logger.info("resolveName key:" + xparam.getKey() + " value:" + value + " xparam:" + xparam.getClass().getName());
 			if (value != null) {
 				break;
 			}
