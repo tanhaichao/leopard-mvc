@@ -27,7 +27,7 @@ public class SessCaptchaXParam implements XParam {
 	public Object getValue(HttpServletRequest request, MethodParameter parameter) {
 		String captchaGroupId = this.getGroupId(parameter);
 		Object captcha = CaptchaUtil.getCodeAndRemove(request, captchaGroupId);
-		logger.info("getValue captcha:" + captcha + " captchaGroupId:" + captchaGroupId);
+		// logger.info("getValue captcha:" + captcha + " captchaGroupId:" + captchaGroupId);
 		return captcha;
 	}
 
