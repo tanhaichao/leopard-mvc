@@ -1,4 +1,4 @@
-package io.leopard.web.xparam;
+package io.leopard.web.xparam.resolver;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -19,6 +19,7 @@ import org.springframework.core.annotation.AnnotationAwareOrderComparator;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.NativeWebRequest;
 
+import io.leopard.web.xparam.XParam;
 import io.leopard.web.xparam.api.UserinfoResolverImpl;
 
 /**

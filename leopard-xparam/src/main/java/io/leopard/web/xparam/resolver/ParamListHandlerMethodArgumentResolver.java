@@ -1,4 +1,4 @@
-package io.leopard.web.xparam;
+package io.leopard.web.xparam.resolver;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;

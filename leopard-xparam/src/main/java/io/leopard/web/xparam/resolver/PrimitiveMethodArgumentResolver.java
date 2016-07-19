@@ -1,4 +1,4 @@
-package io.leopard.web.xparam;
+package io.leopard.web.xparam.resolver;
 
 import javax.servlet.ServletException;
 

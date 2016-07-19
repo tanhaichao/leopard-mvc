@@ -1,4 +1,4 @@
-package io.leopard.web.xparam;
+package io.leopard.web.xparam.resolver;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
@@ -55,7 +55,7 @@ public class UnderlineHandlerMethodArgumentResolver extends AbstractNamedValueMe
 				break;
 			}
 		}
-		// logger.info("supportsParameter name:" + name + " supports:" + supports);
+		logger.info("supportsParameter name:" + name + " supports:" + supports);
 		return supports;
 	}
 
@@ -63,7 +63,7 @@ public class UnderlineHandlerMethodArgumentResolver extends AbstractNamedValueMe
 	protected Object resolveName(String name, MethodParameter parameter, NativeWebRequest request) throws Exception {
 		HttpServletRequest req = (HttpServletRequest) request.getNativeRequest();
 		String underlineName = camelToUnderline(name);
-		// logger.info("resolveName name:" + name + " underlineName:" + underlineName);
+		logger.info("resolveName name:" + name + " underlineName:" + underlineName);
 		String value = req.getParameter(underlineName);
 		return value;
 	}

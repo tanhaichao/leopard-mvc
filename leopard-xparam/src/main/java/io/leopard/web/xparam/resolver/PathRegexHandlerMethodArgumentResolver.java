@@ -1,4 +1,4 @@
-package io.leopard.web.xparam;
+package io.leopard.web.xparam.resolver;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,6 +12,8 @@ import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
+
+import io.leopard.web.xparam.PathRegex;
 
 /**
  * 使用正则表达式解析URL作为Controller参数.
