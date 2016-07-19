@@ -8,6 +8,7 @@ import java.util.Date;
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -79,6 +80,7 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 				String underlineName = fieldName.replaceFirst("List$", "");
 				underlineName = UnderlineHandlerMethodArgumentResolver.camelToUnderline(underlineName);
 				String[] values = req.getParameterValues(underlineName);
+				logger.info("fieldName:" + fieldName + " underlineName:" + underlineName + " values:" + StringUtils.join(values, ",   "));
 				obj = ParamListHandlerMethodArgumentResolver.toList(subType, values);
 				// throw new IllegalArgumentException("还没有支持List.class解析.");
 			}
