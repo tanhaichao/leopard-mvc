@@ -2,12 +2,14 @@ package io.leopard.web.xparam.resolver;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.NotImplementedException;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.math.NumberUtils;
 import org.apache.commons.logging.Log;
@@ -70,19 +72,12 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 
 		Object bean = clazz.newInstance();
 		for (Field field : clazz.getDeclaredFields()) {
-
 			String fieldName = field.getName();
-
 			Class<?> type = field.getType();
 			Object obj;
 			if (List.class.equals(type)) {
 				Class<?> subType = (Class<?>) ((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0];
-				String underlineName = fieldName.replaceFirst("List$", "");
-				underlineName = UnderlineHandlerMethodArgumentResolver.camelToUnderline(underlineName);
-				String[] values = req.getParameterValues(underlineName);
-				logger.info("fieldName:" + fieldName + " underlineName:" + underlineName + " values:" + StringUtils.join(values, ",   "));
-				obj = ParamListHandlerMethodArgumentResolver.toList(subType, values);
-				// throw new IllegalArgumentException("还没有支持List.class解析.");
+				obj = this.toList(fieldName, subType, req);
 			}
 			else {
 				String underlineName = UnderlineHandlerMethodArgumentResolver.camelToUnderline(fieldName);
@@ -99,6 +94,42 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 		}
 
 		return bean;
+	}
+
+	protected Object toList(String fieldName, Class<?> subType, HttpServletRequest req) {
+		String underlineName = fieldName.replaceFirst("List$", "");
+		underlineName = UnderlineHandlerMethodArgumentResolver.camelToUnderline(underlineName);
+		String[] values = req.getParameterValues(underlineName);
+		logger.info("toList fieldName:" + fieldName + " underlineName:" + underlineName + " values:" + StringUtils.join(values, ",   "));
+		if (values == null) {
+			return null;
+		}
+		if (subType.equals(String.class)) {
+			List<String> list = new ArrayList<String>();
+			for (String value : values) {
+				list.add(value);
+			}
+			return list;
+		}
+		else if (subType.equals(Integer.class)) {
+			throw new NotImplementedException("List<Integer>未实现.");
+		}
+		else if (subType.equals(Long.class)) {
+			throw new NotImplementedException("List<Long>未实现.");
+		}
+		else if (subType.equals(Float.class)) {
+			throw new NotImplementedException("List<Float>未实现.");
+		}
+		else if (subType.equals(Double.class)) {
+			throw new NotImplementedException("List<Double>未实现.");
+		}
+		else if (subType.equals(Boolean.class)) {
+			throw new NotImplementedException("List<Boolean>未实现.");
+		}
+		else if (subType.equals(Date.class)) {
+			throw new NotImplementedException("List<Date>未实现.");
+		}
+		return ParamListHandlerMethodArgumentResolver.toList(subType, values);
 	}
 
 	protected Object toObject(String value, Class<?> type) {
