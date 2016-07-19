@@ -97,13 +97,14 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 	@Override
 	protected Object resolveName(String name, MethodParameter parameter, NativeWebRequest request) throws Exception {
 		HttpServletRequest req = (HttpServletRequest) request.getNativeRequest();
+
 		name = name.replaceFirst("List$", "");
 		name = UnderlineHandlerMethodArgumentResolver.camelToUnderline(name);
 		String[] values = req.getParameterValues(name);
 		int hashCode = parameter.hashCode();
 		Class<?> clazz = modelMap.get(hashCode);
 		if (clazz != null) {
-			return this.toList(clazz, values);
+			return toList(clazz, values);
 		}
 		if (values != null && values.length == 1) {
 			// StringUtils.split("", "");
@@ -119,7 +120,7 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	protected List toList(Class<?> clazz, String[] values) {
+	protected static List toList(Class<?> clazz, String[] values) {
 		// System.out.println("toList clazz:" + clazz + " values:" + values);
 		if (values == null || values.length == 0) {
 			return null;

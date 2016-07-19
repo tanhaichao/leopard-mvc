@@ -2,6 +2,7 @@ package io.leopard.web.xparam.resolver;
 
 import java.awt.List;
 import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
 import java.util.Date;
 
 import javax.annotation.PostConstruct;
@@ -49,11 +50,12 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 		Class<?> type = parameter.getParameterType();
 		String className = type.getName();
 		boolean supports = false;
-		// if (className.endsWith("VO") || className.endsWith("Form")) {
-		// supports = true;
-		// }
 
-		if (className.endsWith("SellerAddressVO")) {
+		if (className.endsWith("VO") || className.endsWith("Form")) {
+			supports = true;
+		}
+
+		if (className.endsWith("AddressVO")) {
 			supports = true;
 		}
 		logger.info("supportsParameter name:" + parameter.getParameterName() + " supports:" + supports);
@@ -67,15 +69,27 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 
 		Object bean = clazz.newInstance();
 		for (Field field : clazz.getDeclaredFields()) {
-			String underlineName = UnderlineHandlerMethodArgumentResolver.camelToUnderline(field.getName());
-			logger.info("resolveName name:" + field.getName() + " underlineName:" + underlineName);
-			String value = req.getParameter(underlineName);
 
-			if (value == null) {
-				continue;
+			Class<?> type = field.getType();
+			Object obj;
+			if (List.class.equals(type)) {
+				Class<?> subType = (Class<?>) ((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0];
+				name = name.replaceFirst("List$", "");
+				name = UnderlineHandlerMethodArgumentResolver.camelToUnderline(name);
+				String[] values = req.getParameterValues(name);
+				obj = ParamListHandlerMethodArgumentResolver.toList(subType, values);
+				// throw new IllegalArgumentException("还没有支持List.class解析.");
+			}
+			else {
+				String underlineName = UnderlineHandlerMethodArgumentResolver.camelToUnderline(field.getName());
+				logger.info("resolveName name:" + field.getName() + " underlineName:" + underlineName);
+				String value = req.getParameter(underlineName);
+				if (value == null) {
+					continue;
+				}
+				obj = this.toObject(value, type);
 			}
 
-			Object obj = this.toObject(value, field.getType());
 			field.setAccessible(true);
 			field.set(bean, obj);
 		}
@@ -84,9 +98,6 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 	}
 
 	protected Object toObject(String value, Class<?> type) {
-		if (List.class.equals(type)) {
-			throw new IllegalArgumentException("还没有支持List.class解析.");
-		}
 		if (String.class.equals(type)) {
 			return value;
 		}
