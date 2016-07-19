@@ -51,6 +51,9 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
 		Class<?> type = parameter.getParameterType();
+		if (type.isEnum()) {
+			return false;
+		}
 		String className = type.getName();
 		boolean supports = false;
 		if (className.endsWith("VO") || className.endsWith("Form")) {
