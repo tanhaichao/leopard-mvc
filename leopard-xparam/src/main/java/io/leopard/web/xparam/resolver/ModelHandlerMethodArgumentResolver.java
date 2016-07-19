@@ -1,9 +1,10 @@
 package io.leopard.web.xparam.resolver;
 
+import java.lang.reflect.Field;
+
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -42,52 +43,32 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 
 	@Override
 	public boolean supportsParameter(MethodParameter parameter) {
-		String name = parameter.getParameterName();
-		if (StringUtils.isEmpty(name)) {
-			return false;
-		}
-		// TODO 重启的时候name会为null?
+		Class<?> type = parameter.getParameterType();
+		String className = type.getName();
 		boolean supports = false;
-		for (char ch : name.toCharArray()) {
-			if (Character.isUpperCase(ch)) {
-				// 有大写就返回true.
-				supports = true;
-				break;
-			}
+		if (className.endsWith("VO") || className.endsWith("Form")) {
+			supports = true;
 		}
-		logger.info("supportsParameter name:" + name + " supports:" + supports);
+		logger.info("supportsParameter name:" + parameter.getParameterName() + " supports:" + supports);
 		return supports;
 	}
 
 	@Override
 	protected Object resolveName(String name, MethodParameter parameter, NativeWebRequest request) throws Exception {
 		HttpServletRequest req = (HttpServletRequest) request.getNativeRequest();
-		String underlineName = camelToUnderline(name);
-		logger.info("resolveName name:" + name + " underlineName:" + underlineName);
-		String value = req.getParameter(underlineName);
-		return value;
-	}
+		Class<?> clazz = parameter.getParameterType();
 
-	/**
-	 * 将驼峰式命名的字符串转换为下划线方式.
-	 */
-	public static String camelToUnderline(String param) {
-		if (param == null || param.length() == 0) {
-			return param;
+		Object bean = clazz.newInstance();
+		for (Field field : clazz.getDeclaredFields()) {
+			String underlineName = UnderlineHandlerMethodArgumentResolver.camelToUnderline(name);
+			logger.info("resolveName name:" + name + " underlineName:" + underlineName);
+			String value = req.getParameter(underlineName);
+
+			field.setAccessible(true);
+			field.set(bean, value);
 		}
-		int len = param.length();
-		StringBuilder sb = new StringBuilder(len);
-		for (int i = 0; i < len; i++) {
-			char c = param.charAt(i);
-			if (Character.isUpperCase(c)) {
-				sb.append('_');
-				sb.append(Character.toLowerCase(c));
-			}
-			else {
-				sb.append(c);
-			}
-		}
-		return sb.toString();
+
+		return bean;
 	}
 
 }
