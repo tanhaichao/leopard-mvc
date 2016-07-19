@@ -70,19 +70,21 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 		Object bean = clazz.newInstance();
 		for (Field field : clazz.getDeclaredFields()) {
 
+			String fieldName = field.getName();
+
 			Class<?> type = field.getType();
 			Object obj;
 			if (List.class.equals(type)) {
 				Class<?> subType = (Class<?>) ((ParameterizedType) field.getGenericType()).getActualTypeArguments()[0];
-				name = name.replaceFirst("List$", "");
-				name = UnderlineHandlerMethodArgumentResolver.camelToUnderline(name);
-				String[] values = req.getParameterValues(name);
+				String underlineName = fieldName.replaceFirst("List$", "");
+				underlineName = UnderlineHandlerMethodArgumentResolver.camelToUnderline(underlineName);
+				String[] values = req.getParameterValues(underlineName);
 				obj = ParamListHandlerMethodArgumentResolver.toList(subType, values);
 				// throw new IllegalArgumentException("还没有支持List.class解析.");
 			}
 			else {
-				String underlineName = UnderlineHandlerMethodArgumentResolver.camelToUnderline(field.getName());
-				logger.info("resolveName name:" + field.getName() + " underlineName:" + underlineName);
+				String underlineName = UnderlineHandlerMethodArgumentResolver.camelToUnderline(fieldName);
+				logger.info("resolveName name:" + fieldName + " underlineName:" + underlineName);
 				String value = req.getParameter(underlineName);
 				if (value == null) {
 					continue;
