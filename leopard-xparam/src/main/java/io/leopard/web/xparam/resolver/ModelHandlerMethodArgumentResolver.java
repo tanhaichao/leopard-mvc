@@ -53,7 +53,7 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 		// supports = true;
 		// }
 
-		if (className.endsWith("BuyerAddressVO")) {
+		if (className.endsWith("SellerAddressVO")) {
 			supports = true;
 		}
 		logger.info("supportsParameter name:" + parameter.getParameterName() + " supports:" + supports);
