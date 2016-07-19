@@ -49,7 +49,11 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 		Class<?> type = parameter.getParameterType();
 		String className = type.getName();
 		boolean supports = false;
-		if (className.endsWith("VO") || className.endsWith("Form")) {
+		// if (className.endsWith("VO") || className.endsWith("Form")) {
+		// supports = true;
+		// }
+
+		if (className.endsWith("BuyerAddressVO")) {
 			supports = true;
 		}
 		logger.info("supportsParameter name:" + parameter.getParameterName() + " supports:" + supports);
