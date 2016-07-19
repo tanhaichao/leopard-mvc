@@ -1,9 +1,9 @@
 package io.leopard.web.xparam.resolver;
 
-import java.awt.List;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
