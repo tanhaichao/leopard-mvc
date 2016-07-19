@@ -141,16 +141,16 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 			return "true".equals(value);
 		}
 		if (int.class.equals(type)) {
-			return Integer.parseInt(value);
+			return NumberUtils.toInt(value);
 		}
 		if (long.class.equals(type)) {
-			return Long.parseLong(value);
+			return NumberUtils.toLong(value);
 		}
 		if (float.class.equals(type)) {
-			return Float.parseFloat(value);
+			return NumberUtils.toFloat(value);
 		}
 		if (double.class.equals(type)) {
-			return Double.parseDouble(value);
+			return NumberUtils.toDouble(value);
 		}
 		if (Date.class.equals(type)) {
 			long time = NumberUtils.toLong(value);
