@@ -1,10 +1,13 @@
 package io.leopard.web.xparam.resolver;
 
+import java.awt.List;
 import java.lang.reflect.Field;
+import java.util.Date;
 
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.math.NumberUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -60,15 +63,52 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 
 		Object bean = clazz.newInstance();
 		for (Field field : clazz.getDeclaredFields()) {
-			String underlineName = UnderlineHandlerMethodArgumentResolver.camelToUnderline(name);
-			logger.info("resolveName name:" + name + " underlineName:" + underlineName);
+			String underlineName = UnderlineHandlerMethodArgumentResolver.camelToUnderline(field.getName());
+			logger.info("resolveName name:" + field.getName() + " underlineName:" + underlineName);
 			String value = req.getParameter(underlineName);
 
+			if (value == null) {
+				continue;
+			}
+
+			Object obj = this.toObject(value, field.getType());
 			field.setAccessible(true);
-			field.set(bean, value);
+			field.set(bean, obj);
 		}
 
 		return bean;
+	}
+
+	protected Object toObject(String value, Class<?> type) {
+		if (List.class.equals(type)) {
+			throw new IllegalArgumentException("还没有支持List.class解析.");
+		}
+		if (String.class.equals(type)) {
+			return value;
+		}
+		if (boolean.class.equals(type)) {
+			return "true".equals(value);
+		}
+		if (int.class.equals(type)) {
+			return Integer.parseInt(value);
+		}
+		if (long.class.equals(type)) {
+			return Long.parseLong(value);
+		}
+		if (float.class.equals(type)) {
+			return Float.parseFloat(value);
+		}
+		if (double.class.equals(type)) {
+			return Double.parseDouble(value);
+		}
+		if (Date.class.equals(type)) {
+			long time = NumberUtils.toLong(value);
+			if (time <= 0) {
+				return null;
+			}
+			return new Date(time);
+		}
+		throw new IllegalArgumentException("未知数据类型[" + type.getName() + "].");
 	}
 
 }

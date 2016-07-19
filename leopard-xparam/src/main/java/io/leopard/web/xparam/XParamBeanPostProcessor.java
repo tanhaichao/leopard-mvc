@@ -11,6 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter;
 
+import io.leopard.web.xparam.resolver.ModelHandlerMethodArgumentResolver;
 import io.leopard.web.xparam.resolver.ParamListHandlerMethodArgumentResolver;
 import io.leopard.web.xparam.resolver.PathRegexHandlerMethodArgumentResolver;
 import io.leopard.web.xparam.resolver.PrimitiveMethodArgumentResolver;
@@ -71,6 +72,10 @@ public class XParamBeanPostProcessor implements BeanPostProcessor, BeanFactoryAw
 		}
 		if (UnderlineHandlerMethodArgumentResolver.isEnable()) {
 			UnderlineHandlerMethodArgumentResolver argumentResolver = beanFactory.getBean(UnderlineHandlerMethodArgumentResolver.class);
+			customArgumentResolvers.add(argumentResolver);
+		}
+		if (UnderlineHandlerMethodArgumentResolver.isEnable()) {
+			ModelHandlerMethodArgumentResolver argumentResolver = beanFactory.getBean(ModelHandlerMethodArgumentResolver.class);
 			customArgumentResolvers.add(argumentResolver);
 		}
 		customArgumentResolvers.add(new PrimitiveMethodArgumentResolver());
