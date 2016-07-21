@@ -143,13 +143,38 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 		if (int.class.equals(type)) {
 			return NumberUtils.toInt(value);
 		}
+		if (Integer.class.equals(type)) {
+			if (StringUtils.isEmpty(value)) {
+				return null;
+			}
+			return NumberUtils.toInt(value);
+		}
 		if (long.class.equals(type)) {
 			return NumberUtils.toLong(value);
 		}
+		if (Long.class.equals(type)) {
+			if (StringUtils.isEmpty(value)) {
+				return null;
+			}
+			return NumberUtils.toLong(value);
+		}
+
 		if (float.class.equals(type)) {
 			return NumberUtils.toFloat(value);
 		}
+		if (Float.class.equals(type)) {
+			if (StringUtils.isEmpty(value)) {
+				return null;
+			}
+			return NumberUtils.toFloat(value);
+		}
 		if (double.class.equals(type)) {
+			return NumberUtils.toDouble(value);
+		}
+		if (Double.class.equals(type)) {
+			if (StringUtils.isEmpty(value)) {
+				return null;
+			}
 			return NumberUtils.toDouble(value);
 		}
 		if (Date.class.equals(type)) {
