@@ -23,8 +23,14 @@ public class SessUidXParam implements XParam {
 		Number sessUid = (Number) request.getSession().getAttribute("sessUid");
 		// logger.info("getValue sessUid:" + sessUid);
 		if (sessUid == null) {
-			String ip = XParamUtil.getProxyIp(request);
-			throw new NotLoginException("您[" + ip + "]未登录.");
+			Nologin nologin = parameter.getMethodAnnotation(Nologin.class);
+			if (nologin == null) {
+				String ip = XParamUtil.getProxyIp(request);
+				throw new NotLoginException("您[" + ip + "]未登录.");
+			}
+			else {
+				return 0;
+			}
 		}
 		if (sessUid instanceof Integer) {
 			return new Long((Integer) sessUid);

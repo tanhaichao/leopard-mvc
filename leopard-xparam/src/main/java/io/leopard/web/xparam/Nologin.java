@@ -1,4 +1,4 @@
-package io.leopard.web.passport;
+package io.leopard.web.xparam;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
