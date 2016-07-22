@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 
 import io.leopard.web.servlet.RegisterHandlerInterceptor;
+import io.leopard.web.xparam.Nologin;
 
 /**
  * 检查是否已登录.
