@@ -11,7 +11,14 @@ public class ListConvert<S, T> {
 
 	private List<T> result;
 
+	private Class<T> clazz;
+
 	public ListConvert(List<S> list) {
+		this(list,null);
+	}
+
+	public ListConvert(List<S> list, Class<T> clazz) {
+		this.clazz = clazz;
 		this.list = list;
 		if (list == null) {
 		}
@@ -20,7 +27,7 @@ public class ListConvert<S, T> {
 		}
 		else {
 			String json = Json.toJson(list);
-			this.result = Json.toObject(json, null, true);
+			this.result = Json.toListObject(json, clazz);
 		}
 	}
 

@@ -10,7 +10,14 @@ public class PagingConvert<S, T> {
 
 	private Paging<T> result;
 
+	private Class<T> clazz;
+	
 	public PagingConvert(Paging<S> paging) {
+		this(paging,null);
+	}
+
+	
+	public PagingConvert(Paging<S> paging,Class<T> clazz) {
 		this.paging = paging;
 		if (paging != null) {
 			Paging<T> result = new PagingImpl<T>(paging);
