@@ -1,13 +1,25 @@
 package io.leopard.convert;
 
-/**
- * Bean 转换器
- * 
- * @author 谭海潮
- *
- */
-public interface BeanConvert<S, T> {
+import io.leopard.json.Json;
 
-	public T convert();
+public class BeanConvert<S, T> {
+
+	private S source;
+	private T target;
+
+	public BeanConvert(S source) {
+		if (source != null) {
+			String json = Json.toJson(source);
+			this.target = Json.toObject(json, null, true);
+		}
+	}
+
+	public T get() {
+		return this.target;
+	}
+
+	public T convert() {
+		return this.target;
+	}
 
 }
