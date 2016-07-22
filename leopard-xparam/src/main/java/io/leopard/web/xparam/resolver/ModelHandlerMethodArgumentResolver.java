@@ -62,7 +62,7 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 		if (className.endsWith("AddressVO")) {
 			supports = true;
 		}
-		logger.info("supportsParameter name:" + parameter.getParameterName() + " supports:" + supports);
+		// logger.info("supportsParameter name:" + parameter.getParameterName() + " supports:" + supports);
 		return supports;
 	}
 
@@ -82,7 +82,7 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 			}
 			else {
 				String underlineName = UnderlineHandlerMethodArgumentResolver.camelToUnderline(fieldName);
-				logger.info("resolveName name:" + fieldName + " underlineName:" + underlineName);
+				// logger.info("resolveName name:" + fieldName + " underlineName:" + underlineName);
 				String value = req.getParameter(underlineName);
 				if (value == null) {
 					continue;
