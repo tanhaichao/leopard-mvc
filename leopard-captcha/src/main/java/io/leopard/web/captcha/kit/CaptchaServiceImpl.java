@@ -38,6 +38,7 @@ public class CaptchaServiceImpl implements CaptchaService {
 		this.captchaDao = captchaDaoMysqlImpl;
 	}
 
+	@Override
 	public void checkSessCaptcha(String captcha, String sessCaptcha) throws CaptchaWrongException {
 		if (StringUtils.isEmpty(captcha)) {
 			throw new CaptchaInvalidException("验证码不能为空.");

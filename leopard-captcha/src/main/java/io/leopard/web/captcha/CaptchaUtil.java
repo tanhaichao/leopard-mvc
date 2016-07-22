@@ -19,6 +19,7 @@ public class CaptchaUtil {
 	// return getSessionKey(captchaGroupId);
 	// }
 
+	@Deprecated
 	public static void checkCaptcha(String captcha, String sessCaptcha) throws CaptchaWrongException {
 		if (StringUtils.isEmpty(captcha)) {
 			throw new CaptchaInvalidException("验证码不能为空.");

@@ -36,4 +36,6 @@ public interface CaptchaService {
 
 	String sendSeccode(String account, String type, String target);
 
+	void checkSessCaptcha(String captcha, String sessCaptcha) throws CaptchaWrongException;
+
 }
