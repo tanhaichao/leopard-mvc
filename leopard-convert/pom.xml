@@ -10,9 +10,11 @@
 	<name>模型转换器</name>
 
 	<dependencies>
+
 		<dependency>
-			<groupId>io.leopard</groupId>
-			<artifactId>leopard-json</artifactId>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-databind</artifactId>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>io.leopard</groupId>

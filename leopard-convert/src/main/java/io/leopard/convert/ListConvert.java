@@ -1,7 +1,5 @@
 package io.leopard.convert;
 
-import io.leopard.json.Json;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,8 +24,8 @@ public class ListConvert<S, T> {
 			this.result = new ArrayList<T>();
 		}
 		else {
-			String json = Json.toJson(list);
-			this.result = Json.toListObject(json, clazz);
+			String json = ConvertJson.toJson(list);
+			this.result = ConvertJson.toListObject(json, clazz);
 		}
 	}
 

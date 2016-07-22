@@ -1,6 +1,5 @@
 package io.leopard.convert;
 
-import io.leopard.json.Json;
 
 public class BeanConvert<S, T> {
 
@@ -16,8 +15,8 @@ public class BeanConvert<S, T> {
 	public BeanConvert(S source, Class<T> clazz) {
 
 		if (source != null) {
-			String json = Json.toJson(source);
-			this.target = Json.toObject(json, null, true);
+			String json = ConvertJson.toJson(source);
+			this.target = ConvertJson.toObject(json, clazz);
 		}
 	}
 

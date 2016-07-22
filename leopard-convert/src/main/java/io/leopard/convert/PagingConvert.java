@@ -1,6 +1,5 @@
 package io.leopard.convert;
 
-import io.leopard.json.Json;
 import io.leopard.lang.Paging;
 import io.leopard.lang.PagingImpl;
 
@@ -22,8 +21,8 @@ public class PagingConvert<S, T> {
 		if (paging != null) {
 			Paging<T> result = new PagingImpl<T>(paging);
 			for (S source : paging.getList()) {
-				String json = Json.toJson(source);
-				T target = Json.toObject(json, null, true);
+				String json = ConvertJson.toJson(source);
+				T target = ConvertJson.toObject(json, clazz);
 				result.add(target);
 			}
 		}
