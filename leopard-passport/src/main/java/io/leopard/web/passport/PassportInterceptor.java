@@ -11,6 +11,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
+import org.springframework.web.method.HandlerMethod;
 
 import io.leopard.web.servlet.RegisterHandlerInterceptor;
 
@@ -43,8 +44,12 @@ public class PassportInterceptor extends RegisterHandlerInterceptor {
 			Object account = validator.validate(request, response);
 			logger.info("validator:" + validator + " handler:" + handler + " account:" + account);
 			if (account == null) {
-				validator.showLoginBox(request, response);
-				return false;
+				HandlerMethod method = (HandlerMethod) handler;
+				Nologin nologin = method.getMethodAnnotation(Nologin.class);
+				if (nologin == null) {
+					validator.showLoginBox(request, response);
+					return false;
+				}
 			}
 		}
 		return true;
