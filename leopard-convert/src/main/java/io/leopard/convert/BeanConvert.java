@@ -27,7 +27,7 @@ public class BeanConvert<S, T> {
 		if (target == null) {
 			return this.target;
 		}
-		ConverterContext.convert(target);
+		ConverterContext.convert(target, this.source);
 		return this.target;
 	}
 

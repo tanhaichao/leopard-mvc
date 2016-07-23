@@ -37,8 +37,11 @@ public class ListConvert<S, T> {
 		if (this.result == null || result.isEmpty()) {
 			return this.result;
 		}
+		int index = 0;
 		for (T bean : result) {
-			ConverterContext.convert(bean);
+			S source = this.list.get(index);
+			ConverterContext.convert(bean, source);
+			index++;
 		}
 		return this.result;
 	}

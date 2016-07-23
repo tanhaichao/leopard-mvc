@@ -35,8 +35,11 @@ public class PagingConvert<S, T> {
 		if (this.result == null || result.getList().isEmpty()) {
 			return this.result;
 		}
+		int index = 0;
 		for (T bean : result.getList()) {
-			ConverterContext.convert(bean);
+			S source = this.paging.get(index);
+			ConverterContext.convert(bean, source);
+			index++;
 		}
 		return this.result;
 	}
