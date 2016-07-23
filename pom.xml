@@ -33,6 +33,12 @@
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
+				<artifactId>leopard-test</artifactId>
+				<version>${leopard.unified.version}</version>
+				<scope>test</scope>
+			</dependency>
+			<dependency>
+				<groupId>io.leopard</groupId>
 				<artifactId>leopard-jetty-test</artifactId>
 				<version>${leopard.unified.version}</version>
 				<scope>test</scope>
