@@ -17,6 +17,7 @@ public class ConverterContext implements BeanFactoryAware {
 		for (Entry<String, Converter> entry : beanMap.entrySet()) {
 			System.out.println("entry:" + entry.getKey());
 		}
+		// new Exception("ConverterContext").printStackTrace();
 	}
 
 }
