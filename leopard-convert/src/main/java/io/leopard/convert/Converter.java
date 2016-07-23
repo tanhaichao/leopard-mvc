@@ -6,6 +6,7 @@ package io.leopard.convert;
  * @author 谭海潮
  *
  */
-public interface Converter {
+public interface Converter<S, T> {
 
+	T get(S source);
 }
