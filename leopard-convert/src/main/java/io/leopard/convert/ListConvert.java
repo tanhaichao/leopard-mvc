@@ -12,7 +12,7 @@ public class ListConvert<S, T> {
 	private Class<T> clazz;
 
 	public ListConvert(List<S> list) {
-		this(list,null);
+		this(list, null);
 	}
 
 	public ListConvert(List<S> list, Class<T> clazz) {
@@ -34,6 +34,12 @@ public class ListConvert<S, T> {
 	}
 
 	public List<T> convert() {
+		if (this.result == null || result.isEmpty()) {
+			return this.result;
+		}
+		for (T bean : result) {
+			ConverterContext.convert(bean);
+		}
 		return this.result;
 	}
 

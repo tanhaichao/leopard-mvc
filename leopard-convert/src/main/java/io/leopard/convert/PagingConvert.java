@@ -10,13 +10,12 @@ public class PagingConvert<S, T> {
 	private Paging<T> result;
 
 	private Class<T> clazz;
-	
+
 	public PagingConvert(Paging<S> paging) {
-		this(paging,null);
+		this(paging, null);
 	}
 
-	
-	public PagingConvert(Paging<S> paging,Class<T> clazz) {
+	public PagingConvert(Paging<S> paging, Class<T> clazz) {
 		this.paging = paging;
 		if (paging != null) {
 			Paging<T> result = new PagingImpl<T>(paging);
@@ -33,6 +32,12 @@ public class PagingConvert<S, T> {
 	}
 
 	public Paging<T> convert() {
+		if (this.result == null || result.getList().isEmpty()) {
+			return this.result;
+		}
+		for (T bean : result.getList()) {
+			ConverterContext.convert(bean);
+		}
 		return this.result;
 	}
 

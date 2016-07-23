@@ -1,6 +1,5 @@
 package io.leopard.convert;
 
-
 public class BeanConvert<S, T> {
 
 	private S source;
@@ -25,6 +24,10 @@ public class BeanConvert<S, T> {
 	}
 
 	public T convert() {
+		if (target == null) {
+			return this.target;
+		}
+		ConverterContext.convert(target);
 		return this.target;
 	}
 

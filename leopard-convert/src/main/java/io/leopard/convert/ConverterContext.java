@@ -1,5 +1,7 @@
 package io.leopard.convert;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -11,13 +13,20 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 public class ConverterContext implements BeanFactoryAware {
 
 	@SuppressWarnings("rawtypes")
+	private static List<Converter> converterList = new ArrayList<Converter>();
+
+	@SuppressWarnings("rawtypes")
 	@Override
 	public void setBeanFactory(BeanFactory beanFactory) throws BeansException {
 		Map<String, Converter> beanMap = ((DefaultListableBeanFactory) beanFactory).getBeansOfType(Converter.class);
 		for (Entry<String, Converter> entry : beanMap.entrySet()) {
-			System.out.println("entry:" + entry.getKey());
+			converterList.add(entry.getValue());
 		}
 		// new Exception("ConverterContext").printStackTrace();
+	}
+
+	public static void convert(Object bean) {
+
 	}
 
 }
