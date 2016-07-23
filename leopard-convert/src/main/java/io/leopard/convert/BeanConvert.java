@@ -7,9 +7,9 @@ public class BeanConvert<S, T> {
 
 	private Class<T> clazz;
 
-	public BeanConvert(S source) {
-		this(source, null);
-	}
+	// public BeanConvert(S source) {
+	// this(source, null);
+	// }
 
 	public BeanConvert(S source, Class<T> clazz) {
 

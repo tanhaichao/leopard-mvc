@@ -7,7 +7,7 @@ import java.util.List;
 public class ConvertUtil {
 
 	public static <S, T> T bean(S source, Class<T> clazz) {
-		return new BeanConvert<S, T>(source).convert();
+		return new BeanConvert<S, T>(source, clazz).convert();
 	}
 
 	public static <S, T> List<T> list(List<S> list, Class<T> clazz) {

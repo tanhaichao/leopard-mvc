@@ -20,6 +20,8 @@ public class BankConverter implements Converter<Bankcard, BankVO> {
 	public BankVO get(Bankcard bankcard) {
 		String bankId = bankcard.getBankId();
 		Bank bank = bankService.get(bankId);
+
+		System.out.println("bank:" + bank);
 		return ConvertUtil.bean(bank, BankVO.class);
 	}
 
