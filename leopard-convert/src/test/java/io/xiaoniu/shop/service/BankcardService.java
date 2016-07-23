@@ -14,6 +14,7 @@ public class BankcardService {
 		List<Bankcard> list = new ArrayList<Bankcard>();
 		for (int i = 0; i < 3; i++) {
 			Bankcard bankcard = new Bankcard();
+			bankcard.setBankcardId("bankcardId:" + i);
 			bankcard.setAccount("account" + i);
 			bankcard.setBankId("bankid" + i);
 
