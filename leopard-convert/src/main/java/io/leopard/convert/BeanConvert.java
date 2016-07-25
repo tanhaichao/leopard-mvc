@@ -16,6 +16,7 @@ public class BeanConvert<S, T> {
 		if (source != null) {
 			String json = ConvertJson.toJson(source);
 			this.target = ConvertJson.toObject(json, clazz);
+			FillerContext.fill(source, target);
 		}
 	}
 

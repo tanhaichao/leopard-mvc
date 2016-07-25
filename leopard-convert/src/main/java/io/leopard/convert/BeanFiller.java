@@ -9,4 +9,6 @@ package io.leopard.convert;
 public interface BeanFiller {
 
 	boolean supports(Class<?> sourceClass, Class<?> targetClass);
+
+	void fill(Object source, Object target);
 }
