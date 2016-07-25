@@ -5,6 +5,7 @@ import io.leopard.lang.Paging;
 import java.util.List;
 
 public class ConvertUtil {
+	
 
 	public static <S, T> T bean(S source, Class<T> clazz) {
 		return new BeanConvert<S, T>(source, clazz).convert();
