@@ -48,7 +48,7 @@ public class CaptchaServiceImpl implements CaptchaService {
 		}
 		if (!captcha.equals(sessCaptcha)) {
 			logger.warn("错误验证码 sessCaptcha:" + sessCaptcha + " captcha:" + captcha);
-			throw new CaptchaWrongException(captcha);
+			throw new CaptchaWrongException(sessCaptcha + " " + captcha);
 		}
 	}
 
