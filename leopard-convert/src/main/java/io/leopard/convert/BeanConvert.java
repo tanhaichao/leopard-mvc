@@ -12,7 +12,7 @@ public class BeanConvert<S, T> {
 	// }
 
 	public BeanConvert(S source, Class<T> clazz) {
-
+		this.source = source;
 		if (source != null) {
 			String json = ConvertJson.toJson(source);
 			this.target = ConvertJson.toObject(json, clazz);
