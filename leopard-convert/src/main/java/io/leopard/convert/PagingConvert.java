@@ -21,6 +21,7 @@ public class PagingConvert<S, T> {
 			Paging<T> result = new PagingImpl<T>(paging);
 			for (S source : paging.getList()) {
 				String json = ConvertJson.toJson(source);
+				System.out.println("source:" + source + " json:" + json);
 				T target = ConvertJson.toObject(json, clazz);
 				result.add(target);
 			}
