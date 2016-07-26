@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
@@ -12,6 +14,8 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.util.Assert;
 
 public class FillerContext implements BeanFactoryAware {
+
+	protected static Log logger = LogFactory.getLog(FillerContext.class);
 
 	private static List<BeanFiller> fillerList = new ArrayList<BeanFiller>();
 
@@ -47,6 +51,7 @@ public class FillerContext implements BeanFactoryAware {
 	protected static BeanFiller findConverter(Class<?> sourceClass, Class<?> targetClass) {
 		for (BeanFiller filler : fillerList) {
 			if (filler.supports(sourceClass, targetClass)) {
+				logger.info("findConverter filler:" + filler);
 				return filler;
 			}
 		}
