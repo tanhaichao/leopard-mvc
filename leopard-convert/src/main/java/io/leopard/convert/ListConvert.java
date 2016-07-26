@@ -24,8 +24,13 @@ public class ListConvert<S, T> {
 			this.result = new ArrayList<T>();
 		}
 		else {
-			String json = ConvertJson.toJson(list);
-			this.result = ConvertJson.toListObject(json, clazz);
+			for (S source : list) {
+				String json = ConvertJson.toJson(source);
+				T target = ConvertJson.toObject(json, clazz);
+				FillerContext.fill(source, target);
+				this.result.add(target);
+
+			}
 		}
 	}
 
