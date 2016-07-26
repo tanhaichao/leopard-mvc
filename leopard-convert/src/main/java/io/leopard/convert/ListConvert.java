@@ -24,12 +24,12 @@ public class ListConvert<S, T> {
 			this.result = new ArrayList<T>();
 		}
 		else {
+			this.result = new ArrayList<T>();
 			for (S source : list) {
 				String json = ConvertJson.toJson(source);
 				T target = ConvertJson.toObject(json, clazz);
 				FillerContext.fill(source, target);
 				this.result.add(target);
-
 			}
 		}
 	}
