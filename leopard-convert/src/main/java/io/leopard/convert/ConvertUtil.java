@@ -5,7 +5,6 @@ import io.leopard.lang.Paging;
 import java.util.List;
 
 public class ConvertUtil {
-	
 
 	public static <S, T> T bean(S source, Class<T> clazz) {
 		return new BeanConvert<S, T>(source, clazz).convert();
@@ -16,6 +15,6 @@ public class ConvertUtil {
 	}
 
 	public static <S, T> Paging<T> paging(Paging<S> paging, Class<T> clazz) {
-		return new PagingConvert<S, T>(paging).convert();
+		return new PagingConvert<S, T>(paging, clazz).convert();
 	}
 }

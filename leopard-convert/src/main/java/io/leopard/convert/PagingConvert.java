@@ -1,5 +1,7 @@
 package io.leopard.convert;
 
+import java.util.List;
+
 import io.leopard.lang.Paging;
 import io.leopard.lang.PagingImpl;
 
@@ -11,20 +13,31 @@ public class PagingConvert<S, T> {
 
 	private Class<T> clazz;
 
-	public PagingConvert(Paging<S> paging) {
-		this(paging, null);
-	}
+	// public PagingConvert(Paging<S> paging) {
+	// this(paging, null);
+	// }
 
 	public PagingConvert(Paging<S> paging, Class<T> clazz) {
 		this.paging = paging;
 		if (paging != null) {
-			Paging<T> result = new PagingImpl<T>(paging);
-			for (S source : paging.getList()) {
-				String json = ConvertJson.toJson(source);
-				System.out.println("source:" + source + " json:" + json);
-				T target = ConvertJson.toObject(json, clazz);
+			result = new PagingImpl<T>(paging);
+			String json = ConvertJson.toJson(paging.getList());
+			List<T> list = ConvertJson.toListObject(json, clazz);
+			for (T target : list) {
 				result.add(target);
 			}
+			// for (S source : paging.getList()) {
+			// String json2 = Json.toJson(source);
+			// System.out.println("json2:" + json2);
+			//
+			// String json = ConvertJson.toJson(source);
+			// System.out.println("json:" + json);
+			//
+			// System.out.println("source:" + source + " json:" + json);
+			// // T target = ConvertJson.toObject(json, clazz);
+			// T target = Json.toObject(json, clazz);
+			// result.add(target);
+			// }
 		}
 	}
 
