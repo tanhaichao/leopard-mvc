@@ -33,7 +33,7 @@ public class ConverterContext implements BeanFactoryAware {
 		Assert.notNull(bean, "参数bean不能为null.");
 		Assert.notNull(source, "参数source不能为null.");
 		try {
-			convert2(bean, source);
+			// convert2(bean, source);
 		}
 		catch (Exception e) {
 			e.printStackTrace();

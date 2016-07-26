@@ -40,22 +40,13 @@ public class FillerContext implements BeanFactoryAware {
 	}
 
 	protected static void parse(Object source, Object target) throws Exception {
-		BeanFiller filler = findConverter(source.getClass(), target.getClass());
-		if (filler == null) {
-			return;
-		}
-		System.out.println("converter111:" + filler);
-		filler.fill(source, target);
-	}
-
-	protected static BeanFiller findConverter(Class<?> sourceClass, Class<?> targetClass) {
+		Class<?> sourceClass = source.getClass();
+		Class<?> targetClass = target.getClass();
 		for (BeanFiller filler : fillerList) {
 			if (filler.supports(sourceClass, targetClass)) {
-				logger.info("findConverter filler:" + filler);
-				return filler;
+				filler.fill(source, target);
 			}
 		}
-		return null;
 	}
 
 }
