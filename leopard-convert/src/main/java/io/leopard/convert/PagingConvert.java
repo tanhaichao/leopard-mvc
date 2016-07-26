@@ -21,23 +21,25 @@ public class PagingConvert<S, T> {
 		this.paging = paging;
 		if (paging != null) {
 			result = new PagingImpl<T>(paging);
-			String json = ConvertJson.toJson(paging.getList());
-			List<T> list = ConvertJson.toListObject(json, clazz);
-			for (T target : list) {
-				result.add(target);
-			}
-			// for (S source : paging.getList()) {
-			// String json2 = Json.toJson(source);
-			// System.out.println("json2:" + json2);
-			//
-			// String json = ConvertJson.toJson(source);
-			// System.out.println("json:" + json);
-			//
-			// System.out.println("source:" + source + " json:" + json);
-			// // T target = ConvertJson.toObject(json, clazz);
-			// T target = Json.toObject(json, clazz);
+			// String json = ConvertJson.toJson(paging.getList());
+			// List<T> list = ConvertJson.toListObject(json, clazz);
+			// for (T target : list) {
+			// FillerContext.fill(source, target);
 			// result.add(target);
 			// }
+			for (S source : paging.getList()) {
+				// String json2 = Json.toJson(source);
+				// System.out.println("json2:" + json2);
+				//
+				String json = ConvertJson.toJson(source);
+				// System.out.println("json:" + json);
+				//
+				// System.out.println("source:" + source + " json:" + json);
+				T target = ConvertJson.toObject(json, clazz);
+				FillerContext.fill(source, target);
+				// T target = Json.toObject(json, clazz);
+				result.add(target);
+			}
 		}
 	}
 
