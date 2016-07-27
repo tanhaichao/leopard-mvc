@@ -1,7 +1,5 @@
 package io.leopard.convert;
 
-import java.util.List;
-
 import io.leopard.lang.Paging;
 import io.leopard.lang.PagingImpl;
 
@@ -41,6 +39,10 @@ public class PagingConvert<S, T> {
 				result.add(target);
 			}
 		}
+	}
+
+	protected void fill(S source, T target) {
+
 	}
 
 	public Paging<T> get() {
