@@ -1,6 +1,7 @@
 package io.leopard.web.captcha.kit;
 
 import io.leopard.core.exception.forbidden.CaptchaWrongException;
+import io.leopard.web.captcha.FrequencyException;
 
 public interface CaptchaService {
 
@@ -30,11 +31,11 @@ public interface CaptchaService {
 
 	String sendCaptcha(String account, String type, String target, String content);
 
-	String sendSeccode(String account, String type, String target, String content);
+	String sendSeccode(String account, String type, String target, String content) throws FrequencyException;
 
 	String sendCaptcha(String account, String type, String target);
 
-	String sendSeccode(String account, String type, String target);
+	String sendSeccode(String account, String type, String target) throws FrequencyException;
 
 	void checkSessCaptcha(String captcha, String sessCaptcha) throws CaptchaWrongException;
 

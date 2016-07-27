@@ -13,6 +13,7 @@ import org.springframework.util.StringUtils;
 import io.leopard.core.exception.forbidden.CaptchaWrongException;
 import io.leopard.jdbc.Jdbc;
 import io.leopard.web.captcha.CaptchaInvalidException;
+import io.leopard.web.captcha.FrequencyException;
 
 //@Service
 public class CaptchaServiceImpl implements CaptchaService {
@@ -158,8 +159,8 @@ public class CaptchaServiceImpl implements CaptchaService {
 	}
 
 	@Override
-	public String sendSeccode(String account, String type, String target) {
-		return this.send(account, CaptchaCategory.SECCODE, type, target, "您的验证码:{captcha}");
+	public String sendSeccode(String account, String type, String target) throws FrequencyException {
+		return this.sendSeccode(account, type, target, "您的验证码:{captcha}");
 	}
 
 	@Override
@@ -168,7 +169,9 @@ public class CaptchaServiceImpl implements CaptchaService {
 	}
 
 	@Override
-	public String sendSeccode(String account, String type, String target, String content) {
+	public String sendSeccode(String account, String type, String target, String content) throws FrequencyException {
+		
+		
 		return this.send(account, CaptchaCategory.SECCODE, type, target, content);
 	}
 
