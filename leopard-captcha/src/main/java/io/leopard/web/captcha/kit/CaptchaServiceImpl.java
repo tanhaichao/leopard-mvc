@@ -12,6 +12,7 @@ import org.springframework.util.StringUtils;
 
 import io.leopard.core.exception.forbidden.CaptchaWrongException;
 import io.leopard.jdbc.Jdbc;
+import io.leopard.redis.Redis;
 import io.leopard.web.captcha.CaptchaInvalidException;
 import io.leopard.web.captcha.FrequencyException;
 
@@ -25,9 +26,14 @@ public class CaptchaServiceImpl implements CaptchaService {
 	protected Log logger = LogFactory.getLog(this.getClass());
 
 	protected Jdbc jdbc;
+	protected Redis redis;
 
 	public void setJdbc(Jdbc jdbc) {
 		this.jdbc = jdbc;
+	}
+
+	public void setRedis(Redis redis) {
+		this.redis = redis;
 	}
 
 	protected CaptchaDao captchaDao;
@@ -168,10 +174,30 @@ public class CaptchaServiceImpl implements CaptchaService {
 		return this.send(account, CaptchaCategory.CAPTCHA, type, target, content);
 	}
 
+	/**
+	 * 检查访问频率
+	 * 
+	 * @param account
+	 * @param category
+	 * @param type
+	 * @param target
+	 */
+	protected void checkFrequency(String account, String category, String type, String target, int seconds) throws FrequencyException {
+		String member = type + ":" + target + ":" + account;
+		String key = "captcha:" + category;
+		Double score = redis.zscore(key, member);
+		if (score != null) {
+			long time = score.longValue();
+			if ((time + 1000L * seconds) > System.currentTimeMillis()) {
+				throw new FrequencyException("您[" + account + "]访问太频繁了，歇一会儿吧.");
+			}
+		}
+		redis.zadd(key, System.currentTimeMillis(), member);
+	}
+
 	@Override
 	public String sendSeccode(String account, String type, String target, String content) throws FrequencyException {
-		
-		
+		this.checkFrequency(account, CaptchaCategory.SECCODE, type, target, 60);
 		return this.send(account, CaptchaCategory.SECCODE, type, target, content);
 	}
 
