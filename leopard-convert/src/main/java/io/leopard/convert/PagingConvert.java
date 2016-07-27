@@ -18,6 +18,8 @@ public class PagingConvert<S, T> {
 			for (S source : paging.getList()) {
 				String json = ConvertJson.toJson(source);
 				T target = ConvertJson.toObject(json, clazz);
+				
+				this.fill(source, target);
 				FillerContext.fill(source, target);
 				result.add(target);
 			}
