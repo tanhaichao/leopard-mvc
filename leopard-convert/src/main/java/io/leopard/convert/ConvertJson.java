@@ -1,5 +1,6 @@
 package io.leopard.convert;
 
+import io.leopard.json.DisablingJsonSerializerIntrospector;
 import io.leopard.json.JsonException;
 
 import java.util.ArrayList;
@@ -14,7 +15,7 @@ public class ConvertJson {
 	private static ObjectMapper mapper = new ObjectMapper(); // 忽略不存在的字段.
 	static {
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
-
+		mapper.setAnnotationIntrospector(new DisablingJsonSerializerIntrospector());
 	}
 
 	/**
