@@ -46,9 +46,6 @@ public class JsonViewTrynbResolver implements TrynbResolver {
 		jsonView.setException(exception.getClass().getName());
 		return jsonView;
 	}
-	
-	
-	
 
 	public class ErrorJsonView extends AbstractView {
 
@@ -73,10 +70,9 @@ public class JsonViewTrynbResolver implements TrynbResolver {
 
 		@Override
 		public String getBody(HttpServletRequest request, HttpServletResponse response) {
-			String json = Json.toJson(map);
+			String json = Json.toFormatJson(map);
 			request.setAttribute("result.json", json);
-			
-			
+
 			String callback = request.getParameter("callback");
 			if (StringUtils.isNotEmpty(callback)) {
 				if (!isValidCallback(callback)) {
