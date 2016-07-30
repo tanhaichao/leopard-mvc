@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.SystemUtils;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -43,6 +44,9 @@ public class JsonViewTrynbResolver implements TrynbResolver {
 			jsonView.setStatus(trynbInfo.getStatusCode());
 			jsonView.setMessage(trynbInfo.getMessage());
 		}
+		if (SystemUtils.IS_OS_WINDOWS) {// TODO 测试代码
+			jsonView.setDetailMessage(exception.getMessage());
+		}
 		jsonView.setException(exception.getClass().getName());
 		return jsonView;
 	}
@@ -53,6 +57,10 @@ public class JsonViewTrynbResolver implements TrynbResolver {
 
 		public void setStatus(String status) {
 			map.put("status", status);
+		}
+
+		public void setDetailMessage(String detailMessage) {
+			map.put("detailMessage", detailMessage);
 		}
 
 		public void setMessage(String message) {
