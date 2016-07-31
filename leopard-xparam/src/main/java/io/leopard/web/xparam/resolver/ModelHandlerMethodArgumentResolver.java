@@ -19,6 +19,8 @@ import org.springframework.core.MethodParameter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.NativeWebRequest;
 
+import io.leopard.json.Json;
+
 /**
  * 下划线参数名称解析.
  * 
@@ -184,7 +186,10 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 			}
 			return new Date(time);
 		}
-		throw new IllegalArgumentException("未知数据类型[" + type.getName() + "].");
+		else {
+			return Json.toObject(value, type);
+		}
+		// throw new IllegalArgumentException("未知数据类型[" + type.getName() + "].");
 	}
 
 }
