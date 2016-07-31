@@ -187,7 +187,7 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 			return new Date(time);
 		}
 		else {
-			return Json.toObject(value, type);
+			return ParamListHandlerMethodArgumentResolver.toObject(value, type);
 		}
 		// throw new IllegalArgumentException("未知数据类型[" + type.getName() + "].");
 	}
