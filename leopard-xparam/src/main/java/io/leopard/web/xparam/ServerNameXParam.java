@@ -12,17 +12,17 @@ import org.springframework.stereotype.Service;
  * 
  */
 @Service
-public class RefererAgentXParam implements XParam {
+public class ServerNameXParam implements XParam {
 
 	@Override
 	public Object getValue(HttpServletRequest request, MethodParameter parameter) {
-		String userAgent = request.getHeader("referer");
-		return userAgent;
+		String serverName = request.getServerName();
+		return serverName;
 	}
 
 	@Override
 	public String getKey() {
-		return "referer";
+		return "serverName";
 	}
 
 }
