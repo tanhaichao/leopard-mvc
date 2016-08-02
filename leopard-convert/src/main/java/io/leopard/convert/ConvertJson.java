@@ -21,8 +21,7 @@ public class ConvertJson {
 	/**
 	 * 将对象转成json.
 	 * 
-	 * @param obj
-	 *            对象
+	 * @param obj 对象
 	 * @return
 	 */
 
@@ -47,8 +46,7 @@ public class ConvertJson {
 	 * 
 	 * @param json
 	 * @param clazz
-	 * @param ignoreUnknownField
-	 *            是否忽略不存在的字段?
+	 * @param ignoreUnknownField 是否忽略不存在的字段?
 	 * @return
 	 */
 
