@@ -25,7 +25,6 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 
-import io.leopard.json.Json;
 import io.leopard.json.JsonException;
 
 /**
@@ -128,6 +127,9 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 
 		// boolean underline = UnderlineHandlerMethodArgumentResolver.isEnable();
 		if (values.length == 1) {
+			if (StringUtils.isEmpty(values[0])) {
+				return null;
+			}
 			if (values[0].startsWith("[")) {
 				return toListObject(values[0], clazz);
 			}
