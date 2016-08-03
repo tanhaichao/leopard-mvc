@@ -25,6 +25,7 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 
+import io.leopard.json.Json;
 import io.leopard.json.JsonException;
 
 /**
@@ -106,14 +107,12 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 			return toList(clazz, values);
 		}
 		if (values != null && values.length == 1) {
-			// StringUtils.split("", "");
-			// return StringUtils.split(values[0], ", ");// commons的StringUtils.split有问题，需要使用spring的StringUtils
-			// 20160610 spring和commons的StringUtils.split都有问题
 			if (StringUtils.isEmpty(values[0])) {
 				return null;
 			}
-			// TODO 暂时删除
-			// return values[0].split(", ");
+			// if (values[0].startsWith("[") && values[0].endsWith("]")) {
+			// return Json.toListObject(values[0], String.class);
+			// }
 		}
 		return values;
 	}
