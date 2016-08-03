@@ -110,9 +110,10 @@ public class ParamListHandlerMethodArgumentResolver extends AbstractNamedValueMe
 			if (StringUtils.isEmpty(values[0])) {
 				return null;
 			}
-			// if (values[0].startsWith("[") && values[0].endsWith("]")) {
-			// return Json.toListObject(values[0], String.class);
-			// }
+			// TODO 暂时只支持List<String>
+			if (values[0].startsWith("[") && values[0].endsWith("]")) {
+				return Json.toListObject(values[0], String.class);
+			}
 		}
 		return values;
 	}
