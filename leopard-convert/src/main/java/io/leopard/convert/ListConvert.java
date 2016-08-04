@@ -11,10 +11,6 @@ public class ListConvert<S, T> {
 
 	private Class<T> clazz;
 
-	public ListConvert(List<S> list) {
-		this(list, null);
-	}
-
 	public ListConvert(List<S> list, Class<T> clazz) {
 		this.clazz = clazz;
 		this.list = list;
