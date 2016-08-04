@@ -47,6 +47,18 @@ public class ErrorUtil {
 		if (message == null) {
 			return null;
 		}
-		return message.replaceAll("\\[.*\\]", "");
+		return fillterDebugInfo(message);
+	}
+
+	/**
+	 * 过滤debug信息.
+	 * 
+	 * @param message
+	 * @return
+	 */
+	protected static String fillterDebugInfo(String message) {
+		message = message.replaceAll("\\[[^\\[]*?\\]", "");
+		return message.replaceAll("\\[.*?\\]", "");
+		// return message;
 	}
 }

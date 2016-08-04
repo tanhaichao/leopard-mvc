@@ -60,4 +60,14 @@ public class ErrorUtilTest {
 		// MockRequest request = new MockRequest();
 		// ErrorUtil.getClientInfo(request, "/index.do", "message");
 	}
+
+	@Test
+	public void fillterDebugInfo() {
+		Assert.assertEquals("abc", ErrorUtil.fillterDebugInfo("a[a]bc"));
+		Assert.assertEquals("abc", ErrorUtil.fillterDebugInfo("a[]bc"));
+		Assert.assertEquals("abc", ErrorUtil.fillterDebugInfo("a[a]b[b]c"));
+		Assert.assertEquals("abc", ErrorUtil.fillterDebugInfo("a[a[b]]bc"));
+		Assert.assertEquals("abc", ErrorUtil.fillterDebugInfo("a[a[b]][a]bc"));
+
+	}
 }
