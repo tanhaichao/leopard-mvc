@@ -28,10 +28,16 @@ public class ListConvert<S, T> {
 			for (S source : list) {
 				String json = ConvertJson.toJson(source);
 				T target = ConvertJson.toObject(json, clazz);
+
+				this.fill(source, target);
 				FillerContext.fill(source, target);
 				this.result.add(target);
 			}
 		}
+	}
+
+	protected void fill(S source, T target) {
+
 	}
 
 	public List<T> get() {
