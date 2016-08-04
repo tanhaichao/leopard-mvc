@@ -47,6 +47,6 @@ public class ErrorUtil {
 		if (message == null) {
 			return null;
 		}
-		return message.replaceAll("\\[.*+\\]", "");
+		return message.replaceAll("\\[.*\\]", "");
 	}
 }
