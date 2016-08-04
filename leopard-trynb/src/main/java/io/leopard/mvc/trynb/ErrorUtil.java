@@ -37,7 +37,6 @@ public class ErrorUtil {
 		if (message != null) {
 			return message;
 		}
-
 		if (e instanceof GenericSignatureFormatError) {
 			return "更新程序后，还没有重启服务.";
 		}
@@ -48,6 +47,6 @@ public class ErrorUtil {
 		if (message == null) {
 			return null;
 		}
-		return message.replaceAll("\\[.*?\\]", "");
+		return message.replaceAll("\\[.*+\\]", "");
 	}
 }
