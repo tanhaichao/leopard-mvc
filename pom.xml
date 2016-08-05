@@ -26,6 +26,11 @@
 	<dependencyManagement>
 		<dependencies>
 			<dependency>
+				<groupId>org.freemarker</groupId>
+				<artifactId>freemarker</artifactId>
+				<version>2.3.23</version>
+			</dependency>
+			<dependency>
 				<groupId>io.leopard</groupId>
 				<artifactId>leopard-mock</artifactId>
 				<version>${leopard.unified.version}</version>
