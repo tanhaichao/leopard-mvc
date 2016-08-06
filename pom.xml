@@ -50,6 +50,16 @@
 			</dependency>
 			<dependency>
 				<groupId>io.leopard</groupId>
+				<artifactId>leopard-jdbc</artifactId>
+				<version>${leopard.unified.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.leopard</groupId>
+				<artifactId>leopard-lang</artifactId>
+				<version>${leopard.unified.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.leopard</groupId>
 				<artifactId>leopard-json</artifactId>
 				<version>${leopard.unified.version}</version>
 			</dependency>
