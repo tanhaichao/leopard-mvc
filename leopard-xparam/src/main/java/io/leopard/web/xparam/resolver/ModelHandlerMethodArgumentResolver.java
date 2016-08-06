@@ -62,7 +62,7 @@ public class ModelHandlerMethodArgumentResolver extends AbstractNamedValueMethod
 		if (className.endsWith("AddressVO")) {
 			supports = true;
 		}
-		// logger.info("supportsParameter name:" + parameter.getParameterName() + " supports:" + supports);
+		// logger.info("supportsParameter name:" + parameter.getParameterName() + " supports:" + supports + " type:" + type.getName());
 		return supports;
 	}
 
