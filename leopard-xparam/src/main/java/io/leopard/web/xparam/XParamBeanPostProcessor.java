@@ -15,6 +15,7 @@ import io.leopard.web.xparam.resolver.ModelHandlerMethodArgumentResolver;
 import io.leopard.web.xparam.resolver.ParamListHandlerMethodArgumentResolver;
 import io.leopard.web.xparam.resolver.PathRegexHandlerMethodArgumentResolver;
 import io.leopard.web.xparam.resolver.PrimitiveMethodArgumentResolver;
+import io.leopard.web.xparam.resolver.TimeRangeHandlerMethodArgumentResolver;
 import io.leopard.web.xparam.resolver.UnderlineHandlerMethodArgumentResolver;
 import io.leopard.web.xparam.resolver.XParamHandlerMethodArgumentResolver;
 
@@ -70,6 +71,12 @@ public class XParamBeanPostProcessor implements BeanPostProcessor, BeanFactoryAw
 			ParamListHandlerMethodArgumentResolver argumentResolver = beanFactory.getBean(ParamListHandlerMethodArgumentResolver.class);
 			customArgumentResolvers.add(argumentResolver);
 		}
+
+		{
+			TimeRangeHandlerMethodArgumentResolver argumentResolver = beanFactory.getBean(TimeRangeHandlerMethodArgumentResolver.class);
+			customArgumentResolvers.add(argumentResolver);
+		}
+
 		if (UnderlineHandlerMethodArgumentResolver.isEnable()) {
 			UnderlineHandlerMethodArgumentResolver argumentResolver = beanFactory.getBean(UnderlineHandlerMethodArgumentResolver.class);
 			customArgumentResolvers.add(argumentResolver);
