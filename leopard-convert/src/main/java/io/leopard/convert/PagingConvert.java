@@ -20,14 +20,19 @@ public class PagingConvert<S, T> {
 				// System.err.println("json:" + json);
 				T target = ConvertJson.toObject(json, clazz);
 
-				this.fill(source, target);
+				try {
+					this.fill(source, target);
+				}
+				catch (Exception e) {
+					throw new RuntimeException(e.getMessage());
+				}
 				FillerContext.fill(source, target);
 				result.add(target);
 			}
 		}
 	}
 
-	protected void fill(S source, T target) {
+	protected void fill(S source, T target) throws Exception {
 
 	}
 
