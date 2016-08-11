@@ -35,17 +35,15 @@ public class TimeRangeHandlerMethodArgumentResolver extends AbstractNamedValueMe
 	@Override
 	protected Object resolveName(String name, MethodParameter parameter, NativeWebRequest request) throws Exception {
 		HttpServletRequest req = (HttpServletRequest) request.getNativeRequest();
-		boolean enable = UnderlineHandlerMethodArgumentResolver.isEnable();
-		String startTimeName = "startTime";
-		String endTimeName = "endTime";
-
-		if (enable) {
-			startTimeName = UnderlineHandlerMethodArgumentResolver.camelToUnderline(startTimeName);
-			endTimeName = UnderlineHandlerMethodArgumentResolver.camelToUnderline(endTimeName);
-		}
-
-		String startTime = req.getParameter(startTimeName);
-		String endTime = req.getParameter(endTimeName);
+		// boolean enable = UnderlineHandlerMethodArgumentResolver.isEnable();
+		// String startTimeName = "startTime";
+		// String endTimeName = "endTime";
+		// if (enable) {
+		// startTimeName = UnderlineHandlerMethodArgumentResolver.camelToUnderline(startTimeName);
+		// endTimeName = UnderlineHandlerMethodArgumentResolver.camelToUnderline(endTimeName);
+		// }
+		String startTime = UnderlineHandlerMethodArgumentResolver.getParameter(req, "startTime");
+		String endTime = UnderlineHandlerMethodArgumentResolver.getParameter(req, "endTime");
 
 		TimeRange range = new TimeRange();
 		if (StringUtils.isNotEmpty(startTime)) {

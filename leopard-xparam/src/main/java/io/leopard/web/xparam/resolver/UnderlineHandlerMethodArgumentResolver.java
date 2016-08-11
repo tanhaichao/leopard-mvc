@@ -68,6 +68,15 @@ public class UnderlineHandlerMethodArgumentResolver extends AbstractNamedValueMe
 		return value;
 	}
 
+	
+	public static String getParameter(HttpServletRequest request, String name) {
+		String value = request.getParameter(name);
+		if (enable && value == null) {
+			value = request.getParameter(camelToUnderline(name));
+		}
+		return value;
+	}
+
 	/**
 	 * 将驼峰式命名的字符串转换为下划线方式.
 	 */
