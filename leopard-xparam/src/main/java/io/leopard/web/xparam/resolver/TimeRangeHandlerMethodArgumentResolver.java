@@ -48,7 +48,6 @@ public class TimeRangeHandlerMethodArgumentResolver extends AbstractNamedValueMe
 		TimeRange range = new TimeRange();
 		if (StringUtils.isNotEmpty(startTime)) {
 			range.setStartTime(toDate(startTime));
-			range.setEndTime(toDate(endTime));
 		}
 		if (StringUtils.isNotEmpty(endTime)) {
 			range.setEndTime(toDate(endTime));
