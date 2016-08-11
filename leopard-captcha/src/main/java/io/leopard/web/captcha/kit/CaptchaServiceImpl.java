@@ -79,8 +79,7 @@ public class CaptchaServiceImpl implements CaptchaService {
 		// String securityCode2 = lastSecurityCode(mobile, type);
 		Captcha bean = this.last(account, category, target);
 		if (bean == null) {
-			// System.err.println("class:" + this);
-			throw new CaptchaWrongException(captcha);
+			throw new CaptchaWrongException("获取不到验证码记录");
 		}
 		if (!bean.getCaptcha().equals(captcha)) {
 			throw new CaptchaWrongException(captcha);
