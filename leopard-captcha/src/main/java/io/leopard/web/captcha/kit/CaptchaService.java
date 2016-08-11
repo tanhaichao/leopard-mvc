@@ -35,6 +35,8 @@ public interface CaptchaService {
 
 	String sendCaptcha(String account, String type, String target);
 
+	String sendSeccode(String account, String target) throws FrequencyException;
+
 	String sendSeccode(String account, String type, String target) throws FrequencyException;
 
 	void checkSessCaptcha(String captcha, String sessCaptcha) throws CaptchaWrongException;

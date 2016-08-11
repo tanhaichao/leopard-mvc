@@ -163,6 +163,10 @@ public class CaptchaServiceImpl implements CaptchaService {
 		return this.send(account, CaptchaCategory.CAPTCHA, type, target, "您的验证码:{captcha}");
 	}
 
+	public String sendSeccode(String account, String target) throws FrequencyException {
+		return this.sendSeccode(account, CaptchaCategory.SECCODE, target);
+	}
+
 	@Override
 	public String sendSeccode(String account, String type, String target) throws FrequencyException {
 		return this.sendSeccode(account, type, target, "您的验证码:{captcha}");
