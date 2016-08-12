@@ -1,4 +1,4 @@
-package io.leopard.web.seccode;
+package io.leopard.web.captcha.kit;
 
 import io.leopard.core.exception.ForbiddenException;
 
@@ -8,11 +8,11 @@ import io.leopard.core.exception.ForbiddenException;
  * @author 谭海潮
  *
  */
-public class SeccodeWrongException extends ForbiddenException {
+public class CaptchaWrongException extends ForbiddenException {
 
 	private static final long serialVersionUID = 1L;
 
-	public SeccodeWrongException(String seccode) {
+	public CaptchaWrongException(String seccode) {
 		super("错误的验证码[" + seccode + "].");
 	}
 

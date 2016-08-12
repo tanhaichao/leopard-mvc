@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Captcha {
 
-	private String captchaId;
+	private String seccodeId;
 
 	private String account;
 
@@ -23,17 +23,17 @@ public class Captcha {
 	 */
 	private String target;
 
-	private String captcha;
+	private String seccode;
 	private Date posttime;
 
 	private boolean used;
 
 	public String getCaptchaId() {
-		return captchaId;
+		return seccodeId;
 	}
 
-	public void setCaptchaId(String captchaId) {
-		this.captchaId = captchaId;
+	public void setSeccodeId(String seccodeId) {
+		this.seccodeId = seccodeId;
 	}
 
 	public String getAccount() {
@@ -53,11 +53,11 @@ public class Captcha {
 	}
 
 	public String getCaptcha() {
-		return captcha;
+		return seccode;
 	}
 
-	public void setCaptcha(String captcha) {
-		this.captcha = captcha;
+	public void setSeccode(String seccode) {
+		this.seccode = seccode;
 	}
 
 	public Date getPosttime() {
