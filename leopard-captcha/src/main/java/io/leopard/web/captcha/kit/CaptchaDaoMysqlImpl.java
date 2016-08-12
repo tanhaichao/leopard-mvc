@@ -31,7 +31,7 @@ public class CaptchaDaoMysqlImpl implements CaptchaDao {
 	@Override
 	public boolean add(Captcha captcha) {
 		InsertBuilder builder = new InsertBuilder(tableName);
-		builder.setString("seccodeId", captcha.getCaptchaId());
+		builder.setString("captchaId", captcha.getCaptchaId());
 		builder.setString("type", captcha.getType());
 		builder.setString("target", captcha.getTarget());
 		builder.setString("account", captcha.getAccount());
