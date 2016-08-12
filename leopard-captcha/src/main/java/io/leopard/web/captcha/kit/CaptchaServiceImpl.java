@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import javax.annotation.PostConstruct;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.util.Assert;
@@ -12,6 +13,7 @@ import org.springframework.util.Assert;
 import io.leopard.core.exception.forbidden.CaptchaWrongException;
 import io.leopard.jdbc.Jdbc;
 import io.leopard.redis.Redis;
+import io.leopard.web.captcha.CaptchaInvalidException;
 import io.leopard.web.captcha.FrequencyException;
 
 //@Service
@@ -40,6 +42,20 @@ public class CaptchaServiceImpl implements CaptchaService {
 	}
 
 	protected CaptchaDao captchaDao;
+
+	@Override
+	public void checkSessCaptcha(String captcha, String sessCaptcha) throws CaptchaWrongException {
+		if (StringUtils.isEmpty(captcha)) {
+			throw new CaptchaInvalidException("验证码不能为空.");
+		}
+		if (StringUtils.isEmpty(sessCaptcha)) {
+			throw new CaptchaInvalidException("验证码未生成，验证码使用");
+		}
+		if (!captcha.equals(sessCaptcha)) {
+			logger.warn("错误验证码 sessCaptcha:" + sessCaptcha + " captcha:" + captcha);
+			throw new CaptchaWrongException(sessCaptcha + " " + captcha);
+		}
+	}
 
 	@PostConstruct
 	public void init() {
@@ -92,21 +108,26 @@ public class CaptchaServiceImpl implements CaptchaService {
 	}
 
 	@Override
-	public Captcha check(String account, CaptchaType type, String target, String seccode) throws CaptchaWrongException {
+	public Captcha check(String account, CaptchaType type, String target, String captcha) throws CaptchaWrongException {
 		Assert.hasText(account, "参数account不能为空");
 		Assert.notNull(type, "参数type不能为空");
 		Assert.hasText(target, "参数target不能为空");
-		Assert.hasText(seccode, "参数seccode不能为空");
+		Assert.hasText(captcha, "参数captcha不能为空");
 
 		// String securityCode2 = lastSecurityCode(mobile, type);
 		Captcha bean = this.last(account, type, target);
 		if (bean == null) {
 			throw new CaptchaWrongException("获取不到验证码记录[" + account + " " + type.getKey() + " " + target + "]");
 		}
-		if (!bean.getCaptcha().equals(seccode)) {
-			throw new CaptchaWrongException(seccode);
+		if (!bean.getCaptcha().equals(captcha)) {
+			throw new CaptchaWrongException(captcha);
 		}
 		return bean;
+	}
+
+	@Override
+	public String send(String account, CaptchaType type, String target) throws FrequencyException {
+		return this.send(account, type, target, "");
 	}
 
 	@Override

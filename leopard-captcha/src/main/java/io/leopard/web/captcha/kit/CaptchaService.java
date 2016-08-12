@@ -20,6 +20,10 @@ public interface CaptchaService {
 	 */
 	String send(String account, CaptchaType type, String target, String content) throws FrequencyException;
 
+	String send(String account, CaptchaType type, String target) throws FrequencyException;
+
 	boolean updateUsed(Captcha captcha);
+
+	void checkSessCaptcha(String captcha, String sessCaptcha) throws CaptchaWrongException;
 
 }
