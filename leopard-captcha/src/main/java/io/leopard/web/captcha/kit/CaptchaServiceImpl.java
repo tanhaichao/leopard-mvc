@@ -9,6 +9,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.util.Assert;
 
+import io.leopard.core.exception.forbidden.CaptchaWrongException;
 import io.leopard.jdbc.Jdbc;
 import io.leopard.redis.Redis;
 import io.leopard.web.captcha.FrequencyException;
@@ -53,17 +54,17 @@ public class CaptchaServiceImpl implements CaptchaService {
 		Assert.notNull(type, "参数type不能为空");
 		Assert.hasText(target, "参数target不能为空");
 		Assert.hasText(captcha, "参数captcha不能为空");
-		String seccodeId = UUID.randomUUID().toString().replaceAll("-", "").toLowerCase();
+		String captchaId = UUID.randomUUID().toString().replaceAll("-", "").toLowerCase();
 		Captcha bean = new Captcha();
-		bean.setSeccodeId(seccodeId);
+		bean.setCaptchaId(captchaId);
 		bean.setAccount(account);
 		bean.setType(type.getKey());
 		bean.setTarget(target);
 		bean.setPosttime(new Date());
-		bean.setSeccode(captcha);
+		bean.setCaptcha(captcha);
 		bean.setUsed(false);
 		captchaDao.add(bean);
-		return seccodeId;
+		return captchaId;
 	}
 
 	protected Captcha last(String account, CaptchaType type, String target) {

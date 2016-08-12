@@ -1,5 +1,6 @@
 package io.leopard.web.captcha.kit;
 
+import io.leopard.core.exception.forbidden.CaptchaWrongException;
 import io.leopard.web.captcha.FrequencyException;
 
 public interface CaptchaService {

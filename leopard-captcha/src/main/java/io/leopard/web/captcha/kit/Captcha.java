@@ -4,7 +4,7 @@ import java.util.Date;
 
 public class Captcha {
 
-	private String seccodeId;
+	private String captchaId;
 
 	private String account;
 
@@ -23,18 +23,11 @@ public class Captcha {
 	 */
 	private String target;
 
-	private String seccode;
+	private String captcha;
 	private Date posttime;
+	private Date expiryTime;
 
 	private boolean used;
-
-	public String getCaptchaId() {
-		return seccodeId;
-	}
-
-	public void setSeccodeId(String seccodeId) {
-		this.seccodeId = seccodeId;
-	}
 
 	public String getAccount() {
 		return account;
@@ -52,12 +45,20 @@ public class Captcha {
 		this.type = type;
 	}
 
-	public String getCaptcha() {
-		return seccode;
+	public String getCaptchaId() {
+		return captchaId;
 	}
 
-	public void setSeccode(String seccode) {
-		this.seccode = seccode;
+	public void setCaptchaId(String captchaId) {
+		this.captchaId = captchaId;
+	}
+
+	public String getCaptcha() {
+		return captcha;
+	}
+
+	public void setCaptcha(String captcha) {
+		this.captcha = captcha;
 	}
 
 	public Date getPosttime() {
@@ -90,6 +91,14 @@ public class Captcha {
 
 	public void setTarget(String target) {
 		this.target = target;
+	}
+
+	public Date getExpiryTime() {
+		return expiryTime;
+	}
+
+	public void setExpiryTime(Date expiryTime) {
+		this.expiryTime = expiryTime;
 	}
 
 }
