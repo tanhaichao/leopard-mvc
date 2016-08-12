@@ -79,7 +79,7 @@ public class CaptchaServiceImpl implements CaptchaService {
 		// String securityCode2 = lastSecurityCode(mobile, type);
 		Captcha bean = this.last(account, category, target);
 		if (bean == null) {
-			throw new CaptchaWrongException("获取不到验证码记录");
+			throw new CaptchaWrongException("获取不到验证码记录[" + account + " " + category + " " + target + "]");
 		}
 		if (!bean.getCaptcha().equals(captcha)) {
 			throw new CaptchaWrongException(captcha);
@@ -192,7 +192,7 @@ public class CaptchaServiceImpl implements CaptchaService {
 		if (score != null) {
 			long time = score.longValue();
 			if ((time + 1000L * seconds) > System.currentTimeMillis()) {
-				throw new FrequencyException("您[" + account + "]访问太频繁了，歇一会儿吧.");
+				throw new FrequencyException("您[" + account + " " + category + " " + type + " " + target + "]访问太频繁了，歇一会儿吧.");
 			}
 		}
 		redis.zadd(key, System.currentTimeMillis(), member);
