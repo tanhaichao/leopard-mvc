@@ -45,10 +45,8 @@ public class SessionRequestWrapper extends HttpServletRequestWrapper {
 	/**
 	 * 获取cookie的值</br>
 	 * 
-	 * @param name
-	 *            cookie名称
-	 * @param request
-	 *            http请求
+	 * @param name cookie名称
+	 * @param request http请求
 	 * @return cookie值
 	 */
 	private String getCookie(String name) {
@@ -78,6 +76,7 @@ public class SessionRequestWrapper extends HttpServletRequestWrapper {
 		Cookie cookie = new Cookie(name, value);
 		// cookie.setDomain(domain);
 		// cookie.setMaxAge(maxAge);
+		cookie.setHttpOnly(true);
 		cookie.setPath("/");
 		// response.addHeader("P3P", "CP=\"CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR\"");
 		response.addCookie(cookie);
