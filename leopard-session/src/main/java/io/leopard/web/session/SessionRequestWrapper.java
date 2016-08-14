@@ -74,8 +74,6 @@ public class SessionRequestWrapper extends HttpServletRequestWrapper {
 		}
 
 		Cookie cookie = new Cookie(name, value);
-		// cookie.setDomain(domain);
-		// cookie.setMaxAge(maxAge);
 		cookie.setHttpOnly(true);
 		cookie.setPath("/");
 		// response.addHeader("P3P", "CP=\"CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR\"");
