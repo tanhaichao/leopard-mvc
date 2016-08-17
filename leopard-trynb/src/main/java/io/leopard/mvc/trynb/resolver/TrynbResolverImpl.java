@@ -1,7 +1,5 @@
 package io.leopard.mvc.trynb.resolver;
 
-import io.leopard.mvc.trynb.model.TrynbInfo;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -10,8 +8,11 @@ import java.util.ServiceLoader;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.springframework.util.StringUtils;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import io.leopard.mvc.trynb.model.TrynbInfo;
 
 public class TrynbResolverImpl implements TrynbResolver {
 
@@ -34,7 +35,11 @@ public class TrynbResolverImpl implements TrynbResolver {
 				return view;
 			}
 		}
-		ModelAndView view = new ModelAndView(trynbInfo.getPage());
+		String page = trynbInfo.getPage();
+		if (StringUtils.isEmpty(page)) {
+			page = "/error";
+		}
+		ModelAndView view = new ModelAndView(page);
 		view.addObject("message", exception.getMessage());
 		return view;
 	}
