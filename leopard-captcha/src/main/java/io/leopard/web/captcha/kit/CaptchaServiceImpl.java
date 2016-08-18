@@ -10,9 +10,11 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.util.Assert;
 
+import io.leopard.burrow.util.DateTime;
 import io.leopard.burrow.util.DateUtil;
 import io.leopard.core.exception.forbidden.CaptchaWrongException;
 import io.leopard.jdbc.Jdbc;
+import io.leopard.json.Json;
 import io.leopard.redis.Redis;
 import io.leopard.web.captcha.CaptchaInvalidException;
 import io.leopard.web.captcha.FrequencyException;
@@ -140,6 +142,7 @@ public class CaptchaServiceImpl implements CaptchaService {
 	protected void checkFrequency(Captcha bean) throws FrequencyException {
 		Date posttime = bean.getPosttime();
 		Date expiryTime = DateUtil.addTime(posttime, 1);// 1分钟
+		logger.info("expiryTime:" + DateTime.getTime(expiryTime) + " bean:" + Json.toJson(bean));
 		if (expiryTime.after(new Date())) {
 			throw new FrequencyException("您[" + bean.getAccount() + "]访问太频繁了.");
 		}
