@@ -10,6 +10,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.util.Assert;
 
+import io.leopard.burrow.util.DateUtil;
 import io.leopard.core.exception.forbidden.CaptchaWrongException;
 import io.leopard.jdbc.Jdbc;
 import io.leopard.redis.Redis;
@@ -130,6 +131,20 @@ public class CaptchaServiceImpl implements CaptchaService {
 		return this.send(account, type, target, "");
 	}
 
+	/**
+	 * 访问频率限制
+	 * 
+	 * @param bean
+	 * @throws FrequencyException
+	 */
+	protected void checkFrequency(Captcha bean) throws FrequencyException {
+		Date posttime = bean.getPosttime();
+		Date expiryTime = DateUtil.addTime(posttime, 1);// 1分钟
+		if (expiryTime.after(new Date())) {
+			throw new FrequencyException("您[" + bean.getAccount() + "]访问太频繁了.");
+		}
+	}
+
 	@Override
 	public String send(String account, CaptchaType type, String target, String content) throws FrequencyException {
 		Assert.hasText(account, "参数account不能为空");
@@ -144,6 +159,7 @@ public class CaptchaServiceImpl implements CaptchaService {
 			this.add(account, type, target, seccode);
 		}
 		else {
+			this.checkFrequency(bean);
 			seccode = bean.getCaptcha();
 		}
 		content = content.replace("{seccode}", seccode);
