@@ -1,5 +1,7 @@
 package io.leopard.mvc.trynb.translate;
 
+import org.springframework.beans.factory.NoSuchBeanDefinitionException;
+
 import io.leopard.jdbc.LeopardBeanFactoryAware;
 
 public class TranslaterImpl implements Translater {
@@ -16,10 +18,25 @@ public class TranslaterImpl implements Translater {
 
 	protected Translater translater;
 
+	private boolean loaded;
+
+	private void load() {
+		try {
+			translater = LeopardBeanFactoryAware.getBeanFactory().getBean(Translater.class);
+		}
+		catch (NoSuchBeanDefinitionException e) {
+
+		}
+		this.loaded = true;
+	}
+
 	@Override
 	public String translate(String message) {
+		if (!loaded) {
+			this.load();
+		}
 		if (translater == null) {
-			translater = LeopardBeanFactoryAware.getBeanFactory().getBean(Translater.class);
+			return message;
 		}
 		return translater.translate(message);
 	}
