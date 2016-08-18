@@ -26,6 +26,7 @@ public class Captcha {
 	private String captcha;
 	private Date posttime;
 	private Date expiryTime;
+	private Date lmodify;
 
 	private boolean used;
 
@@ -99,6 +100,14 @@ public class Captcha {
 
 	public void setExpiryTime(Date expiryTime) {
 		this.expiryTime = expiryTime;
+	}
+
+	public Date getLmodify() {
+		return lmodify;
+	}
+
+	public void setLmodify(Date lmodify) {
+		this.lmodify = lmodify;
 	}
 
 }

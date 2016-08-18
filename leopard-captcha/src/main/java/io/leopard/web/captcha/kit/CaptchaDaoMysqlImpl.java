@@ -1,5 +1,7 @@
 package io.leopard.web.captcha.kit;
 
+import java.util.Date;
+
 import org.springframework.stereotype.Repository;
 
 import io.leopard.jdbc.Jdbc;
@@ -39,6 +41,7 @@ public class CaptchaDaoMysqlImpl implements CaptchaDao {
 		builder.setBool("used", captcha.isUsed());
 		builder.setDate("posttime", captcha.getPosttime());
 		builder.setDate("expiryTime", captcha.getExpiryTime());
+		builder.setDate("lmodify", captcha.getLmodify());
 		return jdbc.insertForBoolean(builder);
 	}
 
@@ -54,4 +57,9 @@ public class CaptchaDaoMysqlImpl implements CaptchaDao {
 		return this.jdbc.updateForBoolean(sql, used, captchaId);
 	}
 
+	@Override
+	public boolean updateLmodify(String captchaId, Date lmodify) {
+		String sql = "update " + tableName + " set lmodify=? where captchaId=?";
+		return this.jdbc.updateForBoolean(sql, lmodify, captchaId);
+	}
 }
