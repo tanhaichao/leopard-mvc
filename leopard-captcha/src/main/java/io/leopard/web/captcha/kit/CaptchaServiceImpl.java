@@ -14,7 +14,6 @@ import io.leopard.burrow.util.DateTime;
 import io.leopard.burrow.util.DateUtil;
 import io.leopard.core.exception.forbidden.CaptchaWrongException;
 import io.leopard.jdbc.Jdbc;
-import io.leopard.json.Json;
 import io.leopard.redis.Redis;
 import io.leopard.web.captcha.CaptchaInvalidException;
 import io.leopard.web.captcha.FrequencyException;
@@ -84,6 +83,7 @@ public class CaptchaServiceImpl implements CaptchaService {
 		bean.setPosttime(posttime);
 		bean.setCaptcha(captcha);
 		bean.setExpiryTime(expiryTime);
+		bean.setLmodify(posttime);
 		bean.setUsed(false);
 		captchaDao.add(bean);
 		return captchaId;
@@ -152,10 +152,11 @@ public class CaptchaServiceImpl implements CaptchaService {
 	 * @throws FrequencyException
 	 */
 	protected void checkFrequency(Captcha bean) throws FrequencyException {
-		Date posttime = bean.getPosttime();
-		Date expiryTime = DateUtil.addTime(posttime, 1);// 1分钟
-		logger.info("expiryTime:" + DateTime.getTime(expiryTime) + " bean:" + Json.toJson(bean));
-		if (expiryTime.after(new Date())) {
+		Date lmodify = bean.getLmodify();
+		Date expiryTime = DateUtil.addTime(lmodify, 1);// 1分钟
+		boolean frequency = expiryTime.after(new Date());
+		// logger.info("expiryTime:" + DateTime.getTime(expiryTime) + " frequency:" + frequency);
+		if (frequency) {
 			throw new FrequencyException("您[" + bean.getAccount() + "]访问太频繁了.");
 		}
 	}
@@ -176,6 +177,7 @@ public class CaptchaServiceImpl implements CaptchaService {
 		else {
 			this.checkFrequency(bean);
 			seccode = bean.getCaptcha();
+			this.captchaDao.updateLmodify(bean.getCaptchaId(), new Date());
 		}
 		content = content.replace("{seccode}", seccode);
 		CaptchaDebugger.debug(seccode, content);
