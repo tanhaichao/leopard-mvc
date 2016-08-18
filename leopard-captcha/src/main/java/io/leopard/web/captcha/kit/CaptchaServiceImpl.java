@@ -75,7 +75,7 @@ public class CaptchaServiceImpl implements CaptchaService {
 		Assert.hasText(captcha, "参数captcha不能为空");
 		String captchaId = UUID.randomUUID().toString().replaceAll("-", "").toLowerCase();
 		Date posttime = new Date();
-		Date expiryTime = DateUtil.addTime(posttime, 2);
+		Date expiryTime = DateUtil.addTime(posttime, 10);// 10分钟有效
 		Captcha bean = new Captcha();
 		bean.setCaptchaId(captchaId);
 		bean.setAccount(account);
