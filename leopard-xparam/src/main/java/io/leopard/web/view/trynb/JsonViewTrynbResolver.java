@@ -15,14 +15,14 @@ import org.springframework.web.servlet.ModelAndView;
 import io.leopard.json.Json;
 import io.leopard.mvc.trynb.model.TrynbInfo;
 import io.leopard.mvc.trynb.resolver.TrynbResolver;
+import io.leopard.mvc.trynb.translate.Translater;
+import io.leopard.mvc.trynb.translate.TranslaterImpl;
 import io.leopard.web.view.AbstractView;
 import io.leopard.web.view.StatusCodeException;
 
 public class JsonViewTrynbResolver implements TrynbResolver {
 
-	// public JsonViewTrynbResolver() {
-	// new Exception("JsonViewTrynbResolver").printStackTrace();
-	// }
+	private static Translater translater = TranslaterImpl.getInstance();
 
 	@Override
 	public ModelAndView resolveView(HttpServletRequest request, HttpServletResponse response, HandlerMethod handler, Exception exception, TrynbInfo trynbInfo) {
@@ -35,15 +35,20 @@ public class JsonViewTrynbResolver implements TrynbResolver {
 		// }
 
 		ErrorJsonView jsonView = new ErrorJsonView();
+
+		String message;
 		if (exception instanceof StatusCodeException) {
 			StatusCodeException e = (StatusCodeException) exception;
+			message = e.getMessage();
 			jsonView.setStatus(e.getStatus());
-			jsonView.setMessage(e.getMessage());
+			jsonView.setMessage(translater.translate(message));
 		}
 		else {
+			message = trynbInfo.getMessage();
 			jsonView.setStatus(trynbInfo.getStatusCode());
-			jsonView.setMessage(trynbInfo.getMessage());
+			jsonView.setMessage(translater.translate(message));
 		}
+		jsonView.setOriginalMessage(message);
 		if (SystemUtils.IS_OS_WINDOWS) {// TODO 测试代码
 			jsonView.setDetailMessage(exception.getMessage());
 		}
@@ -61,6 +66,10 @@ public class JsonViewTrynbResolver implements TrynbResolver {
 
 		public void setDetailMessage(String detailMessage) {
 			map.put("detailMessage", detailMessage);
+		}
+
+		public void setOriginalMessage(String originalMessage) {
+			map.put("originalMessage", originalMessage);
 		}
 
 		public void setMessage(String message) {
