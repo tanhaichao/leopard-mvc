@@ -38,6 +38,7 @@ public class CaptchaDaoMysqlImpl implements CaptchaDao {
 		builder.setString("captcha", captcha.getCaptcha());
 		builder.setBool("used", captcha.isUsed());
 		builder.setDate("posttime", captcha.getPosttime());
+		builder.setDate("expiryTime", captcha.getExpiryTime());
 		return jdbc.insertForBoolean(builder);
 	}
 

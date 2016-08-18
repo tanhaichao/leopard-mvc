@@ -74,13 +74,16 @@ public class CaptchaServiceImpl implements CaptchaService {
 		Assert.hasText(target, "参数target不能为空");
 		Assert.hasText(captcha, "参数captcha不能为空");
 		String captchaId = UUID.randomUUID().toString().replaceAll("-", "").toLowerCase();
+		Date posttime = new Date();
+		Date expiryTime = DateUtil.addTime(posttime, 2);
 		Captcha bean = new Captcha();
 		bean.setCaptchaId(captchaId);
 		bean.setAccount(account);
 		bean.setType(type.getKey());
 		bean.setTarget(target);
-		bean.setPosttime(new Date());
+		bean.setPosttime(posttime);
 		bean.setCaptcha(captcha);
+		bean.setExpiryTime(expiryTime);
 		bean.setUsed(false);
 		captchaDao.add(bean);
 		return captchaId;
@@ -95,7 +98,16 @@ public class CaptchaServiceImpl implements CaptchaService {
 		Assert.hasText(account, "参数account不能为空");
 		Assert.notNull(type, "参数type不能为空");
 		Assert.hasText(target, "参数target不能为空");
-		return this.captchaDao.last(account, type.getKey(), target);
+		Captcha captcha = this.captchaDao.last(account, type.getKey(), target);
+		if (captcha == null) {
+			return null;
+		}
+		if (captcha.getExpiryTime().before(new Date())) {
+			// System.err.println("captcha:已过期");
+			// 已过期
+			return null;
+		}
+		return captcha;
 	}
 
 	@Override
