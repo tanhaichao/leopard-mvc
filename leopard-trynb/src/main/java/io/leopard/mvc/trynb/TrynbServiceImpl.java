@@ -55,7 +55,7 @@ public class TrynbServiceImpl implements TrynbService {
 
 		String message;
 		if (exceptionConfig == null || StringUtils.isEmpty(exceptionConfig.getMessage())) {
-			message = parseMessage(exception);
+			message = parseMessage(trynbInfo, exception);
 		}
 		else {
 			message = exceptionConfig.getMessage();
@@ -70,10 +70,11 @@ public class TrynbServiceImpl implements TrynbService {
 		return trynbInfo;
 	}
 
-	protected String parseMessage(Exception exception) {
+	protected String parseMessage(TrynbInfo trynbInfo, Exception exception) {
 		if (exception instanceof ApiException) {
 			String apiMessage = ((ApiException) exception).getApiMessage();
 			if (apiMessage != null) {
+				trynbInfo.setApiMessage(true);
 				return apiMessage;
 			}
 		}
@@ -83,6 +84,7 @@ public class TrynbServiceImpl implements TrynbService {
 		}
 		String message2 = translater.translate(message);
 		if (message2 != null) {
+			trynbInfo.setTranslate(true);
 			return message2;
 		}
 		return null;

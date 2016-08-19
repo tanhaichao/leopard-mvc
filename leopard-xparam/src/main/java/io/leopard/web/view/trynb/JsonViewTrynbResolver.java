@@ -43,14 +43,14 @@ public class JsonViewTrynbResolver implements TrynbResolver {
 			jsonView.setStatus(trynbInfo.getStatusCode());
 		}
 
-		
-		String message = trynbInfo.getMessage();
+		jsonView.setMessage(trynbInfo.getMessage());
 
-				jsonView.setMessage(message);
+		if (trynbInfo.isTrynbMessage() || trynbInfo.isApiMessage() || trynbInfo.isTranslate()) {
+			jsonView.setOriginalMessage(exception.getMessage());
+		}
+		if (SystemUtils.IS_OS_WINDOWS)
 
-				jsonView.setOriginalMessage(message);
-
-		if (SystemUtils.IS_OS_WINDOWS) {// TODO 测试代码
+		{// TODO 测试代码
 			jsonView.setDetailMessage(exception.getMessage());
 		}
 		jsonView.setException(exception.getClass().getName());

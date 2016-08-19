@@ -10,10 +10,12 @@ public class TrynbInfo {
 	 * 是否使用了trynb.xml配置
 	 */
 	private boolean trynbMessage;
+	private boolean apiMessage;
 	/**
 	 * 是否经过翻译
 	 */
 	protected boolean translate;
+
 	private Exception exception;
 
 	public String getPage() {
@@ -54,6 +56,22 @@ public class TrynbInfo {
 
 	public void setTrynbMessage(boolean trynbMessage) {
 		this.trynbMessage = trynbMessage;
+	}
+
+	public boolean isTranslate() {
+		return translate;
+	}
+
+	public void setTranslate(boolean translate) {
+		this.translate = translate;
+	}
+
+	public boolean isApiMessage() {
+		return apiMessage;
+	}
+
+	public void setApiMessage(boolean apiMessage) {
+		this.apiMessage = apiMessage;
 	}
 
 }
