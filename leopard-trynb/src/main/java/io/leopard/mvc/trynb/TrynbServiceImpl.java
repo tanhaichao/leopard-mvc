@@ -82,7 +82,7 @@ public class TrynbServiceImpl implements TrynbService {
 				return apiMessage;
 			}
 		}
-		exception.printStackTrace();
+		// exception.printStackTrace();
 		String message = ErrorUtil.parseMessage(exception);
 		if (message == null) {
 			return null;
@@ -92,7 +92,7 @@ public class TrynbServiceImpl implements TrynbService {
 			trynbInfo.setTranslate(true);
 			return message2;
 		}
-		return null;
+		return message;
 	}
 
 	protected String parseStatusCode(ExceptionConfig exceptionConfig, HttpServletRequest request, String uri, Exception exception) {
