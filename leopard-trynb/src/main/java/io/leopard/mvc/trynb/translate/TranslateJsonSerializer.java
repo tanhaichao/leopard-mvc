@@ -20,7 +20,12 @@ public class TranslateJsonSerializer extends JsonSerializer<String> {
 	@Override
 	public void serialize(String chinese, JsonGenerator gen, SerializerProvider serializers) throws IOException, JsonProcessingException {
 		String english = translater.translate(chinese);
-		gen.writeString(english);
+		if (english == null) {
+			gen.writeString(chinese);
+		}
+		else {
+			gen.writeString(english);
+		}
 	}
 
 }
