@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 
+import io.leopard.core.exception.ApiException;
 import io.leopard.json.Json;
 import io.leopard.mvc.trynb.model.TrynbInfo;
 import io.leopard.mvc.trynb.resolver.TrynbResolver;
@@ -49,8 +50,11 @@ public class JsonViewTrynbResolver implements TrynbResolver {
 
 		if (message != null) {
 			String message2 = translater.translate(message);
-			jsonView.setMessage(message2);
-			if (!message.equals(message2)) {
+			if (message2 == null) {
+				jsonView.setMessage(message);
+			}
+			else {
+				jsonView.setMessage(message2);
 				jsonView.setOriginalMessage(message);
 			}
 		}
@@ -60,6 +64,20 @@ public class JsonViewTrynbResolver implements TrynbResolver {
 		}
 		jsonView.setException(exception.getClass().getName());
 		return jsonView;
+	}
+
+	protected String translate(Exception exception, String message) {
+		String message2 = translater.translate(message);
+		if (message2 != null) {
+			return message2;
+		}
+		if (exception instanceof ApiException) {
+			String apiMessage = ((ApiException) exception).getApiMessage();
+			if (apiMessage != null) {
+				return apiMessage;
+			}
+		}
+		return null;
 	}
 
 	public class ErrorJsonView extends AbstractView {
