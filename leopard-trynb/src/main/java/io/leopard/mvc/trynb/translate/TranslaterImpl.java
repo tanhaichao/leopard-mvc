@@ -41,4 +41,15 @@ public class TranslaterImpl implements Translater {
 		return translater.translate(message);
 	}
 
+	@Override
+	public boolean isEnable() {
+		if (!loaded) {
+			this.load();
+		}
+		if (translater == null) {
+			return false;
+		}
+		return translater.isEnable();
+	}
+
 }

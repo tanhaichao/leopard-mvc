@@ -8,6 +8,8 @@ package io.leopard.mvc.trynb.translate;
  */
 public interface Translater {
 
+	boolean isEnable();
+
 	String translate(String message);
 
 }
