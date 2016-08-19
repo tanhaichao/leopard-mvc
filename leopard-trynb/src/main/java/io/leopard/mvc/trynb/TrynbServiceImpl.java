@@ -82,6 +82,7 @@ public class TrynbServiceImpl implements TrynbService {
 				return apiMessage;
 			}
 		}
+		exception.printStackTrace();
 		String message = ErrorUtil.parseMessage(exception);
 		if (message == null) {
 			return null;
