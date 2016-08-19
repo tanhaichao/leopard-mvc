@@ -1,12 +1,14 @@
 package io.leopard.web.view;
 
+import io.leopard.core.exception.LeopardRuntimeException;
+
 /**
  * 状态码异常.
  * 
  * @author ahai
  * 
  */
-public class StatusCodeException extends RuntimeException {
+public class StatusCodeException extends LeopardRuntimeException {
 
 	private static final long serialVersionUID = 1L;
 
