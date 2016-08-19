@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.util.StringUtils;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
@@ -15,6 +17,7 @@ import io.leopard.mvc.trynb.translate.Translater;
 import io.leopard.mvc.trynb.translate.TranslaterImpl;
 
 public class TrynbServiceImpl implements TrynbService {
+	protected Log logger = LogFactory.getLog(this.getClass());
 
 	private final TrynbDao trynbDao = new TrynbDaoImpl();
 	private final TrynbLogger trynbLogger = new TrynbLoggerImpl();
@@ -74,6 +77,8 @@ public class TrynbServiceImpl implements TrynbService {
 		if (exception instanceof ApiException) {
 			String apiMessage = ((ApiException) exception).getApiMessage();
 			if (apiMessage != null) {
+//				logger.info("apiMessage:" + apiMessage);
+
 				trynbInfo.setApiMessage(true);
 				return apiMessage;
 			}

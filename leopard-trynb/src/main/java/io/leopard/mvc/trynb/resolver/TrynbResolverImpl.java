@@ -40,7 +40,7 @@ public class TrynbResolverImpl implements TrynbResolver {
 			page = "/error";
 		}
 		ModelAndView view = new ModelAndView(page);
-		view.addObject("message", exception.getMessage());
+		view.addObject("message", trynbInfo.getMessage());
 		return view;
 	}
 
