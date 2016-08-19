@@ -74,12 +74,14 @@ public class TrynbServiceImpl implements TrynbService {
 	}
 
 	protected String parseMessage(TrynbInfo trynbInfo, Exception exception) {
-		if (exception instanceof ApiException) {
-			String apiMessage = ((ApiException) exception).getApiMessage();
-			if (apiMessage != null) {
-				// logger.info("apiMessage:" + apiMessage);
-				trynbInfo.setApiMessage(true);
-				return apiMessage;
+		if (translater.isEnable()) {
+			if (exception instanceof ApiException) {
+				String apiMessage = ((ApiException) exception).getApiMessage();
+				if (apiMessage != null) {
+					// logger.info("apiMessage:" + apiMessage);
+					trynbInfo.setApiMessage(true);
+					return apiMessage;
+				}
 			}
 		}
 		// exception.printStackTrace();
