@@ -6,6 +6,14 @@ public class TrynbInfo {
 	private String message;
 	private String statusCode;
 
+	/**
+	 * 是否使用了trynb.xml配置
+	 */
+	private boolean trynbMessage;
+	/**
+	 * 是否经过翻译
+	 */
+	protected boolean translate;
 	private Exception exception;
 
 	public String getPage() {
@@ -38,6 +46,14 @@ public class TrynbInfo {
 
 	public void setException(Exception exception) {
 		this.exception = exception;
+	}
+
+	public boolean isTrynbMessage() {
+		return trynbMessage;
+	}
+
+	public void setTrynbMessage(boolean trynbMessage) {
+		this.trynbMessage = trynbMessage;
 	}
 
 }

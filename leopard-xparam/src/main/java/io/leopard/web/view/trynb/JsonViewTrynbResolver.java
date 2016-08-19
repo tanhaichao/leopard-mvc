@@ -23,8 +23,6 @@ import io.leopard.web.view.StatusCodeException;
 
 public class JsonViewTrynbResolver implements TrynbResolver {
 
-	private static Translater translater = TranslaterImpl.getInstance();
-
 	@Override
 	public ModelAndView resolveView(HttpServletRequest request, HttpServletResponse response, HandlerMethod handler, Exception exception, TrynbInfo trynbInfo) {
 		// Class<?> returnType = handler.getMethod().getReturnType();
@@ -37,47 +35,26 @@ public class JsonViewTrynbResolver implements TrynbResolver {
 
 		ErrorJsonView jsonView = new ErrorJsonView();
 
-		String message;
 		if (exception instanceof StatusCodeException) {
 			StatusCodeException e = (StatusCodeException) exception;
-			message = e.getMessage();
 			jsonView.setStatus(e.getStatus());
 		}
 		else {
-			message = trynbInfo.getMessage();
 			jsonView.setStatus(trynbInfo.getStatusCode());
 		}
 
-		if (message != null) {
-			String message2 = translater.translate(message);
-			if (message2 == null) {
+		
+		String message = trynbInfo.getMessage();
+
 				jsonView.setMessage(message);
-			}
-			else {
-				jsonView.setMessage(message2);
+
 				jsonView.setOriginalMessage(message);
-			}
-		}
 
 		if (SystemUtils.IS_OS_WINDOWS) {// TODO 测试代码
 			jsonView.setDetailMessage(exception.getMessage());
 		}
 		jsonView.setException(exception.getClass().getName());
 		return jsonView;
-	}
-
-	protected String translate(Exception exception, String message) {
-		String message2 = translater.translate(message);
-		if (message2 != null) {
-			return message2;
-		}
-		if (exception instanceof ApiException) {
-			String apiMessage = ((ApiException) exception).getApiMessage();
-			if (apiMessage != null) {
-				return apiMessage;
-			}
-		}
-		return null;
 	}
 
 	public class ErrorJsonView extends AbstractView {

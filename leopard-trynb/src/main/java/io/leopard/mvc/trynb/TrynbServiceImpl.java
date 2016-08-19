@@ -7,14 +7,19 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.util.StringUtils;
 import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
+import io.leopard.core.exception.ApiException;
 import io.leopard.mvc.trynb.model.ErrorConfig;
 import io.leopard.mvc.trynb.model.ExceptionConfig;
 import io.leopard.mvc.trynb.model.TrynbInfo;
+import io.leopard.mvc.trynb.translate.Translater;
+import io.leopard.mvc.trynb.translate.TranslaterImpl;
 
 public class TrynbServiceImpl implements TrynbService {
 
 	private final TrynbDao trynbDao = new TrynbDaoImpl();
 	private final TrynbLogger trynbLogger = new TrynbLoggerImpl();
+
+	private static Translater translater = TranslaterImpl.getInstance();
 
 	protected ExceptionConfig find(ErrorConfig errorConfig, Exception exception) {
 
@@ -46,23 +51,41 @@ public class TrynbServiceImpl implements TrynbService {
 		}
 
 		ExceptionConfig exceptionConfig = this.find(errorConfig, exception);
+		TrynbInfo trynbInfo = new TrynbInfo();
 
 		String message;
 		if (exceptionConfig == null || StringUtils.isEmpty(exceptionConfig.getMessage())) {
-			message = ErrorUtil.parseMessage(exception);
+			message = parseMessage(exception);
 		}
 		else {
 			message = exceptionConfig.getMessage();
+			trynbInfo.setTrynbMessage(true);
 		}
 
 		String statusCode = this.parseStatusCode(exceptionConfig, request, uri, exception);
-
-		TrynbInfo trynbInfo = new TrynbInfo();
 		trynbInfo.setPage(errorConfig.getPage());
 		trynbInfo.setMessage(message);
 		trynbInfo.setException(exception);
 		trynbInfo.setStatusCode(statusCode);
 		return trynbInfo;
+	}
+
+	protected String parseMessage(Exception exception) {
+		if (exception instanceof ApiException) {
+			String apiMessage = ((ApiException) exception).getApiMessage();
+			if (apiMessage != null) {
+				return apiMessage;
+			}
+		}
+		String message = ErrorUtil.parseMessage(exception);
+		if (message == null) {
+			return null;
+		}
+		String message2 = translater.translate(message);
+		if (message2 != null) {
+			return message2;
+		}
+		return null;
 	}
 
 	protected String parseStatusCode(ExceptionConfig exceptionConfig, HttpServletRequest request, String uri, Exception exception) {
