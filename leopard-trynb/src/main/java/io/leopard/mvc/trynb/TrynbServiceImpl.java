@@ -60,6 +60,7 @@ public class TrynbServiceImpl implements TrynbService {
 		TrynbInfo trynbInfo = new TrynbInfo();
 		trynbInfo.setPage(errorConfig.getPage());
 		trynbInfo.setMessage(message);
+		trynbInfo.setException(exception);
 		trynbInfo.setStatusCode(statusCode);
 		return trynbInfo;
 	}

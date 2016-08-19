@@ -6,6 +6,8 @@ public class TrynbInfo {
 	private String message;
 	private String statusCode;
 
+	private Exception exception;
+
 	public String getPage() {
 		return page;
 	}
@@ -28,6 +30,14 @@ public class TrynbInfo {
 
 	public void setStatusCode(String statusCode) {
 		this.statusCode = statusCode;
+	}
+
+	public Exception getException() {
+		return exception;
+	}
+
+	public void setException(Exception exception) {
+		this.exception = exception;
 	}
 
 }
