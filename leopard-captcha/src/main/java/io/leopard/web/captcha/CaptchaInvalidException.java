@@ -16,4 +16,8 @@ public class CaptchaInvalidException extends InvalidException {
 		super(message);
 	}
 
+	public CaptchaInvalidException(String message, String apiMessage) {
+		super(message, apiMessage);
+	}
+
 }
