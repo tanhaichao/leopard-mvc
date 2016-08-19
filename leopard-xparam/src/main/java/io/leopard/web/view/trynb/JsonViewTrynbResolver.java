@@ -13,6 +13,7 @@ import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 
 import io.leopard.json.Json;
+import io.leopard.mvc.trynb.ErrorUtil;
 import io.leopard.mvc.trynb.model.TrynbInfo;
 import io.leopard.mvc.trynb.resolver.TrynbResolver;
 import io.leopard.web.view.AbstractView;
@@ -43,7 +44,7 @@ public class JsonViewTrynbResolver implements TrynbResolver {
 		jsonView.setMessage(trynbInfo.getMessage());
 
 		if (trynbInfo.isTrynbMessage() || trynbInfo.isApiMessage() || trynbInfo.isTranslate()) {
-			jsonView.setOriginalMessage(exception.getMessage());
+			jsonView.setOriginalMessage(ErrorUtil.parseMessage(exception));
 		}
 		if (SystemUtils.IS_OS_WINDOWS) {// TODO 测试代码
 			jsonView.setDetailMessage(exception.getMessage());
