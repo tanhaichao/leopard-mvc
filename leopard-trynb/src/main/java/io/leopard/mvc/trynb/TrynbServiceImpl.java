@@ -77,8 +77,7 @@ public class TrynbServiceImpl implements TrynbService {
 		if (exception instanceof ApiException) {
 			String apiMessage = ((ApiException) exception).getApiMessage();
 			if (apiMessage != null) {
-//				logger.info("apiMessage:" + apiMessage);
-
+				// logger.info("apiMessage:" + apiMessage);
 				trynbInfo.setApiMessage(true);
 				return apiMessage;
 			}
