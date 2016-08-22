@@ -29,7 +29,7 @@ public class CaptchaUtil {
 		}
 		if (!captcha.equals(sessCaptcha)) {
 			logger.warn("错误验证码 sessCaptcha:" + sessCaptcha + " captcha:" + captcha);
-			throw new CaptchaWrongException("sess:"+sessCaptcha+" param:"+captcha);
+			throw new CaptchaWrongException("sess:" + sessCaptcha + " param:" + captcha);
 		}
 	}
 
