@@ -134,7 +134,7 @@ public class CaptchaServiceImpl implements CaptchaService {
 			throw new CaptchaWrongException("获取不到验证码记录[" + account + " " + type.getKey() + " " + target + "]");
 		}
 		if (!bean.getCaptcha().equals(captcha)) {
-			throw new CaptchaWrongException(captcha);
+			throw new CaptchaWrongException("db:" + bean.getCaptcha() + " param:" + captcha);
 		}
 		return bean;
 	}
