@@ -126,8 +126,10 @@ public class CaptchaServiceImpl implements CaptchaService {
 		Assert.hasText(account, "参数account不能为空");
 		Assert.notNull(type, "参数type不能为空");
 		Assert.hasText(target, "参数target不能为空");
-		Assert.hasText(captcha, "参数captcha不能为空");
-
+		// Assert.hasText(captcha, "参数captcha不能为空");
+		if (StringUtils.isEmpty(captcha)) {
+			throw new CaptchaInvalidException("参数captcha不能为空", "Sorry,the code you entered is incorrect!");
+		}
 		// String securityCode2 = lastSecurityCode(mobile, type);
 		Captcha bean = this.last(account, type, target);
 		if (bean == null) {
