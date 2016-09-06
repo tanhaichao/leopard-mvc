@@ -38,11 +38,7 @@
 		<dependency>
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-jdbc</artifactId>
-		</dependency><dependency>
-			<groupId>io.leopard</groupId>
-			<artifactId>leopard-lang</artifactId>
 		</dependency>
-
 
 		<!-- test -->
 		<dependency>

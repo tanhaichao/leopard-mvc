@@ -94,6 +94,7 @@
 		<module>leopard-frequency</module>
 		<module>leopard-proxy</module>
 		<module>leopard-convert</module>
+		<module>leopard-lang</module>
 	</modules>
 
 </project>

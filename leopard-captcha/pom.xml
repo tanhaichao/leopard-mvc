@@ -62,5 +62,9 @@
 			<groupId>io.leopard</groupId>
 			<artifactId>leopard-exception</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>commons-lang</groupId>
+			<artifactId>commons-lang</artifactId>
+		</dependency>
 	</dependencies>
 </project>
