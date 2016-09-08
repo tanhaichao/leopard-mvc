@@ -20,7 +20,7 @@ public class TrynbApiImpl implements TrynbApi {
 
 	@Override
 	public TrynbInfo parse(HttpServletRequest request, String uri, Exception exception) {
-		if (trynbApi != null) {
+		if (trynbApi == null) {
 			return null;
 		}
 		return trynbApi.parse(request, uri, exception);
