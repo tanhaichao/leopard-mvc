@@ -1,14 +1,26 @@
 package io.leopard.mvc.trynb;
 
+import java.util.Iterator;
+import java.util.ServiceLoader;
+
 import javax.servlet.http.HttpServletRequest;
 
 import io.leopard.mvc.trynb.model.TrynbInfo;
 
 public class TrynbApiImpl implements TrynbApi {
 
+	private TrynbApi trynbApi;
+
+	public TrynbApiImpl() {
+		Iterator<TrynbApi> iterator = ServiceLoader.load(TrynbApi.class).iterator();
+		if (iterator.hasNext()) {
+			trynbApi = iterator.next();
+		}
+	}
+
 	@Override
 	public TrynbInfo parse(HttpServletRequest request, String uri, Exception exception) {
-		return null;
+		return trynbApi.parse(request, uri, exception);
 	}
 
 }
