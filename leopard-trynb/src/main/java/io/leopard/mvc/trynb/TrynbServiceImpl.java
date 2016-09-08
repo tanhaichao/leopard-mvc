@@ -19,6 +19,8 @@ import io.leopard.mvc.trynb.translate.TranslaterImpl;
 public class TrynbServiceImpl implements TrynbService {
 	protected Log logger = LogFactory.getLog(this.getClass());
 
+	private TrynbApi trynbApi = new TrynbApiImpl();
+
 	private final TrynbDao trynbDao = new TrynbDaoImpl();
 	private final TrynbLogger trynbLogger = new TrynbLoggerImpl();
 
@@ -40,6 +42,12 @@ public class TrynbServiceImpl implements TrynbService {
 
 	@Override
 	public TrynbInfo parse(HttpServletRequest request, String uri, Exception exception) {
+		{
+			TrynbInfo trynbInfo = trynbApi.parse(request, uri, exception);
+			if (trynbInfo != null) {
+				return trynbInfo;
+			}
+		}
 		ErrorConfig errorConfig = trynbDao.find(uri);
 
 		if (exception instanceof MethodArgumentTypeMismatchException) {

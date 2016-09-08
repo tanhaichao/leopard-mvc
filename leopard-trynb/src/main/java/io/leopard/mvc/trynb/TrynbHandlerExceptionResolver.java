@@ -30,6 +30,7 @@ public class TrynbHandlerExceptionResolver implements HandlerExceptionResolver {
 		}
 		String uri = request.getRequestURI();
 
+		
 		TrynbInfo trynbInfo = errorPageService.parse(request, uri, exception);
 		ModelAndView view = trynbResolver.resolveView(request, response, ((HandlerMethod) handler), exception, trynbInfo);
 
