@@ -59,7 +59,7 @@ public class CaptchaUtil {
 
 	public static String getCode(HttpServletRequest request, String captchaGroupId) {
 		String sessionKey = getSessionKey(captchaGroupId);
-		// System.out.println("getCode:" + sessionKey + " captchaGroupId:" + captchaGroupId);
+//		System.out.println("getCode:" + sessionKey + " captchaGroupId:" + captchaGroupId);
 		return (String) request.getSession().getAttribute(sessionKey);
 	}
 
