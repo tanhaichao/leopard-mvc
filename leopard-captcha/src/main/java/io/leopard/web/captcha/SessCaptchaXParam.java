@@ -34,6 +34,7 @@ public class SessCaptchaXParam implements XParam {
 		else {
 			captcha = CaptchaUtil.getCode(request, captchaGroupId);
 		}
+		// System.err.println("captchaGroupId:" + captchaGroupId + " captcha:" + captcha);
 		return captcha;
 	}
 
