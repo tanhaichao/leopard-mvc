@@ -2,6 +2,12 @@ package io.leopard.mvc.trynb;
 
 import javax.servlet.http.HttpServletRequest;
 
+/**
+ * Trynb日志
+ * 
+ * @author 谭海潮
+ *
+ */
 public interface TrynbLogger {
 
 	/**
