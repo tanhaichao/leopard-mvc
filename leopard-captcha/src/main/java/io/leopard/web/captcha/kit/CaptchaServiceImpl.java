@@ -47,14 +47,14 @@ public class CaptchaServiceImpl implements CaptchaService {
 	@Override
 	public void checkSessCaptcha(String captcha, String sessCaptcha) throws CaptchaWrongException {
 		if (StringUtils.isEmpty(captcha)) {
-			throw new CaptchaInvalidException("验证码不能为空.", "Sorry,the code you entered is incorrect!");
+			throw new CaptchaInvalidException("验证码不能为空.");// , "Sorry,the code you entered is incorrect!"
 		}
 		if (StringUtils.isEmpty(sessCaptcha)) {
-			throw new CaptchaInvalidException("验证码未生成，验证码使用", "Sorry,the code you entered is incorrect!");
+			throw new CaptchaInvalidException("验证码未生成，验证码使用.");// , "Sorry,the code you entered is incorrect!"
 		}
 		if (!captcha.equals(sessCaptcha)) {
 			logger.warn("错误验证码 sessCaptcha:" + sessCaptcha + " captcha:" + captcha);
-			throw new CaptchaWrongException(sessCaptcha + " " + captcha, "Sorry,the code you entered is incorrect!");
+			throw new CaptchaWrongException(sessCaptcha + " " + captcha);// , "Sorry,the code you entered is incorrect!"
 		}
 	}
 
@@ -128,7 +128,7 @@ public class CaptchaServiceImpl implements CaptchaService {
 		Assert.hasText(target, "参数target不能为空");
 		// Assert.hasText(captcha, "参数captcha不能为空");
 		if (StringUtils.isEmpty(captcha)) {
-			throw new CaptchaInvalidException("参数captcha不能为空", "Sorry,the code you entered is incorrect!");
+			throw new CaptchaInvalidException("参数captcha不能为空");
 		}
 		// String securityCode2 = lastSecurityCode(mobile, type);
 		Captcha bean = this.last(account, type, target);
