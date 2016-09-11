@@ -43,7 +43,7 @@ public class TrynbServiceImpl implements TrynbService {
 	@Override
 	public TrynbInfo parse(HttpServletRequest request, String uri, Exception exception) {
 		{
-			TrynbInfo trynbInfo = trynbApi.parse(request, uri, exception);
+			TrynbInfo trynbInfo = trynbApi.parse(trynbLogger, request, uri, exception);
 			if (trynbInfo != null) {
 				return trynbInfo;
 			}

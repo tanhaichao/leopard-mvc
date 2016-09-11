@@ -13,6 +13,6 @@ public interface TrynbApi {
 	 * @param exception
 	 * @return 如果返回null，则有Leopard定义异常信息
 	 */
-	TrynbInfo parse(HttpServletRequest request, String uri, Exception exception);
+	TrynbInfo parse(TrynbLogger trynbLogger, HttpServletRequest request, String uri, Exception exception);
 
 }
