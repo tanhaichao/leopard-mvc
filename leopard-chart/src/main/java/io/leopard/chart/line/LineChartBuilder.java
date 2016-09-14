@@ -69,7 +69,7 @@ public class LineChartBuilder {
 	 * @return
 	 */
 	public static List<LineDayVO> fill(List<LineDayVO> list, TimeRange range) {
-		if (range == null) {
+		if (range == null || range.getStartTime() == null || range.getEndTime() == null) {
 			return list;
 		}
 		List<LineDayVO> list2 = new ArrayList<LineDayVO>();
