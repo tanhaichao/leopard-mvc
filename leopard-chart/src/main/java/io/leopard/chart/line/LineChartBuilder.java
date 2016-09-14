@@ -34,6 +34,7 @@ public class LineChartBuilder {
 				field.setAccessible(true);
 				data[i] = field.get(obj);
 			}
+			list.add(data);
 		}
 		return list;
 	}
