@@ -74,26 +74,25 @@ public class LineChartBuilder {
 			return list;
 		}
 		// Json.print(list, "list");
-		List<LineDayVO> list2 = new ArrayList<LineDayVO>();
+		// List<LineDayVO> list2 = new ArrayList<LineDayVO>();
 		Date startTime = range.getStartTime();
 		int dayCount = Math.abs(DateUtil.getDayCount(range.getStartTime(), range.getEndTime()));
 		for (int i = 0; i < dayCount; i++) {
+			Date curdate = DateUtil.addDate(startTime, i);
 			LineDayVO dayVO = null;
 			Date postdate = null;
 			if (list.size() - 1 >= i) {
 				dayVO = list.get(i);
 				postdate = dayVO.getPostdate();
 			}
-			Date curdate = DateUtil.addDate(startTime, i);
 			if (curdate.equals(postdate)) {
-				list2.add(dayVO);
 				continue;
 			}
 			LineDayVO dayVO2 = new LineDayVO();
 			dayVO2.setPostdate(curdate);
-			list2.add(dayVO2);
+			list.add(i, dayVO2);
 		}
-		return list2;
+		return list;
 	}
 
 }
