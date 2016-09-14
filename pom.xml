@@ -90,6 +90,7 @@
 		<module>leopard-proxy</module>
 		<module>leopard-convert</module>
 		<module>leopard-lang</module>
+		<module>leopard-chart</module>
 	</modules>
 
 </project>
