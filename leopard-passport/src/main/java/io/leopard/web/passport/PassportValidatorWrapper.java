@@ -40,7 +40,21 @@ public class PassportValidatorWrapper implements PassportValidator {
 		}
 		passport = validator.validate(request, response);
 		if (passport != null) {
-			request.getSession().setAttribute(sessionKey, passport);
+			if (passport instanceof Number) {
+				Number uid = (Number) passport;
+				if (uid.longValue() > 0) {
+					request.getSession().setAttribute(sessionKey, passport);
+				}
+			}
+			else if (passport instanceof String) {
+				String username = (String) passport;
+				if (username.length() > 0) {
+					request.getSession().setAttribute(sessionKey, passport);
+				}
+			}
+			else {
+				throw new RuntimeException("passport不支持该类型[" + passport.getClass().getName() + "].");
+			}
 		}
 		return passport;
 	}
