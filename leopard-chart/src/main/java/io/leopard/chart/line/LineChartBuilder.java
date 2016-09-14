@@ -6,6 +6,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import io.leopard.burrow.util.DateUtil;
+import io.leopard.lang.TimeRange;
+
 public class LineChartBuilder {
 
 	private List<LineData> list = new ArrayList<LineData>();
@@ -58,6 +61,32 @@ public class LineChartBuilder {
 		// list.add(this.getTrackTrendVO(range.getStartTime(), "#5ab1ef"));
 		// list.add(this.getTrackTrendVO(range.getEndTime(), "#f5994e"));
 		return list;
+	}
+
+	/**
+	 * 填充没有数据的.
+	 * 
+	 * @return
+	 */
+	public static List<LineDayVO> fill(List<LineDayVO> list, TimeRange range) {
+		if (range == null) {
+			return list;
+		}
+		List<LineDayVO> list2 = new ArrayList<LineDayVO>();
+		Date startTime = range.getStartTime();
+		int dayCount = Math.abs(DateUtil.getDayCount(range.getStartTime(), range.getEndTime()));
+		for (int i = 0; i < dayCount; i++) {
+			LineDayVO dayVO = list.get(i);
+			Date postdate = dayVO.getPostdate();
+			Date curdate = DateUtil.addDate(startTime, i);
+			if (postdate.equals(curdate)) {
+				continue;
+			}
+			LineDayVO dayVO2 = new LineDayVO();
+			dayVO2.setPostdate(curdate);
+			list.add(dayVO2);
+		}
+		return list2;
 	}
 
 }
