@@ -1,7 +1,9 @@
 package io.leopard.chart.line;
 
 import java.lang.reflect.Field;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class LineChartBuilder {
@@ -9,11 +11,15 @@ public class LineChartBuilder {
 	private List<LineData> list = new ArrayList<LineData>();
 
 	public void add(String label, String color, LineDataProvider provider) {
+		this.add(label, color, provider, null);
+	}
+
+	public void add(String label, String color, LineDataProvider provider, String format) {
 		LineData line = new LineData();
 		line.setLabel(label);
 		line.setColor(color);
 		try {
-			line.setData(this.toData(provider.execute()));
+			line.setData(this.toData(provider.execute(), format));
 		}
 		catch (Exception e) {
 			throw new RuntimeException(e.getMessage(), e);
@@ -21,7 +27,7 @@ public class LineChartBuilder {
 		list.add(line);
 	}
 
-	protected List<Object[]> toData(List<?> dataList) throws Exception {
+	protected List<Object[]> toData(List<?> dataList, String format) throws Exception {
 		if (dataList == null) {
 			return null;
 		}
@@ -33,6 +39,14 @@ public class LineChartBuilder {
 				Field field = fields[i];
 				field.setAccessible(true);
 				data[i] = field.get(obj);
+
+				if (i == 0) {
+					// System.err.println("format:" + format + " data[i]:" + data[i] + " " + data[i].getClass().getName());
+					if (format != null && data[i] instanceof Date) {
+						data[i] = new SimpleDateFormat(format).format((Date) data[i]);
+					}
+				}
+
 			}
 			list.add(data);
 		}
