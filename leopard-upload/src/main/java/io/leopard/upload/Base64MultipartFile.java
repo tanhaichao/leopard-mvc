@@ -1,5 +1,6 @@
 package io.leopard.upload;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -68,7 +69,7 @@ public class Base64MultipartFile implements MultipartFile {
 
 	@Override
 	public InputStream getInputStream() throws IOException {
-		throw new UnsupportedOperationException("not impl.");
+		return new ByteArrayInputStream(data);
 	}
 
 	@Override
