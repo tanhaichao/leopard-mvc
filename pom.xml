@@ -91,6 +91,7 @@
 		<module>leopard-convert</module>
 		<module>leopard-lang</module>
 		<module>leopard-chart</module>
+		<module>leopard-upload</module>
 	</modules>
 
 </project>
