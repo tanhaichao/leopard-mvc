@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.fileupload.FileItem;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
@@ -23,7 +24,12 @@ public class LeopardMultipartResolver extends CommonsMultipartResolver {
 			if (item == null) {
 				continue;
 			}
-			List<MultipartFile> list = this.toList(result, fieldName, item.getString());
+			String content = item.getString();
+			if (StringUtils.isEmpty(content)) {
+				continue;
+			}
+
+			List<MultipartFile> list = this.toList(result, fieldName, content);
 			result.getMultipartFiles().put(fieldName, list);
 			break;
 		}
