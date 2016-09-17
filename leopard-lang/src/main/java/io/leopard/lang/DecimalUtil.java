@@ -23,6 +23,18 @@ public class DecimalUtil {
 	}
 
 	/**
+	 * 判断是否4位小数点.
+	 * 
+	 * @param num
+	 */
+	public static void isScale4(double num) {
+		int count = count(num);
+		if (count > 4) {
+			throw new IllegalArgumentException("小数点位数不能超过4位[" + count + "].");
+		}
+	}
+
+	/**
 	 * 获取小数点位数
 	 * 
 	 * @param num
@@ -45,6 +57,16 @@ public class DecimalUtil {
 	 */
 	public static double scale(double num) {
 		return new BigDecimal(num).setScale(2, java.math.BigDecimal.ROUND_HALF_UP).doubleValue();
+	}
+
+	/**
+	 * 4舍5入，保留4位小数点
+	 * 
+	 * @param num
+	 * @return
+	 */
+	public static double scale4(double num) {
+		return new BigDecimal(num).setScale(4, java.math.BigDecimal.ROUND_HALF_UP).doubleValue();
 	}
 
 	/**
