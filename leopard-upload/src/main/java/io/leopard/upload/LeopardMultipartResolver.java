@@ -10,7 +10,7 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 public class LeopardMultipartResolver extends CommonsMultipartResolver {
 
-	private static final String[] NAMES = { "picture", "file", "image" };
+	private static final String[] NAMES = { "picture", "file", "image", "icon1", "icon2", "icon3" };
 
 	protected MultipartParsingResult parseFileItems(List<FileItem> fileItems, String encoding) {
 		// System.out.println("fileItems:" + fileItems);
