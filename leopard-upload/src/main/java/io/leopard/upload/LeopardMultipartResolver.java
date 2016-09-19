@@ -28,7 +28,9 @@ public class LeopardMultipartResolver extends CommonsMultipartResolver {
 			if (StringUtils.isEmpty(content)) {
 				continue;
 			}
-
+			if (!content.startsWith("data:image")) {
+				continue;
+			}
 			List<MultipartFile> list = this.toList(result, fieldName, content);
 			result.getMultipartFiles().put(fieldName, list);
 			break;
