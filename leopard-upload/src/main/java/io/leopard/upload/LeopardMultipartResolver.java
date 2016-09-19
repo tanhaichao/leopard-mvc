@@ -25,6 +25,8 @@ public class LeopardMultipartResolver extends CommonsMultipartResolver {
 				continue;
 			}
 			String content = item.getString();
+
+			// System.out.println("fieldName:" + fieldName + " content:" + content);
 			if (StringUtils.isEmpty(content)) {
 				continue;
 			}
@@ -33,7 +35,7 @@ public class LeopardMultipartResolver extends CommonsMultipartResolver {
 			}
 			List<MultipartFile> list = this.toList(result, fieldName, content);
 			result.getMultipartFiles().put(fieldName, list);
-			break;
+			// break;
 		}
 		// CommonsMultipartFile file = new CommonsMultipartFile(fileItem);
 		// multipartFiles.add(file.getName(), file);
