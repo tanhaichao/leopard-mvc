@@ -24,11 +24,11 @@ public class Base64MultipartFile implements MultipartFile {
 		if (!content.startsWith("data:image")) {
 			throw new IllegalArgumentException("非法图片格式.");
 		}
-		if (content.startsWith("data:image/png;base64,")) {
+		else if (content.startsWith("data:image/png;base64,")) {
 			this.data = Base64Utils.decodeFromString(content.substring(22));
 			this.extName = "png";
 		}
-		if (content.startsWith("data:image/gif;base64,")) {
+		else if (content.startsWith("data:image/gif;base64,")) {
 			this.data = Base64Utils.decodeFromString(content.substring(22));
 			this.extName = "gif";
 		}
