@@ -310,7 +310,7 @@ public class DateUtil {
 			return null;
 		}
 		long time = DateTime.getTimestamp(datetime);
-		if (time < 0) {
+		if (time <= 0) {
 			throw new IllegalArgumentException("非法日期[" + datetime + "]");
 		}
 		return new Date(time);
@@ -561,6 +561,7 @@ public class DateUtil {
 		int dayCount2 = DateTime.getDayCount(date2);
 		return (dayCount1 - dayCount2);
 	}
+
 
 	// public static int getDays(Date date1, Date date2) {
 	// long day = (date1.getTime() - date2.getTime()) / (24 * 60 * 60 * 1000);
