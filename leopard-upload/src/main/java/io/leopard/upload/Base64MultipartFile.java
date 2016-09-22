@@ -28,6 +28,10 @@ public class Base64MultipartFile implements MultipartFile {
 			this.data = Base64Utils.decodeFromString(content.substring(22));
 			this.extName = "png";
 		}
+		if (content.startsWith("data:image/gif;base64,")) {
+			this.data = Base64Utils.decodeFromString(content.substring(22));
+			this.extName = "gif";
+		}
 		else if (content.startsWith("data:image/jpeg;base64,")) {
 			this.data = Base64Utils.decodeFromString(content.substring(23));
 			this.extName = "jpg";
