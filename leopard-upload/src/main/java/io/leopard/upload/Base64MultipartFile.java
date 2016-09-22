@@ -33,7 +33,6 @@ public class Base64MultipartFile implements MultipartFile {
 			this.extName = "jpg";
 		}
 		else {
-
 			throw new IllegalArgumentException("未知图片类型[" + StringUtils.substring(content, 0, 30) + "].");
 		}
 	}
