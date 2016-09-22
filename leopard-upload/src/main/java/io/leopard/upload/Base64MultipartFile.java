@@ -5,8 +5,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.util.Base64Utils;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 public class Base64MultipartFile implements MultipartFile {
@@ -33,7 +33,8 @@ public class Base64MultipartFile implements MultipartFile {
 			this.extName = "jpg";
 		}
 		else {
-			throw new IllegalArgumentException("未知图片类型.");
+
+			throw new IllegalArgumentException("未知图片类型[" + StringUtils.substring(content, 0, 30) + "].");
 		}
 	}
 
