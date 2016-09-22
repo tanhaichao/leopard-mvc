@@ -311,7 +311,7 @@ public class DateUtil {
 		}
 		long time = DateTime.getTimestamp(datetime);
 		if (time <= 0) {
-			throw new IllegalArgumentException("非法日志[" + datetime + "]");
+			throw new IllegalArgumentException("非法日期[" + datetime + "]");
 		}
 		return new Date(time);
 	}
