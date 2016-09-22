@@ -562,7 +562,6 @@ public class DateUtil {
 		return (dayCount1 - dayCount2);
 	}
 
-
 	// public static int getDays(Date date1, Date date2) {
 	// long day = (date1.getTime() - date2.getTime()) / (24 * 60 * 60 * 1000);
 	// return (int) day;
