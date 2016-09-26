@@ -157,6 +157,13 @@ public class DateUtil {
 		return date;
 	}
 
+	public static Date addSecond(final int seconds) {
+		long millis = System.currentTimeMillis();
+		millis = millis + (seconds * 1000L);
+		Date date = new Date(millis);
+		return date;
+	}
+
 	/**
 	 * 将Date的HH-mm-ss置为零
 	 * 
