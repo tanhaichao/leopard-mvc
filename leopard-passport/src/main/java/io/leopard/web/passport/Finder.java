@@ -14,6 +14,8 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.util.StringUtils;
 
+import io.leopard.burrow.lang.AssertUtil;
+
 public class Finder {
 	protected Log logger = LogFactory.getLog(this.getClass());
 
@@ -59,6 +61,7 @@ public class Finder {
 	}
 
 	public PassportValidator find(String type) {
+		AssertUtil.assertNotEmpty(type, "登录类型不能为空.");
 		for (PassportValidator validator : list) {
 			if (type.equals(getSessionKey(validator))) {
 				// System.err.println("find:" + validator + " sessionKey:" + getSessionKey(validator));
