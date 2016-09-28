@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.util.StringUtils;
 
 /**
  * 性能监控数据
@@ -26,6 +27,9 @@ public class PassportLoginServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String type = request.getParameter("type");
+		if (StringUtils.isEmpty(type)) {
+			type = "sessUid";
+		}
 		boolean flag;
 		try {
 			flag = Finder.getInstance().find(type).login(request, response);
