@@ -25,8 +25,12 @@ public class SessCaptchaXParam implements XParam {
 
 	@Override
 	public Object getValue(HttpServletRequest request, MethodParameter parameter) {
-		String captchaGroupId = this.getGroupId(parameter);
-		Object captcha;
+		return getSessCaptcha(request, parameter);
+	}
+
+	public static String getSessCaptcha(HttpServletRequest request, MethodParameter parameter) {
+		String captchaGroupId = getGroupId(parameter);
+		String captcha;
 		Readonly readonly = parameter.getParameterAnnotation(Readonly.class);
 		if (readonly == null) {
 			captcha = CaptchaUtil.getCodeAndRemove(request, captchaGroupId);
@@ -38,7 +42,7 @@ public class SessCaptchaXParam implements XParam {
 		return captcha;
 	}
 
-	private String getGroupId(MethodParameter parameter) {
+	private static String getGroupId(MethodParameter parameter) {
 		CaptchaGroup captchaGroup = parameter.getMethod().getAnnotation(CaptchaGroup.class);
 		if (captchaGroup != null) {
 			return captchaGroup.value();
