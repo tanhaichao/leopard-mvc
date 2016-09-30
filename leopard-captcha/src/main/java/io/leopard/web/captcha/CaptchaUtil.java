@@ -19,19 +19,19 @@ public class CaptchaUtil {
 	// return getSessionKey(captchaGroupId);
 	// }
 
-	@Deprecated
-	public static void checkCaptcha(String captcha, String sessCaptcha) throws CaptchaWrongException {
-		if (StringUtils.isEmpty(captcha)) {
-			throw new CaptchaInvalidException("验证码不能为空.");
-		}
-		if (StringUtils.isEmpty(sessCaptcha)) {
-			throw new CaptchaInvalidException("验证码未生成，验证码使用");
-		}
-		if (!captcha.equals(sessCaptcha)) {
-			logger.warn("错误验证码 sessCaptcha:" + sessCaptcha + " captcha:" + captcha);
-			throw new CaptchaWrongException("sess:" + sessCaptcha + " param:" + captcha);
-		}
-	}
+	// @Deprecated
+	// public static void checkCaptcha(String captcha, String sessCaptcha) throws CaptchaWrongException {
+	// if (StringUtils.isEmpty(captcha)) {
+	// throw new CaptchaInvalidException("验证码不能为空.");
+	// }
+	// if (StringUtils.isEmpty(sessCaptcha)) {
+	// throw new CaptchaInvalidException("验证码未生成，验证码使用");
+	// }
+	// if (!captcha.equals(sessCaptcha)) {
+	// logger.warn("错误验证码 sessCaptcha:" + sessCaptcha + " captcha:" + captcha);
+	// throw new CaptchaWrongException("sess:" + sessCaptcha + " param:" + captcha);
+	// }
+	// }
 
 	private static String getSessionKey(String captchaGroupId) {
 		if (captchaGroupId == null || captchaGroupId.length() == 0) {
@@ -59,7 +59,7 @@ public class CaptchaUtil {
 
 	public static String getCode(HttpServletRequest request, String captchaGroupId) {
 		String sessionKey = getSessionKey(captchaGroupId);
-//		System.out.println("getCode:" + sessionKey + " captchaGroupId:" + captchaGroupId);
+		// System.out.println("getCode:" + sessionKey + " captchaGroupId:" + captchaGroupId);
 		return (String) request.getSession().getAttribute(sessionKey);
 	}
 
