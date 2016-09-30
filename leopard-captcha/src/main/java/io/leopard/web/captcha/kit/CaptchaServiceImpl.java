@@ -47,14 +47,14 @@ public class CaptchaServiceImpl implements CaptchaService {
 	@Override
 	public void checkSessCaptcha(String captcha, String sessCaptcha) throws CaptchaWrongException {
 		if (StringUtils.isEmpty(captcha)) {
-			throw new CaptchaInvalidException("验证码不能为空.");// , "Sorry,the code you entered is incorrect!"
+			throw new CaptchaInvalidException("图片验证码不能为空.");// , "Sorry,the code you entered is incorrect!"
 		}
 		if (StringUtils.isEmpty(sessCaptcha)) {
-			throw new CaptchaInvalidException("验证码未生成，验证码使用.");// , "Sorry,the code you entered is incorrect!"
+			throw new CaptchaInvalidException("图片验证码未生成，验证码使用.");// , "Sorry,the code you entered is incorrect!"
 		}
 		if (!captcha.equals(sessCaptcha)) {
 			logger.warn("错误验证码 sessCaptcha:" + sessCaptcha + " captcha:" + captcha);
-			throw new CaptchaWrongException(sessCaptcha + " " + captcha);// , "Sorry,the code you entered is incorrect!"
+			throw new CaptchaWrongException("错误的图片验证码[" + sessCaptcha + " " + captcha + "].");// , "Sorry,the code you entered is incorrect!"
 		}
 	}
 
@@ -136,7 +136,10 @@ public class CaptchaServiceImpl implements CaptchaService {
 			throw new CaptchaWrongException("获取不到验证码记录[" + account + " " + type.getKey() + " " + target + "]");
 		}
 		if (!bean.getCaptcha().equals(captcha)) {
-			throw new CaptchaWrongException("db:" + bean.getCaptcha() + " param:" + captcha);
+			if (CaptchaType.MOBILE.getKey().equals(type.getKey())) {
+				throw new CaptchaWrongException("错误的手机验证码[db:" + bean.getCaptcha() + " param:" + captcha + "]");
+			}
+			throw new CaptchaWrongException("错误的验证码[db:" + bean.getCaptcha() + " param:" + captcha + "]");
 		}
 		return bean;
 	}
