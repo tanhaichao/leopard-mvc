@@ -421,6 +421,40 @@ public class DateUtil {
 	}
 
 	/**
+	 * 获取月份的第一天
+	 * 
+	 * @param monthNum 0:表示当前月份 负数：表示前n个月份 整数：表示后n个月份
+	 * @return 指定月份第一天的日期字符串
+	 */
+	public static Date getFirstDayOfMonth(final int monthNum) {
+		Calendar cal = Calendar.getInstance();
+		cal.add(Calendar.MONTH, monthNum);
+		cal.set(Calendar.DATE, 1);
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MILLISECOND, 0);
+		return new Date(cal.getTimeInMillis());
+	}
+
+	/**
+	 * 获取月份的第一天
+	 * 
+	 * @param monthNum 0:表示当前月份 负数：表示前n个月份 整数：表示后n个月份
+	 * @return 指定月份第一天的日期字符串
+	 */
+	public static Date getFirstDayOfMonth(Date date) {
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(date);
+		cal.set(Calendar.DATE, 1);
+		cal.set(Calendar.HOUR_OF_DAY, 0);
+		cal.set(Calendar.MINUTE, 0);
+		cal.set(Calendar.SECOND, 0);
+		cal.set(Calendar.MILLISECOND, 0);
+		return new Date(cal.getTimeInMillis());
+	}
+
+	/**
 	 * 字符串日期根据指定格式转换成Date
 	 * 
 	 * @param dateString 字符串日期
