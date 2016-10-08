@@ -3,7 +3,7 @@ package io.leopard.burrow.lang.inum;
 /**
  * 枚举接口(key类型自定义,value类型自定义)
  * 
- * @author Administrator
+ * @author 谭海潮
  * 
  * @param <KEYTYPE>
  * @param <VALUETYPE>

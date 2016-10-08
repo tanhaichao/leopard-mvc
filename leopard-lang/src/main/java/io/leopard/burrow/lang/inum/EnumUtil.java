@@ -6,6 +6,12 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+/**
+ * 枚举工具类
+ * 
+ * @author 谭海潮
+ *
+ */
 public class EnumUtil {
 
 	protected static final Map<Object, Map<Object, Enum<?>>> cache = new ConcurrentHashMap<Object, Map<Object, Enum<?>>>();
