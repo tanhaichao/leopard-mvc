@@ -1,4 +1,4 @@
-package io.leopard.web.xparam;
+package io.leopard.web.xparam.annotation;
 
 import java.lang.annotation.Documented;
 import java.lang.annotation.ElementType;
@@ -15,8 +15,19 @@ import java.lang.annotation.Target;
 @Target({ ElementType.PARAMETER })
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface ParamName {
+public @interface Xparam {
 
+	/**
+	 * 参数名称
+	 * 
+	 * @return
+	 */
 	String value();
 
+	/**
+	 * 特殊参数名称(key)
+	 * 
+	 * @return
+	 */
+	String xparam();
 }
