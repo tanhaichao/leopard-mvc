@@ -22,7 +22,7 @@ public @interface Xparam {
 	 * 
 	 * @return
 	 */
-	String value();
+	String param();
 
 	/**
 	 * 特殊参数名称(key)
