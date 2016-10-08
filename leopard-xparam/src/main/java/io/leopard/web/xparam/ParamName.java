@@ -7,14 +7,16 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 接口不需要做登录检查
+ * 参数名称
  * 
  * @author 谭海潮
  *
  */
-@Target({ ElementType.METHOD })
+@Target({ ElementType.PARAMETER })
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface Nologin {
+public @interface ParamName {
+
+	String value();
 
 }
