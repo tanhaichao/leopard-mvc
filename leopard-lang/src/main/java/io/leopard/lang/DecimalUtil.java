@@ -1,6 +1,7 @@
 package io.leopard.lang;
 
 import java.math.BigDecimal;
+import java.text.NumberFormat;
 
 /**
  * 小数运算工具类.
@@ -40,7 +41,12 @@ public class DecimalUtil {
 	 * @param num
 	 */
 	public static int count(double num) {
-		String s = Double.toString(num);
+		if ((num - 1) > 99999999999D) {// 999亿， 小数点只能计算到5位
+			throw new IllegalArgumentException("超过了99999999999(999亿)，不能正确计算小数点位数[" + num + "].");
+		}
+		NumberFormat nf = NumberFormat.getNumberInstance();
+		nf.setMaximumFractionDigits(5);
+		String s = nf.format(num);
 		int index = s.indexOf(".");
 		if (index == 0) {
 			return 0;
