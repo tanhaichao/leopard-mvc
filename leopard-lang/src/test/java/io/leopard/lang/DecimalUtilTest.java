@@ -37,6 +37,8 @@ public class DecimalUtilTest {
 	@Test
 	public void count() {
 
+		// DecimalUtil.count(11111111111111111111111111.13D);
+
 		Assert.assertEquals(5, DecimalUtil.count(99999999999.191234D));
 		Assert.assertEquals(5, DecimalUtil.count(99999999999.191234D));
 		Assert.assertEquals(2, DecimalUtil.count(99999999999.19D));
@@ -58,4 +60,5 @@ public class DecimalUtilTest {
 
 		}
 	}
+
 }
