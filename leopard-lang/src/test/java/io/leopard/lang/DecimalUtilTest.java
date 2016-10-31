@@ -39,7 +39,10 @@ public class DecimalUtilTest {
 
 		// DecimalUtil.count(11111111111111111111111111.13D);
 
-		// System.out.println("long:" + Long.MAX_VALUE);
+		System.out.println("long:" + Long.MAX_VALUE);
+
+		// long:9223372036854775807(19位-5位小数点=14位) 99999999999999(14位，9亿亿)
+
 		// Assert.assertEquals(5, DecimalUtil.count(999999999999.191234D));
 		Assert.assertEquals(5, DecimalUtil.count(99999999999.191234D));// 999亿
 		Assert.assertEquals(5, DecimalUtil.count(99999999999.192234D));
