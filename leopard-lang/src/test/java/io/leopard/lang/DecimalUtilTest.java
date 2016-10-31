@@ -58,6 +58,15 @@ public class DecimalUtilTest {
 
 	// @Test
 	// public void count2() {
+	// DecimalUtil.count2(999999999999.191234D);
+	// DecimalUtil.count2(99999999999.191234D);
+	// DecimalUtil.count2(9999999999.191234D);
+	// // Assert.assertEquals(5, DecimalUtil.count2(999999999999.191234D));
+	// // Assert.assertEquals(5, DecimalUtil.count2(999999999999.191234D));
+	// }
+	
+	// @Test
+	// public void count2() {
 	// // 9999999999999 num3:0.19140625
 	// // 9999999999999 num3:0.19140625
 	// // 9223372036854 77580

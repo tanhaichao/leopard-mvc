@@ -61,6 +61,20 @@ public class DecimalUtil {
 	// * @param num
 	// */
 	// public static int count2(double num) {
+	// long num2 = (long) num;
+	// BigDecimal b1 = new BigDecimal(Double.toString(num));
+	// BigDecimal b2 = new BigDecimal(Long.toString(num2));
+	// double num3 = b1.subtract(b2).doubleValue();
+	// System.out.println("num3:" + num3);
+	// return 0;
+	// }
+
+	// /**
+	// * 获取小数点位数
+	// *
+	// * @param num
+	// */
+	// public static int count2(double num) {
 	// double abc1 = num * 1000000;
 	// long abc2 = (long) abc1;
 	//
