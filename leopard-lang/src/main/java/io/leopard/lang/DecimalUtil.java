@@ -55,6 +55,32 @@ public class DecimalUtil {
 		return count;
 	}
 
+	// /**
+	// * 获取小数点位数
+	// *
+	// * @param num
+	// */
+	// public static int count2(double num) {
+	// double abc1 = num * 1000000;
+	// long abc2 = (long) abc1;
+	//
+	// long num2 = (long) num * 100000;
+	// double num3 = num - num2;
+	// System.out.println("num2:" + num2 + " num3:" + num3 + " abc1:" + abc1 + " abc2:" + abc2);
+	// if ((num - 1) > 99999999999D) {// 999亿， 小数点只能计算到5位
+	// // throw new IllegalArgumentException("超过了99999999999(999亿)，不能正确计算小数点位数[" + num + "].");
+	// }
+	// NumberFormat nf = NumberFormat.getNumberInstance();
+	// nf.setMaximumFractionDigits(5);
+	// String s = nf.format(num);
+	// int index = s.indexOf(".");
+	// if (index == 0) {
+	// return 0;
+	// }
+	// int count = s.length() - index - 1;
+	// return count;
+	// }
+
 	/**
 	 * 4舍5入，保留2位小数点
 	 * 
