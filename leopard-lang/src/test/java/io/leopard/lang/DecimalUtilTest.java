@@ -39,14 +39,38 @@ public class DecimalUtilTest {
 
 		// DecimalUtil.count(11111111111111111111111111.13D);
 
-		Assert.assertEquals(5, DecimalUtil.count(99999999999.191234D));
-		Assert.assertEquals(5, DecimalUtil.count(99999999999.191234D));
+		// System.out.println("long:" + Long.MAX_VALUE);
+		// Assert.assertEquals(5, DecimalUtil.count(999999999999.191234D));
+		Assert.assertEquals(5, DecimalUtil.count(99999999999.191234D));// 999亿
+		Assert.assertEquals(5, DecimalUtil.count(99999999999.192234D));
+		Assert.assertEquals(5, DecimalUtil.count(99999999999.192238D));
+		Assert.assertEquals(5, DecimalUtil.count(99999999999.192234D));
+		Assert.assertEquals(5, DecimalUtil.count(99999999999.192294D));
 		Assert.assertEquals(2, DecimalUtil.count(99999999999.19D));
 
 		Assert.assertEquals(2, DecimalUtil.count(1.11));
 		Assert.assertEquals(3, DecimalUtil.count(1.111));
 		Assert.assertEquals(1, DecimalUtil.count(1));
 	}
+
+	// @Test
+	// public void count2() {
+	// // 9999999999999 num3:0.19140625
+	// // 9999999999999 num3:0.19140625
+	// // 9223372036854 77580
+	// // long:922337203685477580
+	// DecimalUtil.count2(9999999999999.191D);
+	// DecimalUtil.count2(9999999999999.1912D);
+	// DecimalUtil.count2(9999999999999.191234D);
+	// DecimalUtil.count2(999999999999.1912D);
+	// DecimalUtil.count2(99999999999.1912D);
+	// DecimalUtil.count2(999999999999.1912D);
+	// DecimalUtil.count2(999999999999.191254D);
+	// DecimalUtil.count2(99999999999.191234D);
+	// DecimalUtil.count2(99999999999.191244D);
+	// DecimalUtil.count2(99999999999.191254D);
+	// DecimalUtil.count2(99999999999.191234D);
+	// }
 
 	@Test
 	public void isScale() {
