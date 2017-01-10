@@ -78,7 +78,6 @@ public class CaptchaView extends ModelAndView {
 
 			save(request, groupId, code);
 			// System.out.println("session:" + session.getId() + " code:" + code + " captchaGroupId:" + captchaGroupId + " url:" + request.getRequestURI());
-
 			BufferedImage bi = imageCaptcha.getImageChallenge();
 			// BufferedImage bi = imageCaptchaService.getImageChallengeForID(sessionId);
 			ServletOutputStream out = response.getOutputStream();
@@ -88,6 +87,7 @@ public class CaptchaView extends ModelAndView {
 			}
 			finally {
 				out.close();
+				imageCaptcha.disposeChallenge();
 			}
 		}
 	};
